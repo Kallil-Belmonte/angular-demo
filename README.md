@@ -4,8 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Running the project
 
-- Open the Command Prompt as an administrator.
-- Go to the project folder.
+- Open the Command Prompt as an administrator
+- Go to the project folder
 - Run `npm install`
 
 ## Development server
