@@ -2,11 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
 
-## Run the project
+## Running the project
 
 - Open the Command Prompt as an administrator.
 - Go to the project folder.
-- Run: `npm install`
+- Run `npm install`
 
 ## Development server
 
