@@ -1,3 +1,55 @@
-<p>
-  header works!
-</p>
+<header data-component="app-header">
+  <img class="logo" alt="Angular" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+
+  <h1 class="title">Welcome to Angular</h1>
+
+  <nav class="main-menu">
+    <ul>
+      <li>
+        <!-- <NavLink to="/" exact activeClassName="active">
+          <FontAwesomeIcon icon={faHome} />
+          Home
+        </NavLink> -->
+        <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <fa-icon [icon]="faHome"></fa-icon>
+          Home
+        </a>
+      </li>
+      <li>
+        <!-- <NavLink to="/blog" activeClassName="active">
+         <FontAwesomeIcon icon={faNewspaper} />
+         Blog
+        </NavLink> -->
+        <a [routerLink]="['/blog']" routerLinkActive="active">
+          <fa-icon [icon]="faNewspaper"></fa-icon>
+          Blog
+        </a>
+      </li>
+      <li>
+        <!-- <NavLink to="/contact" activeClassName="active">
+         <FontAwesomeIcon icon={faEnvelope} />
+         Contact
+        </NavLink> -->
+        <a [routerLink]="['/contact']" routerLinkActive="active">
+          <fa-icon [icon]="faEnvelope"></fa-icon>
+          Contact
+        </a>
+      </li>
+      <li>
+        <!-- <NavLink to="/account" activeClassName="active">
+         <FontAwesomeIcon icon={faUser} />
+         Account
+        </NavLink> -->
+        <a [routerLink]="['/account']" routerLinkActive="active">
+          <fa-icon [icon]="faUser"></fa-icon>
+          Account
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="welcome-box d-flex align-items-center position-absolute">
+    <p class="mb-0 mr-3">Hello {{ userFullName }}!</p>
+    <button class="btn btn-dark" type="button" (click)="onlogOut()">Log out</button>
+  </div>
+</header>
