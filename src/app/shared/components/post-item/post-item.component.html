@@ -1,0 +1,8 @@
+<div data-component="post-item">
+  {{ postImage }}
+  <article>
+    <h3 className="title">{{ title }}</h3>
+    <p className="mb-0" *ngIf="body">{{ body | limitWords: 8 }}</p>
+    <a class="btn btn-primary mt-3" [routerLink]="['/posts/', id]">Read more</a>
+  </article>
+</div>
