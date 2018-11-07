@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PostItemComponent implements OnInit {
   @Input() id: string;
-  @Input() postImage: string;
+  @Input() image: string;
   @Input() title: string;
   @Input() body: string;
 

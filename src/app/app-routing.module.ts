@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from 'app/auth/login/login.component';
-import { RegisterComponent } from 'app/auth/register/register.component';
 import { DashboardComponent } from 'app/core/dashboard/dashboard.component';
+import { HomeComponent } from 'app/home/home.component';
 import { BlogComponent } from 'app/news/blog/blog.component';
 import { PostComponent } from 'app/news/post/post.component';
 import { EditPostComponent } from 'app/news/edit-post/edit-post.component';
 import { ContactComponent } from 'app/contact/contact.component';
 import { AccountComponent } from 'app/account/account.component';
+import { LoginComponent } from 'app/auth/login/login.component';
+import { RegisterComponent } from 'app/auth/register/register.component';
+import { NotFoundComponent } from 'app/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -16,7 +18,7 @@ const routes: Routes = [
     component: DashboardComponent,
     // canActivate: [ AuthGuard ],
     children: [
-      { path: '', redirectTo: 'dashboards', pathMatch: 'full' },
+      { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'blog', component: BlogComponent },
       { path: 'post/:id', component: PostComponent },
       { path: 'edit-post/:id', component: EditPostComponent },
@@ -26,7 +28,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent, /* canActivate: [ AuthGuard ] */ },
   { path: 'register',	component: RegisterComponent },
-  { path: '**', component: LoginComponent, /* canActivate: [ AuthGuard ] */	}
+  { path: '**', component: NotFoundComponent	}
 ];
 
 @NgModule({

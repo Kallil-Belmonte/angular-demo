@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from 'app/app-routing.module';
 import { AppComponent } from 'app/app.component';
 import { NotFoundComponent } from 'app/not-found/not-found.component';
 import { CoreModule } from 'app/core/core.module';
@@ -18,7 +17,6 @@ import { AccountModule } from 'app/account/account.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     CoreModule,
     AuthModule,
     HomeModule,
