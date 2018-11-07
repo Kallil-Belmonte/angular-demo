@@ -1,0 +1,20 @@
+<section data-component="featured-posts" class="page-section">
+  <div class="container">
+    <h2 class="section-title">Featured posts</h2>
+
+    <div class="row">
+      <!-- {props.posts.slice(0, 3).map((post, index) => -->
+
+        <div class="col-md-4" *ngFor="let post of posts">
+          <app-post-item
+            id="{{ post?.id }}"
+            image="{{ post?.image }}"
+            title="{{ post?.title }}"
+            body="{{ post?.body }}"
+          ></app-post-item>
+        </div>
+
+      <!-- )} -->
+    </div>
+  </div>
+</section>
