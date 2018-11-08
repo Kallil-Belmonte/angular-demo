@@ -1,20 +1,26 @@
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
 import { environment, endpoints } from 'environments/environment';
 import { LoginModel } from 'app/auth/_models/login.model';
 
-// @Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
 
-	constructor(private httpClient: HttpClient) {
-	}
+	constructor(private httpClient: HttpClient) { }
 
+// LOG OUT
+logOut(): void {
+	window.sessionStorage.clear();
+	window.location.replace('/');
+}
 
 	//==============================
-  // GENERAL METHODS
+  // LOGIN
   //==============================
 
 	// LOG IN
@@ -23,10 +29,9 @@ export class AuthService {
 	}
 
 
-	// LOG OUT
-	logOut(): void {
-		window.sessionStorage.clear();
-		window.location.replace('/');
-	}
+	//==============================
+  // REGISTER
+  //==============================
+
 
 }

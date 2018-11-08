@@ -1,5 +1,9 @@
 <div data-component="post-item">
-  {{ image }}
+  <img class="img-fluid" src="{{ image }}" alt="Capa" *ngIf="image; else imagePlaceholder" />
+  <ng-template #imagePlaceholder>
+    <div class="img-placeholder">Não há imagem para esse post</div>
+  </ng-template>
+
   <article>
     <h3 class="title">{{ title }}</h3>
     <p class="mb-0" *ngIf="body">{{ body | limitWords: 8 }}</p>
