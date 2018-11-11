@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { PostModel } from 'app/home/_models/post.model';
-import { HomeService } from 'app/home/home.service';
 
 @Component({
   selector: 'app-featured-posts',
@@ -9,29 +8,10 @@ import { HomeService } from 'app/home/home.service';
   styleUrls: []
 })
 export class FeaturedPostsComponent implements OnInit {
-  posts: PostModel;
+  @Input() featuredPosts: PostModel[];
 
-  constructor(private homeService: HomeService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.getFeaturedPosts();
-  }
-
-
-	//==============================
-  // GENERAL METHODS
-  //==============================
-
-	// GET FEATURED POSTS
-  getFeaturedPosts(): void {
-    this.homeService.getFeaturedPosts().subscribe(
-      data => {
-        // Data
-        this.posts = data.slice(0, 3);
-      },
-      error => {
-        console.log(error);
-      }
-    );
   }
 }

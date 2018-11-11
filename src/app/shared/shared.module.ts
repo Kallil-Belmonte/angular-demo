@@ -17,6 +17,8 @@ import { LoaderComponent } from 'app/shared/components/loader/loader.component';
     LoaderComponent
   ],
   exports: [
+    CommonModule,
+    RouterModule,
     LimitWordsPipe,
     PostItemComponent,
     LoaderComponent

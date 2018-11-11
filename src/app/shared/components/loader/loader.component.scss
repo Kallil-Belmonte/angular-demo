@@ -1,3 +1,7 @@
+@import "../../../../assets/scss/helpers/_variables";
+@import "../../../../assets/scss/helpers/_mixins";
+@import "../../../../assets/scss/helpers/_placeholders";
+
 @keyframes orbit-spinner-orbit-one-animation {
   0% {
     transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
@@ -26,37 +30,41 @@
 }
 
 [data-component="loader"] {
-  height: 55px;
-  width: 55px;
-  border-radius: 50%;
-  perspective: 800px;
+  background-color: rgba(255, 255, 255, 0.8);
+  @include position(fixed, 0, 0, 0, 0, 10);
 
-  .orbit {
-    position: absolute;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
+  .orbit-spinner {
+    @include square(55px);
     border-radius: 50%;
+    perspective: 800px;
+    @extend %center-absolute;
 
-    &:nth-child(1) {
-      top: 0%;
-      left: 0%;
-      animation: orbit-spinner-orbit-one-animation 1200ms linear infinite;
-      border-bottom: 3px solid #ff1d5e;
-    }
+    .orbit {
+      position: absolute;
+      box-sizing: border-box;
+      @include square(100%);
+      border-radius: 50%;
 
-    &:nth-child(2) {
-      top: 0%;
-      right: 0%;
-      animation: orbit-spinner-orbit-two-animation 1200ms linear infinite;
-      border-right: 3px solid #ff1d5e;
-    }
+      &:nth-child(1) {
+        top: 0%;
+        left: 0%;
+        animation: orbit-spinner-orbit-one-animation 1200ms linear infinite;
+        border-bottom: 3px solid #ff1d5e;
+      }
 
-    &:nth-child(3) {
-      right: 0%;
-      bottom: 0%;
-      animation: orbit-spinner-orbit-three-animation 1200ms linear infinite;
-      border-top: 3px solid #ff1d5e;
+      &:nth-child(2) {
+        top: 0%;
+        right: 0%;
+        animation: orbit-spinner-orbit-two-animation 1200ms linear infinite;
+        border-right: 3px solid #ff1d5e;
+      }
+
+      &:nth-child(3) {
+        right: 0%;
+        bottom: 0%;
+        animation: orbit-spinner-orbit-three-animation 1200ms linear infinite;
+        border-top: 3px solid #ff1d5e;
+      }
     }
   }
 }
