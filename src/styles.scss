@@ -274,6 +274,17 @@ button:focus {
   border-color: darken($brand-primary, 5%);
 }
 
+.btn-primary.disabled,
+.btn-primary:disabled {
+  background-color: lighten($brand-primary, 10%);
+  border-color: lighten($brand-primary, 10%);
+}
+
+.btn-outline-primary.disabled,
+.btn-outline-primary:disabled {
+  color: lighten($brand-primary, 10%);
+}
+
 /* btn-secondary */
 
 .btn-secondary {
@@ -309,6 +320,17 @@ button:focus {
 .show > .btn-outline-secondary.dropdown-toggle {
   background-color: darken($brand-secondary, 5%);
   border-color: darken($brand-secondary, 5%);
+}
+
+.btn-secondary.disabled,
+.btn-secondary:disabled {
+  background-color: lighten($brand-secondary, 10%);
+  border-color: lighten($brand-secondary, 10%);
+}
+
+.btn-outline-secondary.disabled,
+.btn-outline-secondary:disabled {
+  color: lighten($brand-secondary, 10%);
 }
 
 /* btn-success */
@@ -348,6 +370,17 @@ button:focus {
   border-color: darken($brand-success, 5%);
 }
 
+.btn-success.disabled,
+.btn-success:disabled {
+  background-color: lighten($brand-success, 10%);
+  border-color: lighten($brand-success, 10%);
+}
+
+.btn-outline-success.disabled,
+.btn-outline-success:disabled {
+  color: lighten($brand-success, 10%);
+}
+
 /* btn-info */
 
 .btn-info {
@@ -383,6 +416,17 @@ button:focus {
 .show > .btn-outline-info.dropdown-toggle {
   background-color: darken($brand-info, 5%);
   border-color: darken($brand-info, 5%);
+}
+
+.btn-info.disabled,
+.btn-info:disabled {
+  background-color: lighten($brand-info, 10%);
+  border-color: lighten($brand-info, 10%);
+}
+
+.btn-outline-info.disabled,
+.btn-outline-info:disabled {
+  color: lighten($brand-info, 10%);
 }
 
 /* btn-warning */
@@ -425,6 +469,17 @@ button:focus {
   border-color: darken($brand-warning, 5%);
 }
 
+.btn-warning.disabled,
+.btn-warning:disabled {
+  background-color: lighten($brand-warning, 10%);
+  border-color: lighten($brand-warning, 10%);
+}
+
+.btn-outline-warning.disabled,
+.btn-outline-warning:disabled {
+  color: lighten($brand-warning, 10%);
+}
+
 /* btn-danger */
 
 .btn-danger {
@@ -460,6 +515,17 @@ button:focus {
 .show > .btn-outline-danger.dropdown-toggle {
   background-color: darken($brand-danger, 5%);
   border-color: darken($brand-danger, 5%);
+}
+
+.btn-danger.disabled,
+.btn-danger:disabled {
+  background-color: lighten($brand-danger, 10%);
+  border-color: lighten($brand-danger, 10%);
+}
+
+.btn-outline-danger.disabled,
+.btn-outline-danger:disabled {
+  color: lighten($brand-danger, 10%);
 }
 
 /* btn-light */
@@ -535,6 +601,17 @@ button:focus {
 .show > .btn-outline-dark.dropdown-toggle {
   background-color: darken($brand-dark, 5%);
   border-color: darken($brand-dark, 5%);
+}
+
+.btn-dark.disabled,
+.btn-dark:disabled {
+  background-color: lighten($brand-dark, 10%);
+  border-color: lighten($brand-dark, 10%);
+}
+
+.btn-outline-dark.disabled,
+.btn-outline-dark:disabled {
+  color: lighten($brand-dark, 10%);
 }
 
 /* ALERTS */

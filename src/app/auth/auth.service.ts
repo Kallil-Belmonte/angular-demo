@@ -24,8 +24,8 @@ logOut(): void {
   //==============================
 
 	// LOG IN
-	logIn(): Observable<LoginModel> {
-		return this.httpClient.get<LoginModel>(environment.mocky + endpoints.auth.login);
+	logIn(payload): Observable<LoginModel> {
+		return this.httpClient.post<LoginModel>(environment.mocky + endpoints.auth.login, payload);
 	}
 
 
