@@ -799,6 +799,12 @@ textarea {
   max-width: 100%;
 }
 
+/* Invalid feedback */
+
+.form-control.is-invalid ~ .invalid-feedback {
+  display: none;
+}
+
 /* LIST GROUP */
 
 .list-group .list-group-item-action.active {

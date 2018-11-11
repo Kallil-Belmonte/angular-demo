@@ -5,8 +5,11 @@
 
   <div class="form-group">
     <label for="email">E-mail</label>
-    <input id="email" [ngClass]="{'form-control': true, 'is-invalid': loginForm.get('email').invalid && loginForm.get('email').touched }" type="text" formControlName="email" />
-    <div class="invalid-feedback">Invalid e-mail</div>
+    <input id="email" [ngClass]="{ 'form-control': true, 'is-invalid': loginForm.get('email').touched && loginForm.get('email').invalid }" type="email" formControlName="email" />
+    <ng-template [ngIf]="loginForm.get('email').touched && loginForm.get('email').errors">
+      <div [ngClass]="{ 'invalid-feedback': true, 'd-block': loginForm.get('email').errors.required }">E-mail is required</div>
+      <div [ngClass]="{ 'invalid-feedback': true, 'd-block': loginForm.get('email').errors.email }">Invalid e-mail</div>
+    </ng-template>
 
     <ng-template [ngIf]="loginErrors.email.length > 0">
       <app-alert status="danger" [dismissible]="true" (dismissAlert)="onClearLoginError(loginErrors.email, i)" *ngFor="let errorMessage of loginErrors.email; let i = index">{{ errorMessage }}</app-alert>
@@ -15,8 +18,11 @@
 
   <div class="form-group">
     <label for="password">Password</label>
-    <input id="password" [ngClass]="{'form-control': true, 'is-invalid': loginForm.get('password').invalid && loginForm.get('password').touched }" type="password" formControlName="password" />
-    <div class="invalid-feedback">Minimum 3 characters required</div>
+    <input id="password" [ngClass]="{ 'form-control': true, 'is-invalid': loginForm.get('password').touched && loginForm.get('password').invalid }" type="password" formControlName="password" />
+    <ng-template [ngIf]="loginForm.get('password').touched && loginForm.get('password').errors">
+      <div [ngClass]="{ 'invalid-feedback': true, 'd-block': loginForm.get('password').errors.required }">Password is required</div>
+      <div [ngClass]="{ 'invalid-feedback': true, 'd-block': loginForm.get('password').errors.minlength }">Minimum 3 characters required</div>
+    </ng-template>
 
     <ng-template [ngIf]="loginErrors.password.length > 0">
       <app-alert status="danger" [dismissible]="true" (dismissAlert)="onClearLoginError(loginErrors.password, i)" *ngFor="let errorMessage of loginErrors.password; let i = index">{{ errorMessage }}</app-alert>

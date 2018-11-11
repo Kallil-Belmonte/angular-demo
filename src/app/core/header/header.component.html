@@ -6,40 +6,24 @@
   <nav class="main-menu">
     <ul>
       <li>
-        <!-- <NavLink to="/" exact activeClassName="active">
-          <FontAwesomeIcon icon={faHome} />
-          Home
-        </NavLink> -->
         <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <fa-icon [icon]="faHome"></fa-icon>
           Home
         </a>
       </li>
       <li>
-        <!-- <NavLink to="/blog" activeClassName="active">
-         <FontAwesomeIcon icon={faNewspaper} />
-         Blog
-        </NavLink> -->
         <a [routerLink]="['/blog']" routerLinkActive="active">
           <fa-icon [icon]="faNewspaper"></fa-icon>
           Blog
         </a>
       </li>
       <li>
-        <!-- <NavLink to="/contact" activeClassName="active">
-         <FontAwesomeIcon icon={faEnvelope} />
-         Contact
-        </NavLink> -->
         <a [routerLink]="['/contact']" routerLinkActive="active">
           <fa-icon [icon]="faEnvelope"></fa-icon>
           Contact
         </a>
       </li>
       <li>
-        <!-- <NavLink to="/account" activeClassName="active">
-         <FontAwesomeIcon icon={faUser} />
-         Account
-        </NavLink> -->
         <a [routerLink]="['/account']" routerLinkActive="active">
           <fa-icon [icon]="faUser"></fa-icon>
           Account

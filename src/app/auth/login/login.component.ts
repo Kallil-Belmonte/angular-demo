@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   //==============================
 
   // REDIRECT USER
-  redirectUser() {
+  redirectUser(): void {
     let authToken = sessionStorage.getItem('authTokenAngularDemo') || localStorage.getItem('authTokenAngularDemo');
     let expiredSession = new Date().getTime() > Date.parse(localStorage.getItem('expirationDateAngularDemo'));
 

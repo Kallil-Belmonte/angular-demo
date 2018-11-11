@@ -24,6 +24,7 @@ export class LoginFormComponent implements OnInit {
               private authService: AuthService) { }
 
   ngOnInit() {
+    console.log('Utilize o e-mail: demo@demo.com para ver os alertas de erro.');
     this.buildLoginForm();
   }
 
@@ -57,8 +58,8 @@ export class LoginFormComponent implements OnInit {
 
       // Error simulation
       this.loginErrors = {
-        email:    ['This e-mail already exists.'],
-        password: ['Your password is too weak.']
+        email:    ['This e-mail does not exists.'],
+        password: ['The password is incorrect.']
       };
 
       // Deactivate loader

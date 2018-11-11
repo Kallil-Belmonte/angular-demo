@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
 import { environment, endpoints } from 'environments/environment';
 import { LoginModel } from 'app/auth/_models/login.model';
+import { RegisterModel } from 'app/auth/_models/register.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-	constructor(private httpClient: HttpClient) { }
+	constructor(private httpClient: HttpClient,
+              private router: Router) { }
 
-// LOG OUT
-logOut(): void {
-	window.sessionStorage.clear();
-	window.location.replace('/');
-}
 
 	//==============================
   // LOGIN
@@ -33,5 +31,19 @@ logOut(): void {
   // REGISTER
   //==============================
 
+  // REGISTER
+  register(payload): Observable<RegisterModel> {
+    return this.httpClient.post<RegisterModel>(environment.mocky + endpoints.auth.register, payload);
+  }
 
+
+  //==============================
+  // HEADER
+  //==============================
+
+  // LOG OUT
+  logOut(): void {
+    window.sessionStorage.clear();
+    this.router.navigate(['/']);
+  }
 }
