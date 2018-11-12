@@ -1,3 +1,24 @@
-<p>
-  blog works!
-</p>
+<main data-component="blog-page">
+  <app-loader *ngIf="loader"></app-loader>
+
+  <div className="container">
+    <app-page-header [fontAwesomeIcon]="faNewspaper">Blog</app-page-header>
+
+    <!-- <PostsFilter postsPerPage={this.state.postsPerPage} change={(event) => this.handleFilterPosts(event)} /> -->
+
+    <div className="row">
+      <div className="col-md-9">
+        <!-- <Posts posts={this.state.pagePosts} currentPage={this.state.currentPage} /> -->
+
+        <!-- <Pagination
+          firstItem={this.state.firstPaginationItem}
+          totalItems={this.state.pagePosts.length}
+          paginate={(event) => this.handlePagination(event)}
+        /> -->
+      </div>
+      <div className="col-md-3">
+        <!-- <Categories categories={this.props.categories} click={(event) => this.handleSelectCategory(event)} /> -->
+      </div>
+    </div>
+  </div>
+</main>

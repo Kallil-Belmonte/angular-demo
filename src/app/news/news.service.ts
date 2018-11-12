@@ -5,21 +5,27 @@ import { Observable } from 'rxjs';
 
 import { environment, endpoints } from 'environments/environment';
 import { PostModel } from 'app/news/_models/post.model';
+import { CategoryModel } from 'app/news/_models/category.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HomeService {
+export class NewsService {
 
   constructor(private httpClient: HttpClient) { }
 
 
 	//==============================
-  // HOME
+  // BLOG
   //==============================
 
-  // GET FEATURED POSTS
-	getFeaturedPosts(): Observable<PostModel> {
-		return this.httpClient.get<PostModel>(environment.jsonPlaceholder + endpoints.blog.posts);
-	}
+  // GET POSTS
+  getPosts(): Observable<PostModel> {
+    return this.httpClient.get<PostModel>(environment.jsonPlaceholder + endpoints.blog.posts);
+  }
+
+  // GET CATEGORIES
+  getCategories(): Observable<CategoryModel> {
+    return this.httpClient.get<CategoryModel>(environment.mocky + endpoints.blog.categories);
+  }
 }

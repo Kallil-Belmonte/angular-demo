@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PostModel } from 'app/home/_models/post.model';
+import { PostModel } from 'app/news/_models/post.model';
 import { HomeService } from 'app/home/home.service';
 
 @Component({
