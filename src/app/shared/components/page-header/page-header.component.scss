@@ -1,18 +1,12 @@
 [data-component="page-header"] {
   .icon {
     font-size: 32px;
-    margin-bottom: 15px;
-  }
-
-  .svg-inline--fa {
-    display: block;
-    margin: 0 auto;
   }
 
   .title {
     font-weight: 700;
     text-align: center;
     text-transform: uppercase;
-    margin-bottom: 80px;
+    margin: 15px 0 80px;
   }
 }

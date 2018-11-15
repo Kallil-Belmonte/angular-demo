@@ -1,0 +1,7 @@
+<section data-component="posts">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let post of posts[page]">
+      <app-post-item id="{{ post.id }}" title="{{ post.title }}" body="{{ post.body }}"></app-post-item>
+    </div>
+  </div>
+</section>
