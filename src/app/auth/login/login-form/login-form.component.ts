@@ -12,7 +12,7 @@ type loginErrors = { email: string[], password: string[] };
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
-  loader: boolean = false;
+  loading: boolean = false;
   loginForm: FormGroup;
   loginErrors: loginErrors = {
     email:    [],
@@ -52,7 +52,7 @@ export class LoginFormComponent implements OnInit {
   // ON SUBMIT LOGIN FORM
   onSubmitLoginForm(): void {
     // Activate loader
-    this.loader = true;
+    this.loading = true;
 
     if (this.loginForm.get('email').value === 'demo@demo.com') {
 
@@ -63,7 +63,7 @@ export class LoginFormComponent implements OnInit {
       };
 
       // Deactivate loader
-      this.loader = false;
+      this.loading = false;
 
     } else {
 
@@ -78,7 +78,7 @@ export class LoginFormComponent implements OnInit {
           }
 
           // Deactivate loader
-          this.loader = false;
+          this.loading = false;
 
           // Redirect
           this.router.navigate(['/']);
@@ -87,7 +87,7 @@ export class LoginFormComponent implements OnInit {
           console.log(error);
 
           // Deactivate loader
-          this.loader = false;
+          this.loading = false;
         }
       );
 

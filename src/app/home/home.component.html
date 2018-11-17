@@ -1,5 +1,5 @@
 <main data-component="home-page">
-  <app-loader *ngIf="!posts"></app-loader>
+  <app-loader *ngIf="loading"></app-loader>
 
   <app-featured-posts [featuredPosts]="posts"></app-featured-posts>
 </main>

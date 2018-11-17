@@ -1,5 +1,5 @@
 <main data-component="blog">
-  <app-loader *ngIf="loader"></app-loader>
+  <app-loader *ngIf="loading"></app-loader>
 
   <div class="container">
     <app-page-header [fontAwesomeIcon]="faNewspaper">Blog</app-page-header>
@@ -8,17 +8,12 @@
 
     <div class="row">
       <div class="col-md-9">
-        <app-posts [posts]="pagePosts" page="{{ currentPage }}"></app-posts>
-        <!-- <Posts posts={this.state.pagePosts} currentPage={this.state.currentPage} /> -->
+        <app-posts [data]="pagePosts" [page]="currentPage"></app-posts>
 
-        <!-- <Pagination
-          firstItem={this.state.firstPaginationItem}
-          totalItems={this.state.pagePosts.length}
-          paginate={(event) => this.handlePagination(event)}
-        /> -->
+        <app-pagination [firstItem]="firstPaginationItem" [totalItems]="pagePosts.length" (paginate)="onPaginate()"></app-pagination>
       </div>
       <div class="col-md-3">
-        <!-- <Categories categories={this.props.categories} click={(event) => this.handleSelectCategory(event)} /> -->
+        <app-categories [data]="categories" (selectCategory)="onSelectCategory()"></app-categories>
       </div>
     </div>
   </div>

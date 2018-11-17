@@ -9,6 +9,7 @@ import { HomeService } from 'app/home/home.service';
   styleUrls: []
 })
 export class HomeComponent implements OnInit {
+  loading: boolean = true;
   posts: PostModel[];
 
   constructor(private homeService: HomeService) { }
@@ -28,9 +29,15 @@ export class HomeComponent implements OnInit {
       data => {
         // Data
         this.posts = [data[0], data[1], data[2]];
+
+        // Deactivate loader
+        this.loading = false;
       },
       error => {
         console.log(error);
+
+        // Deactivate loader
+        this.loading = false;
       }
     );
   }

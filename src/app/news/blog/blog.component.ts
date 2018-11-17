@@ -14,7 +14,7 @@ import { NewsService } from 'app/news/news.service';
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
-  loader: boolean = true;
+  loading: boolean = true;
   faNewspaper = faNewspaper;
   posts: PostModel;
   categories: CategoryModel;
@@ -36,15 +36,15 @@ export class BlogComponent implements OnInit {
 
   // RESET PAGINATION
   resetPagination(): void {
-    // // Remove active class
-    // if (document.querySelector('.page-item.active')) document.querySelector('.page-item.active').classList.remove('active');
-    //
-    // // Add active class
-    // if (document.querySelector('.page-item .page-link:first-child').innerText !== 'Previous') {
-    //   document.querySelector('.page-item:nth-child(1)').classList.add('active');
-    // } else {
-    //   document.querySelector('.page-item:nth-child(2)').classList.add('active');
-    // }
+    // Remove active class
+    if (document.querySelector('.page-item.active')) document.querySelector('.page-item.active').classList.remove('active');
+
+    // Add active class
+    if (document.querySelector('.page-item .page-link:first-child').innerText !== 'Previous') {
+      document.querySelector('.page-item:nth-child(1)').classList.add('active');
+    } else {
+      document.querySelector('.page-item:nth-child(2)').classList.add('active');
+    }
   }
 
 
@@ -63,8 +63,56 @@ export class BlogComponent implements OnInit {
       this.pagePosts = Utils.groupArrays(this.posts, this.postsPerPage)
 
       // Deactivate loader
-      this.loader = false;
+      this.loading = false;
     });
+  }
+
+
+  // ON SELECT CATEGORY
+  onSelectCategory(): void {
+    // Activate loader
+    this.loading = true;
+
+    // Remove active class
+    for (let item of <any>document.querySelectorAll('.list-group-item')) {
+      item.classList.remove('active');
+    }
+
+    // Add active class
+    if (event.target.tagName === 'SPAN') {
+      event.target.parentNode.classList.add('active');
+    } else {
+      event.target.classList.add('active');
+    }
+
+    // Reset Page posts
+    this.pagePosts = [];
+
+    // Get posts from the selected category
+    // let category = document.querySelector('.list-group-item.active').getAttribute('data-name');
+    this.newsService.getPosts().subscribe(
+      data => {
+        // Data
+        this.posts = data;
+
+        // Reset pagination
+        this.resetPagination();
+
+        // Set page settings
+        this.pagePosts = Utils.groupArrays(this.posts, this.postsPerPage);
+        this.currentPage = 0;
+        this.firstPaginationItem = 1;
+
+        // Deactivate loader
+        this.loading = false;
+      },
+      error => {
+        console.log(error);
+
+        // Deactivate loader
+        this.loading = false;
+      }
+    );
   }
 
 
@@ -75,10 +123,48 @@ export class BlogComponent implements OnInit {
     // Reset pagination
     this.resetPagination();
 
-    // Set page posts
+    // Set page settings
     this.postsPerPage = +filterOption.value;
     this.pagePosts = Utils.groupArrays(this.posts, +filterOption.value);
     this.currentPage = 0;
     this.firstPaginationItem = 1;
+  }
+
+
+  // ON PAGINATE
+  onPaginate(): void {
+    // Select active page item
+    let activePageItem = document.querySelector('.page-item.active');
+
+    // Navigate back and forth
+    let navigateBackAndForth = (back) => {
+      if (activePageItem) activePageItem.classList.remove('active');
+
+      for (let item of <any>document.querySelectorAll('.page-item .page-link')) {
+        if (back) {
+          if (+item.innerText === this.currentPage + 2) item.parentNode.classList.add('active');
+        } else {
+          if (+item.innerText === this.currentPage) item.parentNode.classList.add('active');
+        }
+      }
+
+      this.firstPaginationItem = back ? this.firstPaginationItem - 1 : this.firstPaginationItem + 1;
+    };
+
+    // Update current page
+    switch(event.target.innerText) {
+      case 'Previous':
+        navigateBackAndForth(true);
+        break;
+
+      case 'Next':
+        navigateBackAndForth(false);
+        break;
+
+      default:
+        if (activePageItem) activePageItem.classList.remove('active');
+        event.target.parentNode.classList.add('active');
+        this.currentPage = parseInt(event.target.innerText) - 1;
+    }
   }
 }

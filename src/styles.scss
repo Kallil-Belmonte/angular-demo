@@ -823,7 +823,7 @@ textarea {
   color: $brand-primary;
 
   &:hover {
-    color: #59C7E5;
+    color: darken($brand-primary, 5%);
   }
 }
 

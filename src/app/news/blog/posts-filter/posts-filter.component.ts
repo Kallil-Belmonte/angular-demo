@@ -18,8 +18,8 @@ export class PostsFilterComponent implements OnInit {
   // GENERAL METHODS
   //==============================
 
-  // ON POSTS FILTER CHANGED
-  onPostsFilterChanged() {
+  // ON SELECT POSTS FILTER
+  onSelectPostsFilter() {
     this.filterPosts.emit();
   }
 }

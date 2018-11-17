@@ -12,7 +12,7 @@ type registerErrors = { email: string[], password: string[] };
   styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent implements OnInit {
-  loader: boolean = false;
+  loading: boolean = false;
   registerForm: FormGroup;
   registerErrors: registerErrors = {
     email:    [],
@@ -53,7 +53,7 @@ export class RegisterFormComponent implements OnInit {
   // ON REGISTER LOGIN FORM
   onSubmitRegisterForm(): void {
     // Activate loader
-    this.loader = true;
+    this.loading = true;
 
     if (this.registerForm.get('email').value === 'demo@demo.com') {
 
@@ -64,7 +64,7 @@ export class RegisterFormComponent implements OnInit {
       };
 
       // Deactivate loader
-      this.loader = false;
+      this.loading = false;
 
     } else {
 
@@ -74,7 +74,7 @@ export class RegisterFormComponent implements OnInit {
           sessionStorage.setItem('authTokenAngularDemo', data.token);
 
           // Deactivate loader
-          this.loader = false;
+          this.loading = false;
 
           // Redirect
           this.router.navigate(['/']);
@@ -83,7 +83,7 @@ export class RegisterFormComponent implements OnInit {
           console.log(error);
 
           // Deactivate loader
-          this.loader = false;
+          this.loading = false;
         }
       );
 
