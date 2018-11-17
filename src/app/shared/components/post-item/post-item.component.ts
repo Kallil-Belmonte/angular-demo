@@ -1,15 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { PostModel } from 'app/news/_models/post.model';
+
 @Component({
   selector: 'app-post-item',
   templateUrl: './post-item.component.html',
   styleUrls: ['./post-item.component.scss']
 })
 export class PostItemComponent implements OnInit {
-  @Input() id: string;
-  @Input() image: string;
-  @Input() title: string;
-  @Input() body: string;
+  @Input() data: PostModel[];
 
   constructor() { }
 

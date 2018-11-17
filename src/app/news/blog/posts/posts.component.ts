@@ -8,7 +8,7 @@ import { PostModel } from 'app/news/_models/post.model';
   styleUrls: []
 })
 export class PostsComponent implements OnInit {
-  @Input() posts: PostModel;
+  @Input() posts: PostModel[];
   @Input() page: number;
 
   constructor() { }
