@@ -1,3 +1,51 @@
-<p>
-  account-form works!
-</p>
+<app-loader *ngIf="loading"></app-loader>
+
+<div data-component="account-form" class="row">
+  <div class="offset-md-3 col-md-6">
+    <!-- {props.feedbackMessages && props.feedbackMessages.success ?
+      <Alert color="success">
+        {props.feedbackMessages.success}
+      </Alert>
+    : null}
+
+    {props.feedbackMessages ?
+      props.feedbackMessages.error.map((message, index) =>
+        <Alert color="danger" key={index}>
+          {message}
+        </Alert>
+      )
+    : null} -->
+
+    <form [formGroup]="accountForm" (ngSubmit)="onSubmitAccountForm()">
+      <div class="form-group">
+        <label for="first-name">First name</label>
+        <input id="first-name" [ngClass]="{ 'form-control': true, 'is-invalid': accountForm.get('firstName').touched && accountForm.get('firstName').invalid }" type="text" formControlName="firstName" placeholder="First name" />
+
+        <ng-template [ngIf]="accountForm.get('firstName').touched && accountForm.get('firstName').errors">
+          <div [ngClass]="{ 'invalid-feedback': true, 'd-block': accountForm.get('firstName').errors.required }">First name is required</div>
+          <div [ngClass]="{ 'invalid-feedback': true, 'd-block': accountForm.get('firstName').errors.minlength }">Minimum 3 characters required</div>
+        </ng-template>
+      </div>
+
+      <div class="form-group">
+        <label for="last-name">Last name</label>
+        <input id="last-name" [ngClass]="{ 'form-control': true, 'is-invalid': accountForm.get('lastName').touched && accountForm.get('lastName').invalid }" type="text" formControlName="lastName" placeholder="Last name" />
+
+        <div [ngClass]="{ 'invalid-feedback': true, 'd-block': accountForm.get('lastName').touched && accountForm.get('lastName').invalid }">Last name is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input id="email" [ngClass]="{ 'form-control': true, 'is-invalid': accountForm.get('email').touched && accountForm.get('email').invalid }" type="email" formControlName="email" placeholder="E-mail" />
+
+        <ng-template [ngIf]="accountForm.get('email').touched && accountForm.get('email').errors">
+          <div [ngClass]="{ 'invalid-feedback': true, 'd-block': accountForm.get('email').errors.required }">E-mail is required</div>
+          <div [ngClass]="{ 'invalid-feedback': true, 'd-block': accountForm.get('email').errors.email }">Invalid e-mail</div>
+        </ng-template>
+      </div>
+
+      <button class="btn btn-primary mr-2" type="submit" [disabled]="!accountForm.valid || accountForm.pristine">Save</button>
+      <button class="btn btn-light" type="button" [disabled]="accountForm.pristine" (click)="onResetAccountForm()">Reset form</button>
+    </form>
+  </div>
+</div>

@@ -11,5 +11,4 @@ export class AccountFormComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
