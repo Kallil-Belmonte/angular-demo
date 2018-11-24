@@ -10,7 +10,10 @@ import { PostsComponent } from 'app/news/blog/posts/posts.component';
 import { PaginationComponent } from 'app/news/blog/pagination/pagination.component';
 import { CategoriesComponent } from 'app/news/blog/categories/categories.component';
 import { PostComponent } from 'app/news/post/post.component';
+import { PostBodyComponent } from 'app/news/post/post-body/post-body.component';
+import { DeletePostModalComponent } from 'app/news/post/delete-post-modal/delete-post-modal.component';
 import { EditPostComponent } from 'app/news/edit-post/edit-post.component';
+import { EditPostFormComponent } from 'app/news/edit-post/edit-post-form/edit-post-form.component';
 
 @NgModule({
   imports: [
@@ -25,7 +28,10 @@ import { EditPostComponent } from 'app/news/edit-post/edit-post.component';
     PaginationComponent,
     CategoriesComponent,
     PostComponent,
-    EditPostComponent
+    PostBodyComponent,
+    DeletePostModalComponent,
+    EditPostComponent,
+    EditPostFormComponent
   ]
 })
 export class NewsModule { }

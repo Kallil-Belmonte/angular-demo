@@ -79,7 +79,7 @@ export class AccountFormComponent implements OnInit {
 
 
   // ON CLEAR FORM MESSAGE
-  onClearFormMessage(field, index): void {
+  onClearFormMessage(field: string[], index: number): void {
     field.splice(index, 1);
   }
 }

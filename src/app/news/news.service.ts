@@ -28,4 +28,14 @@ export class NewsService {
   getCategories(): Observable<CategoryModel> {
     return this.httpClient.get<CategoryModel>(environment.mocky + endpoints.blog.categories);
   }
+
+
+  //==============================
+  // POST
+  //==============================
+
+  // GET CURRENT POST
+  getCurrentPost(id: string): Observable<PostModel> {
+    return this.httpClient.get<PostModel>(environment.jsonPlaceholder + endpoints.blog.posts + id);
+  }
 }

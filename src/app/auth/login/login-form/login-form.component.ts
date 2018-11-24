@@ -99,7 +99,7 @@ export class LoginFormComponent implements OnInit {
 
 
   // ON CLEAR FORM MESSAGE
-  onClearFormMessage(field, index) {
+  onClearFormMessage(field: string[], index: number): void {
     field.splice(index, 1);
   }
 }

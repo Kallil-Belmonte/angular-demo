@@ -1,0 +1,11 @@
+<section data-component="post-body" *ngIf="data">
+  <article>
+    <h1 class="title text-center">{{ data.title }}</h1>
+    <p>{{ data.body }}</p>
+  </article>
+  <hr class="mt-4" />
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-danger mr-3" type="button" (click)="onClickDelete()">Delete</button>
+    <a class="btn btn-light" [routerLink]="['/edit-post/', data.id]">Edit</a>
+  </div>
+</section>

@@ -22,6 +22,6 @@ export class AlertComponent implements OnInit {
 
   // ON DISMISS ALERT
   onDismissAlert() {
-    this.dismissAlert.emit(event);
+    this.dismissAlert.emit();
   }
 }

@@ -7,6 +7,6 @@
   <article>
     <h3 class="title">{{ data.title }}</h3>
     <p class="mb-0" *ngIf="data.body">{{ data.body | limitWords: 8 }}</p>
-    <a class="btn btn-primary mt-3" [routerLink]="['/posts/', data.id]">Read more</a>
+    <a class="btn btn-primary mt-3" [routerLink]="['/post/', data.id]">Read more</a>
   </article>
 </div>
