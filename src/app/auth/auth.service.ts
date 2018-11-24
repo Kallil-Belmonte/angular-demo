@@ -44,6 +44,6 @@ export class AuthService {
   // LOG OUT
   logOut(): void {
     window.sessionStorage.clear();
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 }

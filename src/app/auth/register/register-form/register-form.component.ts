@@ -4,7 +4,12 @@ import { Router } from '@angular/router';
 
 import { AuthService } from 'app/auth/auth.service';
 
-type registerErrors = { email: string[], password: string[] };
+type registerFormFeedback = {
+  fieldsErrors: {
+    email: string[],
+    password: string[]
+  }
+};
 
 @Component({
   selector: 'app-register-form',
@@ -14,9 +19,11 @@ type registerErrors = { email: string[], password: string[] };
 export class RegisterFormComponent implements OnInit {
   loading: boolean = false;
   registerForm: FormGroup;
-  registerErrors: registerErrors = {
-    email:    [],
-    password: []
+  registerFormFeedback: registerFormFeedback = {
+    fieldsErrors: {
+      email:    [],
+      password: []
+    }
   };
 
   constructor(private formBuilder: FormBuilder,
@@ -44,12 +51,6 @@ export class RegisterFormComponent implements OnInit {
   }
 
 
-  // ON CLEAR LOGIN ERROR
-  onClearRegisterError(field, index) {
-    field.splice(index, 1);
-  }
-
-
   // ON REGISTER LOGIN FORM
   onSubmitRegisterForm(): void {
     // Activate loader
@@ -58,9 +59,11 @@ export class RegisterFormComponent implements OnInit {
     if (this.registerForm.get('email').value === 'demo@demo.com') {
 
       // Error simulation
-      this.registerErrors = {
-        email:    ['This e-mail already exists.'],
-        password: ['Your password is too weak.']
+      this.registerFormFeedback = {
+        fieldsErrors: {
+          email:    ['This e-mail already exists.'],
+          password: ['Your password is too weak.']
+        }
       };
 
       // Deactivate loader
@@ -88,5 +91,11 @@ export class RegisterFormComponent implements OnInit {
       );
 
     }
+  }
+
+
+  // ON CLEAR FORM MESSAGE
+  onClearFormMessage(field, index) {
+    field.splice(index, 1);
   }
 }

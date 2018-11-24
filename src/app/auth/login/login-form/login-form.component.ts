@@ -4,7 +4,12 @@ import { Router } from '@angular/router';
 
 import { AuthService } from 'app/auth/auth.service';
 
-type loginErrors = { email: string[], password: string[] };
+type loginFormFeedback = {
+  fieldsErrors: {
+    email: string[],
+    password: string[]
+  }
+};
 
 @Component({
   selector: 'app-login-form',
@@ -14,9 +19,11 @@ type loginErrors = { email: string[], password: string[] };
 export class LoginFormComponent implements OnInit {
   loading: boolean = false;
   loginForm: FormGroup;
-  loginErrors: loginErrors = {
-    email:    [],
-    password: []
+  loginFormFeedback: loginFormFeedback = {
+    fieldsErrors: {
+      email:    [],
+      password: []
+    }
   };
 
   constructor(private formBuilder: FormBuilder,
@@ -43,12 +50,6 @@ export class LoginFormComponent implements OnInit {
   }
 
 
-  // ON CLEAR LOGIN ERROR
-  onClearLoginError(field, index) {
-    field.splice(index, 1);
-  }
-
-
   // ON SUBMIT LOGIN FORM
   onSubmitLoginForm(): void {
     // Activate loader
@@ -57,9 +58,11 @@ export class LoginFormComponent implements OnInit {
     if (this.loginForm.get('email').value === 'demo@demo.com') {
 
       // Error simulation
-      this.loginErrors = {
-        email:    ['This e-mail does not exists.'],
-        password: ['The password is incorrect.']
+      this.loginFormFeedback = {
+        fieldsErrors: {
+          email:    ['This e-mail does not exists.'],
+          password: ['The password is incorrect.']
+        }
       };
 
       // Deactivate loader
@@ -92,5 +95,11 @@ export class LoginFormComponent implements OnInit {
       );
 
     }
+  }
+
+
+  // ON CLEAR FORM MESSAGE
+  onClearFormMessage(field, index) {
+    field.splice(index, 1);
   }
 }
