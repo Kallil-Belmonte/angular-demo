@@ -40,7 +40,9 @@ export class BlogComponent implements OnInit {
     if (document.querySelector('.page-item.active')) document.querySelector('.page-item.active').classList.remove('active');
 
     // Add active class
-    if (document.querySelector('.page-item .page-link:first-child').innerText !== 'Previous') {
+    let firstPageItem: HTMLElement = document.querySelector('.page-item .page-link:first-child');
+
+    if (firstPageItem.innerText !== 'Previous') {
       document.querySelector('.page-item:nth-child(1)').classList.add('active');
     } else {
       document.querySelector('.page-item:nth-child(2)').classList.add('active');
@@ -79,10 +81,13 @@ export class BlogComponent implements OnInit {
     }
 
     // Add active class
-    if (event.target.tagName === 'SPAN') {
-      event.target.parentNode.classList.add('active');
+    let targetElement = event.target as HTMLElement;
+    let parentElement = targetElement.parentNode as HTMLElement;
+
+    if (targetElement.tagName === 'SPAN') {
+      parentElement.classList.add('active');
     } else {
-      event.target.classList.add('active');
+      targetElement.classList.add('active');
     }
 
     // Reset Page posts
@@ -152,7 +157,10 @@ export class BlogComponent implements OnInit {
     };
 
     // Update current page
-    switch(event.target.innerText) {
+    let targetElement = event.target as HTMLElement;
+    let parentElement = targetElement.parentNode as HTMLElement;
+
+    switch(targetElement.innerText) {
       case 'Previous':
         navigateBackAndForth(true);
         break;
@@ -163,8 +171,8 @@ export class BlogComponent implements OnInit {
 
       default:
         if (activePageItem) activePageItem.classList.remove('active');
-        event.target.parentNode.classList.add('active');
-        this.currentPage = parseInt(event.target.innerText) - 1;
+        parentElement.classList.add('active');
+        this.currentPage = parseInt(targetElement.innerText) - 1;
     }
   }
 }
