@@ -5,7 +5,7 @@
 
   <div class="form-group">
     <label for="first-name">First name</label>
-    <input id="first-name" class="form-control" [ngClass]="{ 'form-control': true, 'is-invalid': registerForm.get('firstName').touched && registerForm.get('firstName').invalid }" type="text" formControlName="firstName" />
+    <input id="first-name" [ngClass]="{ 'form-control': true, 'is-invalid': registerForm.get('firstName').touched && registerForm.get('firstName').invalid }" type="text" formControlName="firstName" />
 
     <ng-template [ngIf]="registerForm.get('firstName').touched && registerForm.get('firstName').errors">
       <div [ngClass]="{ 'invalid-feedback': true, 'd-block': registerForm.get('firstName').errors.required }">First name is required</div>

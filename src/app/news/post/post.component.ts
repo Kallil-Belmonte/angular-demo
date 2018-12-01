@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
+import { ThemeFunctions } from 'app/shared/theme-functions/theme-functions';
 import { PostModel } from 'app/news/_models/post.model';
 import { NewsService } from 'app/news/news.service';
 
@@ -59,12 +60,8 @@ export class PostComponent implements OnInit {
 
   // ON OPEN MODAL
   onToggleModal(): void {
-    // Toggle class on body
-    if (document.querySelector('body.modal-open')) {
-      document.querySelector('body').classList.remove('modal-open');
-    } else {
-      document.querySelector('body').classList.add('modal-open');
-    }
+    // Toggle styles
+    ThemeFunctions.toggleModalStyles(this.isModalOpen);
 
     // Toggle modal
     this.isModalOpen = !this.isModalOpen;

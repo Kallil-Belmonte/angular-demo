@@ -1,3 +1,23 @@
-<p>
-  edit-post-form works!
-</p>
+<app-loader *ngIf="loading"></app-loader>
+
+<form data-component="edit-post-form" [formGroup]="editPostForm" (ngSubmit)="onEditPostForm()">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input id="title" [ngClass]="{ 'form-control': true, 'is-invalid': editPostForm.get('title').touched && editPostForm.get('title').invalid }" type="text" formControlName="title" />
+
+    <ng-template [ngIf]="editPostForm.get('title').touched && editPostForm.get('title').errors">
+      <div [ngClass]="{ 'invalid-feedback': true, 'd-block': editPostForm.get('title').errors.required }">Title is required</div>
+    </ng-template>
+  </div>
+  <div class="form-group">
+    <label for="body">Body</label>
+    <textarea id="body" [ngClass]="{ 'form-control': true, 'is-invalid': editPostForm.get('body').touched && editPostForm.get('body').invalid }" formControlName="body" rows="6"></textarea>
+
+    <ng-template [ngIf]="editPostForm.get('body').touched && editPostForm.get('body').errors">
+      <div [ngClass]="{ 'invalid-feedback': true, 'd-block': editPostForm.get('body').errors.required }">Title is required</div>
+    </ng-template>
+  </div>
+
+  <button class="btn btn-primary mr-2" type="submit" [disabled]="!editPostForm.valid || editPostForm.pristine">Edit</button>
+  <button class="btn btn-light" type="button" [disabled]="editPostForm.pristine" (click)="onResetEditPostForm()">Reset form</button>
+</form>

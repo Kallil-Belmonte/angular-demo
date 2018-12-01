@@ -1,10 +1,11 @@
 @import "../../../assets/scss/helpers/helpers";
 
 [data-component="header"] {
-  background-color: #222;
-  padding: 20px;
-  color: white;
+  color: #FFF;
   text-align: center;
+  padding: 20px;
+  background-color: #222;
+  position: relative;
 
   .logo {
     @include square(80px);

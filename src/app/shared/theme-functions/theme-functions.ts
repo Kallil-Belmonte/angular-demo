@@ -2,6 +2,20 @@ declare var $: any;
 
 export class ThemeFunctions {
 
+  // TOGGLE MODAL STYLES
+  static toggleModalStyles(isModalOpen) {
+    if (isModalOpen) {
+      $('body, .modal-open .modal').removeAttr('style');
+      $('body').removeClass('modal-open');
+    } else {
+      let scrollbarWidth = window.innerWidth - document.body.clientWidth;
+
+      $('body').addClass('modal-open');
+      $('body, .modal-open .modal').css({'padding-right': scrollbarWidth.toString() + 'px'});
+    }
+  }
+
+
   // JQUERY MASK PLUGIN
   static jQueryMaskPlugin() {
     // Credit card config
