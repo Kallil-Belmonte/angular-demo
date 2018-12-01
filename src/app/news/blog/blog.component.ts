@@ -172,7 +172,7 @@ export class BlogComponent implements OnInit {
       default:
         if (activePageItem) activePageItem.classList.remove('active');
         parentElement.classList.add('active');
-        this.currentPage = parseInt(targetElement.innerText) - 1;
+        this.currentPage = +targetElement.innerText - 1;
     }
   }
 }
