@@ -9,7 +9,7 @@ import { PostModel } from 'app/news/_models/post.model';
 })
 export class PostBodyComponent implements OnInit {
   @Input() data: PostModel;
-  @Output() toggleModal = new EventEmitter();
+  @Output() openModal = new EventEmitter();
 
   constructor() { }
 
@@ -21,8 +21,8 @@ export class PostBodyComponent implements OnInit {
   // GENERAL METHODS
   //==============================
 
-  // ON TOGGLE MODAL
+  // ON CLICK DELETE
   onClickDelete(): void {
-    this.toggleModal.emit();
+    this.openModal.emit();
   }
 }

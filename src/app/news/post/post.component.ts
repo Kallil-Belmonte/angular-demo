@@ -11,6 +11,7 @@ import { NewsService } from 'app/news/news.service';
 })
 export class PostComponent implements OnInit {
   loading: boolean = true;
+  isModalOpen: boolean = false;
   currentPost: PostModel;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -56,9 +57,17 @@ export class PostComponent implements OnInit {
   }
 
 
-  // ON TOGGLE MODAL
+  // ON OPEN MODAL
   onToggleModal(): void {
-    
+    // Toggle class on body
+    if (!document.querySelector('body.modal-open')) {
+      document.querySelector('body').classList.add('modal-open');
+    } else {
+      document.querySelector('body').classList.remove('modal-open');
+    }
+
+    // Toggle modal
+    this.isModalOpen = !this.isModalOpen;
   }
 
 

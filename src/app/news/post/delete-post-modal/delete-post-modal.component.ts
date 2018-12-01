@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-delete-post-modal',
@@ -6,10 +6,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: []
 })
 export class DeletePostModalComponent implements OnInit {
+  @Input() open: boolean;
+  @Output() closeModal = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+
+  //==============================
+  // GENERAL METHODS
+  //==============================
+
+  // ON DELETE POST
+  onDeletePost(): void {
+
+  }
+
+
+  // ON CLOSE MODAL
+  onCloseModal(): void {
+    this.closeModal.emit();
+  }
 }
