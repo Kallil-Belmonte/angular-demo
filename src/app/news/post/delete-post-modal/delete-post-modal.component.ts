@@ -1,4 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+
+import { NewsService } from 'app/news/news.service';
 
 @Component({
   selector: 'app-delete-post-modal',
@@ -6,10 +9,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: []
 })
 export class DeletePostModalComponent implements OnInit {
+  loading: boolean = false;
   @Input() open: boolean;
   @Output() closeModal = new EventEmitter();
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private newsService: NewsService) { }
 
   ngOnInit() {
   }
@@ -19,9 +25,57 @@ export class DeletePostModalComponent implements OnInit {
   // GENERAL METHODS
   //==============================
 
+  // DELETE CURRENT POST
+  deleteCurrentPost(id): void {
+    this.newsService.deleteCurrentPost(id).subscribe(
+      data => {
+        console.log(data);
+
+        // Close modal
+        this.closeModal.emit();
+
+        // Deactivate loader
+        this.loading = false;
+
+        // Redirect
+        this.router.navigate(['/blog']);
+      },
+      error => {
+        console.log(error);
+
+        // Deactivate loader
+        this.loading = false;
+      }
+    );
+  }
+
+
+  // PARAMETER LISTENER
+  parameterListener(): void {
+    this.activatedRoute.params.subscribe(
+      (params: Params) => {
+        // Delete current post
+        this.deleteCurrentPost(params['id']);
+      }
+    );
+  }
+
+
   // ON DELETE POST
   onDeletePost(): void {
+    // Activate loader
+    this.loading = true
 
+    // Parameter listener
+    this.parameterListener();
+  }
+
+
+  // ON CLICK OUT MODAL
+  onClickOutModal(): void {
+    if (event.target.id === 'deletePost') {
+      this.closeModal.emit();
+    }
   }
 
 

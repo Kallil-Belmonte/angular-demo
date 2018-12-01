@@ -12,26 +12,14 @@ Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) { ... }
 */
 
-/*==============================
-HELPERS
-==============================*/
-
-// Bootstrap
+// BOOTSTRAP
 // @import "assets/scss/bootstrap/custom/helpers/variables";
 
-// Custom
-@import "assets/scss/helpers/_variables";
-@import "assets/scss/helpers/_mixins";
-@import "assets/scss/helpers/_functions";
-@import "assets/scss/helpers/_placeholders";
+// HELPERS
+@import "assets/scss/helpers/helpers";
 
-
-/*==============================
-PLUGINS
-==============================*/
-
-// Pretty checkbox
-@import "assets/scss/plugins/_pretty-checkbox";
+// PLUGINS
+@import "assets/scss/plugins/plugins";
 
 
 /*============================== HELPER CLASSES ==============================*/

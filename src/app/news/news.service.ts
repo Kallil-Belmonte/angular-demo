@@ -38,4 +38,9 @@ export class NewsService {
   getCurrentPost(id: string): Observable<PostModel> {
     return this.httpClient.get<PostModel>(environment.jsonPlaceholder + endpoints.blog.posts + id);
   }
+
+  // DELETE CURRENT POST
+  deleteCurrentPost(id: string): Observable<PostModel> {
+    return this.httpClient.delete<PostModel>(environment.jsonPlaceholder + endpoints.blog.posts + id);
+  }
 }

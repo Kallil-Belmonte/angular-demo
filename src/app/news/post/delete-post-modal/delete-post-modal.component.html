@@ -1,4 +1,6 @@
-<div [ngClass]="{'modal fade': true, 'show': open}" [ngStyle]="{'display': open ? 'block' : 'none' }" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="deletePostLabel" [attr.aria-hidden]="open ? false : true">
+<app-loader *ngIf="loading"></app-loader>
+
+<div [ngClass]="{ 'modal fade': true, 'show d-block': open }" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="deletePostLabel" [attr.aria-hidden]="open ? false : true" (click)="onClickOutModal()">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -17,3 +19,5 @@
     </div>
   </div>
 </div>
+
+<div class="modal-backdrop fade show" *ngIf="open"></div>
