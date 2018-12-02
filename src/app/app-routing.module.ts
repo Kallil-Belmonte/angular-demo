@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from 'app/core/dashboard/dashboard.component';
+import { AuthGuardService } from 'app/auth/auth-guard.service';
 import { HomeComponent } from 'app/home/home.component';
 import { BlogComponent } from 'app/news/blog/blog.component';
 import { PostComponent } from 'app/news/post/post.component';
@@ -16,7 +17,7 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    // canActivate: [ AuthGuard ],
+    canActivate: [ AuthGuardService ],
     children: [
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'blog', component: BlogComponent },

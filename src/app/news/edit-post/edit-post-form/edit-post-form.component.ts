@@ -82,8 +82,8 @@ export class EditPostFormComponent implements OnInit {
   }
 
 
-  // ON EDIT POST FORM
-  onEditPostForm(): void {
+  // ON SUBMIT EDIT POST FORM
+  onSubmitEditPostForm(): void {
     // Activate loader
     this.loading = true;
 

@@ -10,6 +10,17 @@ export class NotFoundComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.setPageTitle();
+  }
+
+
+	//==============================
+  // GENERAL METHODS
+  //==============================
+
+  // SET PAGE TITLE
+  setPageTitle(): void {
+    document.title = 'Angular Demo | Error 404';
   }
 
 }

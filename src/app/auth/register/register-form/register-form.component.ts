@@ -51,7 +51,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
 
-  // ON REGISTER LOGIN FORM
+  // ON SUBMIT REGISTER FORM
   onSubmitRegisterForm(): void {
     // Activate loader
     this.loading = true;

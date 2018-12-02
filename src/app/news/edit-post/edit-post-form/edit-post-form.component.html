@@ -1,6 +1,6 @@
 <app-loader *ngIf="loading"></app-loader>
 
-<form data-component="edit-post-form" [formGroup]="editPostForm" (ngSubmit)="onEditPostForm()">
+<form data-component="edit-post-form" [formGroup]="editPostForm" (ngSubmit)="onSubmitEditPostForm()">
   <div class="form-group">
     <label for="title">Title</label>
     <input id="title" [ngClass]="{ 'form-control': true, 'is-invalid': editPostForm.get('title').touched && editPostForm.get('title').invalid }" type="text" formControlName="title" />
