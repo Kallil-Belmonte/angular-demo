@@ -43,7 +43,13 @@ export class AuthService {
 
   // LOG OUT
   logOut(): void {
-    window.sessionStorage.clear();
+    // Remove token
+    sessionStorage.removeItem('authTokenAngularDemo');
+    localStorage.removeItem('authTokenAngularDemo');
+    localStorage.removeItem('expirationDateAngularDemo');
+
+    // Redirect
     this.router.navigate(['/login']);
   }
+
 }
