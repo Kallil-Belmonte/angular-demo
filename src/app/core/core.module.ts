@@ -26,7 +26,6 @@ import { AuthInterceptor } from 'app/auth/auth.interceptor';
     AppRoutingModule
   ],
   providers: [
-  	// AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ]
 })
