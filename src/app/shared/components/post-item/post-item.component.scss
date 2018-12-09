@@ -1,3 +1,4 @@
+@import "../../../../assets/scss/helpers/bootstrap-helpers";
 @import "../../../../assets/scss/helpers/helpers";
 
 [data-component="post-item"] {
@@ -15,7 +16,7 @@
     color: #FFF;
     padding: 20px;
     @include border-top-radius(5px);
-    background-color: $brand-primary;
+    background-color: $primary;
   }
 
   article {

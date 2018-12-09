@@ -1,3 +1,4 @@
+@import "../../../assets/scss/helpers/bootstrap-helpers";
 @import "../../../assets/scss/helpers/helpers";
 
 [data-component="header"] {
@@ -41,7 +42,7 @@
           &:focus,
           &:active,
           &.active {
-            color: $brand-primary;
+            color: $primary;
           }
         }
       }
