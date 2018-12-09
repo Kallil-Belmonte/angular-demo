@@ -7,7 +7,7 @@
 
   img {
     display: block;
-    @include square(100px)
+    @include square(100px);
     margin: 0 auto 10px;
   }
 
