@@ -28,7 +28,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/pretty-checkbox/dist/pretty-checkbox.min.css",
               "src/styles.scss"
             ],
             "scripts": [
