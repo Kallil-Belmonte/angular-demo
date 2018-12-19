@@ -17,6 +17,7 @@ type loginFormFeedback = {
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
+
   loading: boolean = false;
   loginForm: FormGroup;
   loginFormFeedback: loginFormFeedback = {
@@ -102,4 +103,5 @@ export class LoginFormComponent implements OnInit {
   onClearFormMessage(field: string[], index: number): void {
     field.splice(index, 1);
   }
+
 }
