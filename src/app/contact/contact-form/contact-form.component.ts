@@ -10,6 +10,7 @@ import { ContactService } from 'app/contact/contact.service';
   styleUrls: []
 })
 export class ContactFormComponent implements OnInit {
+
   loading: boolean = true;
   contactForm: FormGroup;
   favoriteColors: string[];
@@ -89,4 +90,5 @@ export class ContactFormComponent implements OnInit {
   onClearSuccessMessage(): void {
     this.contactFormSuccessMessage = null;
   }
+
 }
