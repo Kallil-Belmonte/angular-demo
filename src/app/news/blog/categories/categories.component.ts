@@ -8,6 +8,7 @@ import { CategoryModel } from 'app/news/_models/category.model';
   styleUrls: []
 })
 export class CategoriesComponent implements OnInit {
+
   @Input() data: CategoryModel[];
   @Output() selectCategory = new EventEmitter();
 
@@ -25,4 +26,5 @@ export class CategoriesComponent implements OnInit {
   onClickCategory(): void {
     this.selectCategory.emit();
   }
+
 }
