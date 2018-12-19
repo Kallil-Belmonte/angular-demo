@@ -19,6 +19,7 @@ type accountFormFeedback = {
   styleUrls: []
 })
 export class AccountFormComponent implements OnInit {
+
   faUser = faUser;
   accountForm: FormGroup;
   accountFormFeedback: accountFormFeedback = {
@@ -82,4 +83,5 @@ export class AccountFormComponent implements OnInit {
   onClearFormMessage(field: string[], index: number): void {
     field.splice(index, 1);
   }
+
 }
