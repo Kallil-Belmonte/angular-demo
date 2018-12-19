@@ -8,6 +8,7 @@ import { PostModel } from 'app/news/_models/post.model';
   styleUrls: []
 })
 export class PostsComponent implements OnInit {
+
   @Input() data: PostModel[];
   @Input() page: number;
 
@@ -15,4 +16,5 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
   }
+
 }
