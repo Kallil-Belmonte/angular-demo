@@ -17,6 +17,7 @@ type registerFormFeedback = {
   styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent implements OnInit {
+
   loading: boolean = false;
   registerForm: FormGroup;
   registerFormFeedback: registerFormFeedback = {
@@ -98,4 +99,5 @@ export class RegisterFormComponent implements OnInit {
   onClearFormMessage(field: string[], index: number): void {
     field.splice(index, 1);
   }
+
 }
