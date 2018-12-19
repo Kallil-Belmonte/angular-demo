@@ -41,7 +41,7 @@ export class DeletePostModalComponent implements OnInit {
         this.router.navigate(['/blog']);
       },
       error => {
-        console.log(error);
+        console.error(error);
 
         // Deactivate loader
         this.loading = false;
@@ -72,7 +72,7 @@ export class DeletePostModalComponent implements OnInit {
 
 
   // ON CLICK OUT MODAL
-  onClickOutModal(): void {
+  onClickOutModal(event): void {
     if (event.target.id === 'deletePost') {
       this.closeModal.emit();
     }

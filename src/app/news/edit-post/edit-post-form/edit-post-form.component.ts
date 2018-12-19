@@ -57,7 +57,7 @@ export class EditPostFormComponent implements OnInit {
         this.loading = false;
       },
       error => {
-        console.log(error);
+        console.error(error);
 
         // Deactivate loader
         this.loading = false;
@@ -105,7 +105,7 @@ export class EditPostFormComponent implements OnInit {
         this.router.navigate(['/post/' + this.currentPost.id]);
       },
       error => {
-        console.log(error);
+        console.error(error);
 
         // Deactivate loader
         this.loading = false;

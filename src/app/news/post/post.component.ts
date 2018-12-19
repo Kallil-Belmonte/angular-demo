@@ -38,7 +38,7 @@ export class PostComponent implements OnInit {
         this.loading = false;
       },
       error => {
-        console.log(error);
+        console.error(error);
 
         // Deactivate loader
         this.loading = false;

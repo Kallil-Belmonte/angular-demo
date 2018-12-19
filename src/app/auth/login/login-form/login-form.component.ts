@@ -88,7 +88,7 @@ export class LoginFormComponent implements OnInit {
           this.router.navigate(['/']);
         },
         error => {
-          console.log(error);
+          console.error(error);
 
           // Deactivate loader
           this.loading = false;

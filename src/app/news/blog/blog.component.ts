@@ -113,7 +113,7 @@ export class BlogComponent implements OnInit {
         this.loading = false;
       },
       error => {
-        console.log(error);
+        console.error(error);
 
         // Deactivate loader
         this.loading = false;
