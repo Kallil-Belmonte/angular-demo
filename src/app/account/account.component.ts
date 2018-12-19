@@ -8,10 +8,12 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
+
   faUser = faUser;
 
   constructor() { }
 
   ngOnInit() {
   }
+
 }
