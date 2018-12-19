@@ -9,6 +9,7 @@ import { HomeService } from 'app/home/home.service';
   styleUrls: []
 })
 export class HomeComponent implements OnInit {
+
   loading: boolean = true;
   posts: PostModel[];
 
@@ -41,4 +42,5 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
 }
