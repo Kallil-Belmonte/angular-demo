@@ -6,6 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit {
+
   @Input() firstItem: number = 1;
   secondItem: number;
   thirdItem:  number;
@@ -41,4 +42,5 @@ export class PaginationComponent implements OnInit {
   onClickPagination(): void {
     this.paginate.emit();
   }
+
 }
