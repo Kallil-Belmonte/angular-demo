@@ -6,6 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./alert.component.scss']
 })
 export class AlertComponent implements OnInit {
+
   @Input() status: string;
   @Input() dismissible: boolean = false;
   @Output() dismissAlert = new EventEmitter();
@@ -24,4 +25,5 @@ export class AlertComponent implements OnInit {
   onDismissAlert() {
     this.dismissAlert.emit();
   }
+
 }
