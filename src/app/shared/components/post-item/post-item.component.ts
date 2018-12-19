@@ -8,10 +8,12 @@ import { PostModel } from 'app/news/_models/post.model';
   styleUrls: ['./post-item.component.scss']
 })
 export class PostItemComponent implements OnInit {
+
   @Input() data: PostModel;
 
   constructor() { }
 
   ngOnInit() {
   }
+
 }
