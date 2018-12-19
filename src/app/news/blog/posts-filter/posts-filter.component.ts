@@ -6,6 +6,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./posts-filter.component.scss']
 })
 export class PostsFilterComponent implements OnInit {
+
   @Output() filterPosts = new EventEmitter();
 
   constructor() { }
@@ -22,4 +23,5 @@ export class PostsFilterComponent implements OnInit {
   onSelectPostsFilter() {
     this.filterPosts.emit();
   }
+
 }
