@@ -10,6 +10,7 @@ import { AuthService } from 'app/auth/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
   faHome = faHome;
   faNewspaper = faNewspaper;
   faEnvelope = faEnvelope;
@@ -30,4 +31,5 @@ export class HeaderComponent implements OnInit {
   onlogOut(): void {
     this.authService.logOut();
   }
+
 }
