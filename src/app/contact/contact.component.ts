@@ -8,10 +8,12 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
+
   faEnvelope = faEnvelope;
 
   constructor() { }
 
   ngOnInit() {
   }
+
 }
