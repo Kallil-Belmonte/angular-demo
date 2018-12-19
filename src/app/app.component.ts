@@ -10,6 +10,7 @@ import { Utils } from 'app/shared/utils/utils';
   styleUrls: []
 })
 export class AppComponent implements OnInit {
+
   pageTitle: string = 'Angular Demo | ';
 
   public constructor(private router: Router,
@@ -41,4 +42,5 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
 }
