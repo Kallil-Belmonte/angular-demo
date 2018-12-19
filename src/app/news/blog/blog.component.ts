@@ -14,6 +14,7 @@ import { NewsService } from 'app/news/news.service';
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
+
   loading: boolean = true;
   faNewspaper = faNewspaper;
   posts: PostModel;
@@ -175,4 +176,5 @@ export class BlogComponent implements OnInit {
         this.currentPage = +targetElement.innerText - 1;
     }
   }
+
 }
