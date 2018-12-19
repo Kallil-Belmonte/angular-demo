@@ -8,10 +8,12 @@ import { PostModel } from 'app/news/_models/post.model';
   styleUrls: []
 })
 export class FeaturedPostsComponent implements OnInit {
+
   @Input() featuredPosts: PostModel[];
 
   constructor() { }
 
   ngOnInit() {
   }
+
 }
