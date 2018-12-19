@@ -11,6 +11,7 @@ import { NewsService } from 'app/news/news.service';
   styleUrls: ['./edit-post-form.component.scss']
 })
 export class EditPostFormComponent implements OnInit {
+
   loading: boolean = true;
   editPostForm: FormGroup;
   currentPost: PostModel;
@@ -111,4 +112,5 @@ export class EditPostFormComponent implements OnInit {
       }
     );
   }
+
 }
