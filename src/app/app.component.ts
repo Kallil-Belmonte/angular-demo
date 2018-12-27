@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { Utils } from 'app/shared/utils/utils';
+import { Utils } from 'app/shared/general/utils';
 
 @Component({
   selector: 'app-root',

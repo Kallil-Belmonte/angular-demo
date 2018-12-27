@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
 
-import { Utils } from 'app/shared/utils/utils';
+import { Utils } from 'app/shared/general/utils';
 import { PostModel } from 'app/news/_models/post.model';
 import { CategoryModel } from 'app/news/_models/category.model';
 import { NewsService } from 'app/news/news.service';

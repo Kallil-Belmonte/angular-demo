@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { ThemeFunctions } from 'app/shared/theme-functions/theme-functions';
+import { ThemeFunctions } from 'app/shared/general/theme-functions';
 import { PostModel } from 'app/news/_models/post.model';
 import { NewsService } from 'app/news/news.service';
 

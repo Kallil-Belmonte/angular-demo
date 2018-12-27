@@ -12,31 +12,31 @@
       </app-alert>
     </ng-template>
 
-    <form [formGroup]="accountForm" (ngSubmit)="onSubmitAccountForm()">
+    <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="first-name">First name</label>
-        <input id="first-name" [ngClass]="{ 'form-control': true, 'is-invalid': accountForm.get('firstName').touched && accountForm.get('firstName').invalid }" type="text" formControlName="firstName" placeholder="First name" />
+        <input id="first-name" [ngClass]="onSetInputClass('firstName')" type="text" formControlName="firstName" placeholder="First name" />
 
-        <ng-template [ngIf]="accountForm.get('firstName').touched && accountForm.get('firstName').errors">
-          <div [ngClass]="{ 'invalid-feedback': true, 'd-block': accountForm.get('firstName').errors.required }">First name is required</div>
-          <div [ngClass]="{ 'invalid-feedback': true, 'd-block': accountForm.get('firstName').errors.minlength }">Minimum 3 characters required</div>
+        <ng-template [ngIf]="onShowFieldErrors('firstName')">
+          <div [ngClass]="onSetFirstNameFirstErrorClass()">First name is required</div>
+          <div [ngClass]="onSetFirstNameSecondErrorClass()">Minimum 3 characters required</div>
         </ng-template>
       </div>
 
       <div class="form-group">
         <label for="last-name">Last name</label>
-        <input id="last-name" [ngClass]="{ 'form-control': true, 'is-invalid': accountForm.get('lastName').touched && accountForm.get('lastName').invalid }" type="text" formControlName="lastName" placeholder="Last name" />
+        <input id="last-name" [ngClass]="onSetInputClass('lastName')" type="text" formControlName="lastName" placeholder="Last name" />
 
-        <div [ngClass]="{ 'invalid-feedback': true, 'd-block': accountForm.get('lastName').touched && accountForm.get('lastName').invalid }">Last name is required</div>
+        <div [ngClass]="onSetLastNameErrorClass()">Last name is required</div>
       </div>
 
       <div class="form-group">
         <label for="email">E-mail</label>
-        <input id="email" [ngClass]="{ 'form-control': true, 'is-invalid': accountForm.get('email').touched && accountForm.get('email').invalid }" type="email" formControlName="email" placeholder="E-mail" />
+        <input id="email" [ngClass]="onSetInputClass('email')" type="email" formControlName="email" placeholder="E-mail" />
 
-        <ng-template [ngIf]="accountForm.get('email').touched && accountForm.get('email').errors">
-          <div [ngClass]="{ 'invalid-feedback': true, 'd-block': accountForm.get('email').errors.required }">E-mail is required</div>
-          <div [ngClass]="{ 'invalid-feedback': true, 'd-block': accountForm.get('email').errors.email }">Invalid e-mail</div>
+        <ng-template [ngIf]="onShowFieldErrors('email')">
+          <div [ngClass]="onSetEmailFirstErrorClass()">E-mail is required</div>
+          <div [ngClass]="onSetEmailSecondErrorClass()">Invalid e-mail</div>
         </ng-template>
 
         <ng-template [ngIf]="accountFormFeedback.fieldsErrors.email.length > 0">

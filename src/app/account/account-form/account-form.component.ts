@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
+import { Utils } from 'app/shared/general/utils';
+
 type accountFormFeedback = {
   messages: {
     success: string[],
@@ -59,8 +61,45 @@ export class AccountFormComponent implements OnInit {
   }
 
 
-  // ON SUBMIT ACCOUNT FORM
-  onSubmitAccountForm() {
+  // ACCOUNT FORM
+
+  // On Set Input Class
+  onSetInputClass(formControlName): string[] {
+    return Utils.setInputClassName(this.accountForm, formControlName);
+  }
+
+  // On Show Field Errors
+  onShowFieldErrors(formControlName): boolean {
+    return Utils.showFieldErrors(this.accountForm, formControlName);
+  }
+
+  // On Set First Name First Error Class
+  onSetFirstNameFirstErrorClass(): string[] {
+    return Utils.setErrorClassName(this.accountForm.get('firstName').errors.required);
+  }
+
+  // On Set First Name Second Error Class
+  onSetFirstNameSecondErrorClass(): string[] {
+    return Utils.setErrorClassName(this.accountForm.get('firstName').errors.minlength);
+  }
+
+  // On Set Last Name Error Class
+  onSetLastNameErrorClass(): string[] {
+    return Utils.setErrorClassName(this.accountForm.get('lastName').touched && this.accountForm.get('lastName').invalid);
+  }
+
+  // On Set Email First Error Class
+  onSetEmailFirstErrorClass(): string[] {
+    return Utils.setErrorClassName(this.accountForm.get('email').errors.required);
+  }
+
+  // On Set Email Second Error Class
+  onSetEmailSecondErrorClass(): string[] {
+    return Utils.setErrorClassName(this.accountForm.get('email').errors.email);
+  }
+
+  // On Submit
+  onSubmit(): void {
     if (this.accountForm.value.email === 'john.doe@email.com') {
       // Set field error messages
       this.accountFormFeedback.fieldsErrors.email.push('This e-mail already exists.');

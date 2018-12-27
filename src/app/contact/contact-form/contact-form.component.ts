@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { ThemeFunctions } from 'app/shared/theme-functions/theme-functions';
+import { ThemeFunctions } from 'app/shared/general/theme-functions';
 import { ContactService } from 'app/contact/contact.service';
 
 @Component({
