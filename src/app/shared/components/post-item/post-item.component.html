@@ -1,4 +1,4 @@
-<div data-component="post-item">
+<div class="post-item">
   <img class="img-fluid" src="{{ data.image }}" alt="Capa" *ngIf="data.image; else imagePlaceholder" />
   <ng-template #imagePlaceholder>
     <div class="img-placeholder">Não há imagem para esse post</div>

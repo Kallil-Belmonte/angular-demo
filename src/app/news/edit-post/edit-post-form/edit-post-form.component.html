@@ -1,6 +1,6 @@
 <app-loader *ngIf="loading"></app-loader>
 
-<form data-component="edit-post-form" [formGroup]="editPostForm" (ngSubmit)="onSubmit()">
+<form class="edit-post-form" [formGroup]="editPostForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="title">Title</label>
     <input id="title" [ngClass]="onSetInputClass('title')" type="text" formControlName="title" />

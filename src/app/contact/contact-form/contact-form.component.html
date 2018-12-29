@@ -1,6 +1,6 @@
 <app-loader *ngIf="loading"></app-loader>
 
-<form data-component="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
   <app-alert status="success" [dismissible]="true" (dismissAlert)="onClearSuccessMessage()" *ngIf="contactFormSuccessMessage">
     {{ contactFormSuccessMessage }}
   </app-alert>

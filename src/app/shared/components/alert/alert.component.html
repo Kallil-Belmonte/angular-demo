@@ -1,4 +1,4 @@
-<div data-component="alert" [class]="'alert alert-' + status + ' alert-dismissible fade show'" role="alert">
+<div class="alert" [class]="'alert alert-' + status + ' alert-dismissible fade show'" role="alert">
   <ng-content></ng-content>
 
   <button type="button" class="close" data-dismiss="alert" aria-label="Close" *ngIf="dismissible" (click)="onDismissAlert()">
