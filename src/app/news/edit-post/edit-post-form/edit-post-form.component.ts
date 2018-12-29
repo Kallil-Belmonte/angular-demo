@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Utils } from 'app/shared/general/utils';
 import { PostModel } from 'app/news/_models/post.model';
 import { NewsService } from 'app/news/news.service';
 
@@ -77,14 +78,30 @@ export class EditPostFormComponent implements OnInit {
   }
 
 
-  // ON RESET EDIT POST FORM
-  onResetEditPostForm(): void {
-    this.editPostForm.reset();
+  // EDIT POST FORM
+
+  // On Set Input Class
+  onSetInputClass(formControlName, classNames?: string[]): string[] {
+    return Utils.setInputClassName(this.editPostForm, formControlName, classNames);
   }
 
+  // On Show Field Errors
+  onShowFieldErrors(formControlName): boolean {
+    return Utils.showFieldErrors(this.editPostForm, formControlName);
+  }
 
-  // ON SUBMIT EDIT POST FORM
-  onSubmitEditPostForm(): void {
+  // On Set Title Error Class
+  onSetTitleErrorClass(): string[] {
+    return Utils.setErrorClassName(this.editPostForm.get('title').errors.required);
+  }
+
+  // On Set Body Error Class
+  onSetBodyErrorClass(): string[] {
+    return Utils.setErrorClassName(this.editPostForm.get('body').errors.required);
+  }
+
+  // On Submit
+  onSubmit(): void {
     // Activate loader
     this.loading = true;
 

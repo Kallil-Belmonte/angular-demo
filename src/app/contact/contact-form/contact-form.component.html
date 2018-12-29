@@ -1,6 +1,6 @@
 <app-loader *ngIf="loading"></app-loader>
 
-<form data-component="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmitContactForm()">
+<form data-component="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
   <app-alert status="success" [dismissible]="true" (dismissAlert)="onClearSuccessMessage()" *ngIf="contactFormSuccessMessage">
     {{ contactFormSuccessMessage }}
   </app-alert>
@@ -9,11 +9,11 @@
     <div class="col">
       <div class="form-group">
         <label for="first-name">First name</label>
-        <input id="first-name" [ngClass]="{ 'form-control': true, 'is-invalid': contactForm.get('firstName').touched && contactForm.get('firstName').invalid }" type="text" formControlName="firstName" placeholder="First name" />
+        <input id="first-name" [ngClass]="onSetInputClass('firstName')" type="text" formControlName="firstName" placeholder="First name" />
 
-        <ng-template [ngIf]="contactForm.get('firstName').touched && contactForm.get('firstName').errors">
-          <div [ngClass]="{ 'invalid-feedback': true, 'd-block': contactForm.get('firstName').errors.required }">First name is required</div>
-          <div [ngClass]="{ 'invalid-feedback': true, 'd-block': contactForm.get('firstName').errors.minlength }">Minimum 3 characters required</div>
+        <ng-template [ngIf]="onShowFieldErrors('firstName')">
+          <div [ngClass]="onSetFirstNameFirstErrorClass()">First name is required</div>
+          <div [ngClass]="onSetFirstNameSecondErrorClass()">Minimum 3 characters required</div>
         </ng-template>
       </div>
     </div>
@@ -21,9 +21,9 @@
     <div class="col">
       <div class="form-group">
         <label for="last-name">Last name</label>
-        <input id="last-name" [ngClass]="{ 'form-control': true, 'is-invalid': contactForm.get('lastName').touched && contactForm.get('lastName').invalid }" type="text" formControlName="lastName" placeholder="Last name" />
+        <input id="last-name" [ngClass]="onSetInputClass('lastName')" type="text" formControlName="lastName" placeholder="Last name" />
 
-        <div [ngClass]="{ 'invalid-feedback': true, 'd-block': contactForm.get('lastName').touched && contactForm.get('lastName').invalid }">Last name is required</div>
+        <div [ngClass]="onSetLastNameErrorClass()">Last name is required</div>
       </div>
     </div>
   </div>
@@ -32,11 +32,11 @@
     <div class="col">
       <div class="form-group">
         <label for="email">E-mail</label>
-        <input id="email" [ngClass]="{ 'form-control': true, 'is-invalid': contactForm.get('email').touched && contactForm.get('email').invalid }" type="email" formControlName="email" placeholder="E-mail" />
+        <input id="email" [ngClass]="onSetInputClass('email')" type="email" formControlName="email" placeholder="E-mail" />
 
-        <ng-template [ngIf]="contactForm.get('email').touched && contactForm.get('email').errors">
-          <div [ngClass]="{ 'invalid-feedback': true, 'd-block': contactForm.get('email').errors.required }">E-mail is required</div>
-          <div [ngClass]="{ 'invalid-feedback': true, 'd-block': contactForm.get('email').errors.email }">Invalid e-mail</div>
+        <ng-template [ngIf]="onShowFieldErrors('email')">
+          <div [ngClass]="onSetEmailFirstErrorClass()">E-mail is required</div>
+          <div [ngClass]="onSetEmailSecondErrorClass()">Invalid e-mail</div>
         </ng-template>
       </div>
     </div>
@@ -44,9 +44,9 @@
     <div class="col">
       <div class="form-group">
         <label for="telephone">Telephone</label>
-        <input id="telephone" [ngClass]="{ 'form-control telephone-mask': true, 'is-invalid': contactForm.get('telephone').touched && contactForm.get('telephone').invalid }" type="tel" formControlName="telephone" placeholder="(00) 0000 0000" />
+        <input id="telephone" [ngClass]="onSetInputClass('telephone', ['telephone-mask'])" type="tel" formControlName="telephone" placeholder="(00) 0000 0000" />
 
-        <div [ngClass]="{ 'invalid-feedback': true, 'd-block': contactForm.get('telephone').touched && contactForm.get('telephone').invalid }">Telephone is required</div>
+        <div [ngClass]="onSetTelephoneErrorClass()">Telephone is required</div>
       </div>
     </div>
   </div>
@@ -71,12 +71,12 @@
     <div class="col">
       <div class="form-group">
         <label for="favorite-color">Favorite color</label>
-        <select id="favorite-color" class="form-control" formControlName="favoriteColors">
+        <select id="favorite-color" class="form-control" formControlName="favoriteColor">
           <option value="select" disabled>Select</option>
-          <option value="{{ favoriteColor }}" *ngFor="let favoriteColor of favoriteColors">{{ favoriteColor }}</option>
+          <option value="{{ favoriteColor }}" *ngFor="let color of favoriteColors">{{ color }}</option>
         </select>
 
-        <div [ngClass]="{ 'invalid-feedback': true, 'd-block': contactForm.get('favoriteColors').touched && contactForm.get('favoriteColors').value === 'select' }">Favorite color is required</div>
+        <div [ngClass]="onSetFavoriteColorErrorClass()">Favorite color is required</div>
       </div>
     </div>
 
@@ -95,11 +95,11 @@
 
   <div class="form-group">
     <label for="message">Message</label>
-    <textarea id="message" [ngClass]="{ 'form-control': true, 'is-invalid': contactForm.get('message').touched && contactForm.get('message').invalid }" rows="3" formControlName="message"></textarea>
+    <textarea id="message" [ngClass]="onSetInputClass('message')" rows="3" formControlName="message"></textarea>
 
-    <div [ngClass]="{ 'invalid-feedback': true, 'd-block': contactForm.get('message').touched && contactForm.get('message').invalid }">Message is required</div>
+    <div [ngClass]="onSetMessageErrorClass()">Message is required</div>
   </div>
 
-  <button class="btn btn-primary mr-2" type="submit" [disabled]="!contactForm.valid || contactForm.pristine || contactForm.get('favoriteColors').value === 'select'">Send</button>
-  <button class="btn btn-light" type="button" [disabled]="contactForm.pristine" (click)="onResetContactForm()">Reset form</button>
+  <button class="btn btn-primary mr-2" type="submit" [disabled]="!contactForm.valid || contactForm.pristine || contactForm.get('favoriteColor').value === 'select'">Send</button>
+  <button class="btn btn-light" type="button" [disabled]="contactForm.pristine" (click)="contactForm.reset()">Reset form</button>
 </form>

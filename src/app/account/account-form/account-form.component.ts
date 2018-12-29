@@ -55,17 +55,11 @@ export class AccountFormComponent implements OnInit {
   }
 
 
-  // ON RESET ACCOUNT FORM
-  onResetAccountForm(): void {
-    this.accountForm.reset();
-  }
-
-
   // ACCOUNT FORM
 
   // On Set Input Class
-  onSetInputClass(formControlName): string[] {
-    return Utils.setInputClassName(this.accountForm, formControlName);
+  onSetInputClass(formControlName, classNames?: string[]): string[] {
+    return Utils.setInputClassName(this.accountForm, formControlName, classNames);
   }
 
   // On Show Field Errors

@@ -32,8 +32,8 @@ export class Utils {
 
 
   // SET INPUT CLASS NAME
-  static setInputClassName(form, inputName): string[] {
-    let className = ['form-control'];
+  static setInputClassName(form, inputName, customClassNames: string[] = []): string[] {
+    let className = ['form-control', ...customClassNames];
 
     if (form.get(inputName).touched && form.get(inputName).invalid) {
       className.push('is-invalid');

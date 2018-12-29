@@ -47,7 +47,7 @@
       </div>
 
       <button class="btn btn-primary mr-2" type="submit" [disabled]="!accountForm.valid || accountForm.pristine">Save</button>
-      <button class="btn btn-light" type="button" [disabled]="accountForm.pristine" (click)="onResetAccountForm()">Reset form</button>
+      <button class="btn btn-light" type="button" [disabled]="accountForm.pristine" (click)="accountForm.reset()">Reset form</button>
     </form>
   </div>
 </div>
