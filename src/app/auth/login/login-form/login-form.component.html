@@ -1,15 +1,15 @@
 <app-loader *ngIf="loading"></app-loader>
 
-<form data-component="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmitLoginForm()">
+<form data-component="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <h1 class="page-title">Login</h1>
 
   <div class="form-group">
     <label for="email">E-mail</label>
-    <input id="email" [ngClass]="{ 'form-control': true, 'is-invalid': loginForm.get('email').touched && loginForm.get('email').invalid }" type="email" formControlName="email" />
+    <input id="email" [ngClass]="onSetInputClass('email')" type="email" formControlName="email" />
 
-    <ng-template [ngIf]="loginForm.get('email').touched && loginForm.get('email').errors">
-      <div [ngClass]="{ 'invalid-feedback': true, 'd-block': loginForm.get('email').errors.required }">E-mail is required</div>
-      <div [ngClass]="{ 'invalid-feedback': true, 'd-block': loginForm.get('email').errors.email }">Invalid e-mail</div>
+    <ng-template [ngIf]="onShowFieldErrors('email')">
+      <div [ngClass]="onSetEmailFirstErrorClass()">E-mail is required</div>
+      <div [ngClass]="onSetEmailSecondErrorClass()">Invalid e-mail</div>
     </ng-template>
 
     <ng-template [ngIf]="loginFormFeedback.fieldsErrors.email.length > 0">
@@ -21,11 +21,11 @@
 
   <div class="form-group">
     <label for="password">Password</label>
-    <input id="password" [ngClass]="{ 'form-control': true, 'is-invalid': loginForm.get('password').touched && loginForm.get('password').invalid }" type="password" formControlName="password" />
+    <input id="password" [ngClass]="onSetInputClass('password')" type="password" formControlName="password" />
 
-    <ng-template [ngIf]="loginForm.get('password').touched && loginForm.get('password').errors">
-      <div [ngClass]="{ 'invalid-feedback': true, 'd-block': loginForm.get('password').errors.required }">Password is required</div>
-      <div [ngClass]="{ 'invalid-feedback': true, 'd-block': loginForm.get('password').errors.minlength }">Minimum 3 characters required</div>
+    <ng-template [ngIf]="onShowFieldErrors('password')">
+      <div [ngClass]="onSetPasswordFirstErrorClass()">Password is required</div>
+      <div [ngClass]="onSetPasswordSecondErrorClass()">Minimum 3 characters required</div>
     </ng-template>
 
     <ng-template [ngIf]="loginFormFeedback.fieldsErrors.password.length > 0">

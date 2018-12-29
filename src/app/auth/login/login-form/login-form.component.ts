@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { Utils } from 'app/shared/general/utils';
 import { AuthService } from 'app/auth/auth.service';
 
 type loginFormFeedback = {
@@ -51,8 +52,40 @@ export class LoginFormComponent implements OnInit {
   }
 
 
-  // ON SUBMIT LOGIN FORM
-  onSubmitLoginForm(): void {
+  // LOGIN FORM
+
+  // On Set Input Class
+  onSetInputClass(formControlName, classNames?: string[]): string[] {
+    return Utils.setInputClassName(this.loginForm, formControlName, classNames);
+  }
+
+  // On Show Field Errors
+  onShowFieldErrors(formControlName): boolean {
+    return Utils.showFieldErrors(this.loginForm, formControlName);
+  }
+
+  // On Set Email First Error Class
+  onSetEmailFirstErrorClass(): string[] {
+    return Utils.setErrorClassName(this.loginForm.get('email').errors.required);
+  }
+
+  // On Set Email Second Error Class
+  onSetEmailSecondErrorClass(): string[] {
+    return Utils.setErrorClassName(this.loginForm.get('email').errors.email);
+  }
+
+  // On Set Password First Error Class
+  onSetPasswordFirstErrorClass(): string[] {
+    return Utils.setErrorClassName(this.loginForm.get('password').errors.required);
+  }
+
+  // On Set Password Second Error Class
+  onSetPasswordSecondErrorClass(): string[] {
+    return Utils.setErrorClassName(this.loginForm.get('password').errors.email);
+  }
+
+  // On Submit
+  onSubmit(): void {
     // Activate loader
     this.loading = true;
 
