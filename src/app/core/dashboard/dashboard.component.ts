@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
 
   userDataState: Observable<UserModel>;
 
-  constructor(private store: Store<{account}>) { }
+  constructor(private store: Store<{userData}>) { }
 
   ngOnInit() {
     this.getUserData();
