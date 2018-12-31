@@ -1,9 +1,4 @@
 const ACTION_TYPES = {
-  // AUTH
-  LOG_IN:  'LOG_IN',
-  LOG_OUT: 'LOG_OUT',
-
-
   // NEWS
 
   // Post

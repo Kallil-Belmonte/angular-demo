@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 
 import { UserModel } from 'app/account/_models/user.model';
 
@@ -12,9 +12,10 @@ import { UserModel } from 'app/account/_models/user.model';
 })
 export class DashboardComponent implements OnInit {
 
-  userDataState: Observable<UserModel>;
+  fullName: string;
 
-  constructor(private store: Store<{userData}>) { }
+  constructor(private store: Store<{userData}>,
+              private localStorage: LocalStorage) { }
 
   ngOnInit() {
     this.getUserData();
@@ -27,7 +28,19 @@ export class DashboardComponent implements OnInit {
 
   // GET USER DATA
   getUserData(): void {
-    this.userDataState = this.store.select('userData');
+    this.store.select('userData').subscribe(
+      state => {
+        if (Object.keys(state).length > 0) {
+          this.localStorage.setItemSubscribe('userData', state);
+        }
+
+        this.localStorage.getItem('userData').subscribe(
+          (data: UserModel) => {
+            this.fullName = data.firstName + ' ' + data.lastName;
+          }
+        );
+      }
+    );
   }
 
 }

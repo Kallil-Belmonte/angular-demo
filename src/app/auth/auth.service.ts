@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-// import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 
 import { environment, endpoints } from 'environments/environment';
-// import * as AuthActions from 'app/core/redux/actions/auth.actions';
 import { LoginModel } from 'app/auth/_models/login.model';
 import { RegisterModel } from 'app/auth/_models/register.model';
 
@@ -17,7 +16,7 @@ export class AuthService {
 
 	constructor(private httpClient: HttpClient,
               private router: Router,
-            /*private store: Store<{auth}>*/) { }
+              private localStorage: LocalStorage) { }
 
 
 	//==============================
@@ -51,8 +50,8 @@ export class AuthService {
     localStorage.removeItem('authTokenAngularDemo');
     localStorage.removeItem('expirationDateAngularDemo');
 
-    // Clear the app data
-    // this.store.dispatch(new AuthActions.LogOut({}));
+    // Clear app data
+    this.localStorage.clearSubscribe();
 
     // Redirect
     this.router.navigate(['/login']);
