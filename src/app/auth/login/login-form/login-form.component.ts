@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { Store } from '@ngrx/store';
+
+import * as UserDataActions from 'app/core/redux/actions/user-data.actions';
 import { Utils } from 'app/shared/general/utils';
+import { UserModel } from 'app/account/_models/user.model';
 import { AuthService } from 'app/auth/auth.service';
 
 type loginFormFeedback = {
@@ -20,6 +24,7 @@ type loginFormFeedback = {
 export class LoginFormComponent implements OnInit {
 
   loading: boolean = false;
+  userData: UserModel;
   loginForm: FormGroup;
   loginFormFeedback: loginFormFeedback = {
     fieldsErrors: {
@@ -30,6 +35,7 @@ export class LoginFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
+              private store: Store<{auth}>,
               private authService: AuthService) { }
 
   ngOnInit() {
@@ -113,6 +119,15 @@ export class LoginFormComponent implements OnInit {
           } else {
             sessionStorage.setItem('authTokenAngularDemo', data.idToken);
           }
+
+          // Set user data
+          this.userData = {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email
+          };
+
+          this.store.dispatch(new UserDataActions.SetUserData(this.userData));
 
           // Deactivate loader
           this.loading = false;

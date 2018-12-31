@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
+import * as UserDataActions from 'app/core/redux/actions/user-data.actions';
 import { Utils } from 'app/shared/general/utils';
+import { UserModel } from 'app/account/_models/user.model';
 
 type accountFormFeedback = {
   messages: {
@@ -23,6 +26,7 @@ type accountFormFeedback = {
 export class AccountFormComponent implements OnInit {
 
   faUser = faUser;
+  userData: UserModel;
   accountForm: FormGroup;
   accountFormFeedback: accountFormFeedback = {
     messages: {
@@ -34,7 +38,8 @@ export class AccountFormComponent implements OnInit {
     }
   };
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private store: Store<{userData}>) { }
 
   ngOnInit() {
     this.buildAccountForm();
@@ -103,8 +108,9 @@ export class AccountFormComponent implements OnInit {
       this.accountFormFeedback.messages.error.push('An error occurred, please try again later.');
     }
     else {
-      // Handle edit account
-      // this.props.handleEditAccount(values);
+      // Update user data
+      this.userData = this.accountForm.value;
+      this.store.dispatch(new UserDataActions.EditUserData(this.userData));
 
       // Set success message
       this.accountFormFeedback.messages.success.push('Account saved successfully.');

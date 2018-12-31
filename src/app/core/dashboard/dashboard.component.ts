@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { UserModel } from 'app/account/_models/user.model';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -7,9 +12,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  userDataState: Observable<UserModel>;
+
+  constructor(private store: Store<{account}>) { }
 
   ngOnInit() {
+    this.getUserData();
+  }
+
+
+	//==============================
+  // GENERAL METHODS
+  //==============================
+
+  // GET USER DATA
+  getUserData(): void {
+    this.userDataState = this.store.select('userData');
   }
 
 }
