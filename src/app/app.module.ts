@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { StoreModule } from '@ngrx/store';
-import { userDataReducer } from 'app/core/redux/reducers/user-data.reducer';
+import { userDataReducer } from 'app/core/redux/reducers/account.reducers';
+import { currentPostReducer } from 'app/core/redux/reducers/post.reducers';
 
 import { AppComponent } from 'app/app.component';
 import { CoreModule } from 'app/core/core.module';
@@ -21,7 +22,8 @@ import { NotFoundComponent } from 'app/not-found/not-found.component';
   imports: [
     BrowserModule,
     StoreModule.forRoot({
-      userData: userDataReducer
+      userData: userDataReducer,
+      currentPost: currentPostReducer
     }),
     CoreModule,
     AuthModule,

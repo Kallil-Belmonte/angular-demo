@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Store } from '@ngrx/store';
+
+import * as PostActions from 'app/core/redux/actions/post.actions';
 import { Utils } from 'app/shared/general/utils';
 import { PostModel } from 'app/news/_models/post.model';
 import { NewsService } from 'app/news/news.service';
@@ -17,8 +20,9 @@ export class EditPostFormComponent implements OnInit {
   editPostForm: FormGroup;
   currentPost: PostModel;
 
-  constructor(private formBuilder: FormBuilder,
-              private activatedRoute: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute,
+              private formBuilder: FormBuilder,
+              private store: Store<{currentPost}>,
               private newsService: NewsService,
               private router: Router) { }
 
@@ -42,14 +46,14 @@ export class EditPostFormComponent implements OnInit {
 
 
   // GET CURRENT POST
-  getCurrentPost(id): void {
+  getCurrentPost(id: string): void {
     this.newsService.getCurrentPost(id).subscribe(
       data => {
         // Data
         this.currentPost = data;
 
         // Set initial Edit Post Form value
-        this.editPostForm.patchValue({
+        this.editPostForm.setValue({
           title: this.currentPost.title,
           body:  this.currentPost.body
         });
@@ -109,11 +113,16 @@ export class EditPostFormComponent implements OnInit {
       data => {
         console.log(data);
 
-        // Update Edit Post Form value
-        this.editPostForm.patchValue({
+        // Update Current Post
+        this.currentPost = {
+          userId: this.currentPost.userId,
+          id: this.currentPost.id,
           title: this.editPostForm.value.title,
           body:  this.editPostForm.value.body
-        });
+        }
+
+        // Set data to reducer
+        this.store.dispatch(new PostActions.EditCurrentPost(this.currentPost));
 
         // Deactivate loader
         this.loading = false;

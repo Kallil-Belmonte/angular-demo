@@ -28,15 +28,18 @@ export class DashboardComponent implements OnInit {
 
   // GET USER DATA
   getUserData(): void {
+    // Get User Data Reducer
     this.store.select('userData').subscribe(
       state => {
+        // If state is not empty, set/update User Data Reducer in local storage
         if (Object.keys(state).length > 0) {
           this.localStorage.setItemSubscribe('userData', state);
         }
 
+        // Get User Data Reducer from local storage
         this.localStorage.getItem('userData').subscribe(
-          (data: UserModel) => {
-            this.fullName = data.firstName + ' ' + data.lastName;
+          (userData: UserModel) => {
+            this.fullName = userData.firstName + ' ' + userData.lastName;
           }
         );
       }

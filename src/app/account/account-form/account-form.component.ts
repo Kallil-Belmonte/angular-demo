@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
 
+import { Store } from '@ngrx/store';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-import * as UserDataActions from 'app/core/redux/actions/user-data.actions';
+import * as AccountActions from 'app/core/redux/actions/account.actions';
 import { Utils } from 'app/shared/general/utils';
 import { UserModel } from 'app/account/_models/user.model';
 
@@ -108,9 +108,11 @@ export class AccountFormComponent implements OnInit {
       this.accountFormFeedback.messages.error.push('An error occurred, please try again later.');
     }
     else {
-      // Update user data
+      // Update User Data
       this.userData = this.accountForm.value;
-      this.store.dispatch(new UserDataActions.EditUserData(this.userData));
+
+      // Set data to reducer
+      this.store.dispatch(new AccountActions.EditUserData(this.userData));
 
       // Set success message
       this.accountFormFeedback.messages.success.push('Account saved successfully.');

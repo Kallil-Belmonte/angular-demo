@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
+import { Store } from '@ngrx/store';
+import { LocalStorage } from '@ngx-pwa/local-storage';
+
+import * as PostActions from 'app/core/redux/actions/post.actions';
 import { ThemeFunctions } from 'app/shared/general/theme-functions';
 import { PostModel } from 'app/news/_models/post.model';
 import { NewsService } from 'app/news/news.service';
@@ -11,11 +15,14 @@ import { NewsService } from 'app/news/news.service';
   styleUrls: []
 })
 export class PostComponent implements OnInit {
+
   loading: boolean = true;
   isModalOpen: boolean = false;
   currentPost: PostModel;
 
   constructor(private activatedRoute: ActivatedRoute,
+              private store: Store<{currentPost}>,
+              private localStorage: LocalStorage,
               private newsService: NewsService) { }
 
   ngOnInit() {
@@ -28,11 +35,27 @@ export class PostComponent implements OnInit {
   //==============================
 
   // GET CURRENT POST
-  getCurrentPost(id): void {
+  getCurrentPost(id: string): void {
     this.newsService.getCurrentPost(id).subscribe(
       data => {
-        // Data
-        this.currentPost = data;
+        // Set data to reducer
+        this.store.dispatch(new PostActions.SetCurrentPost(data));
+
+        // Get Current Post Reducer
+        this.store.select('currentPost').subscribe(
+          state => {
+            // Set/update Current Post Reducer in local storage
+            this.localStorage.setItemSubscribe('currentPost', state);
+
+            // Get Current Post Reducer from local storage
+            this.localStorage.getItem('currentPost').subscribe(
+              (currentPost: PostModel) => {
+                // Data
+                this.currentPost = currentPost;
+              }
+            );
+          }
+        );
 
         // Deactivate loader
         this.loading = false;
@@ -66,4 +89,5 @@ export class PostComponent implements OnInit {
     // Toggle modal
     this.isModalOpen = !this.isModalOpen;
   }
+
 }

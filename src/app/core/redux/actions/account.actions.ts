@@ -18,4 +18,4 @@ export class EditUserData implements Action {
   constructor(public payload: UserModel) { }
 }
 
-export type UserDataActions = SetUserData | EditUserData;
+export type AccountActions = SetUserData | EditUserData;

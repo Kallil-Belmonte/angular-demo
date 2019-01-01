@@ -9,6 +9,7 @@ import { NewsService } from 'app/news/news.service';
   styleUrls: []
 })
 export class DeletePostModalComponent implements OnInit {
+
   loading: boolean = false;
   @Input() open: boolean;
   @Output() closeModal = new EventEmitter();
@@ -83,4 +84,5 @@ export class DeletePostModalComponent implements OnInit {
   onCloseModal(): void {
     this.closeModal.emit();
   }
+
 }

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
-import * as UserDataActions from 'app/core/redux/actions/user-data.actions';
+import * as AccountActions from 'app/core/redux/actions/account.actions';
 import { Utils } from 'app/shared/general/utils';
 import { UserModel } from 'app/account/_models/user.model';
 import { AuthService } from 'app/auth/auth.service';
@@ -120,14 +120,15 @@ export class LoginFormComponent implements OnInit {
             sessionStorage.setItem('authTokenAngularDemo', data.idToken);
           }
 
-          // Set user data
+          // Set User Data
           this.userData = {
             firstName: data.firstName,
             lastName: data.lastName,
             email: data.email
           };
 
-          this.store.dispatch(new UserDataActions.SetUserData(this.userData));
+          // Set data to reducer
+          this.store.dispatch(new AccountActions.SetUserData(this.userData));
 
           // Deactivate loader
           this.loading = false;

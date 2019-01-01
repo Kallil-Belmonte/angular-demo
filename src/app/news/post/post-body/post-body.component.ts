@@ -8,6 +8,7 @@ import { PostModel } from 'app/news/_models/post.model';
   styleUrls: ['./post-body.component.scss']
 })
 export class PostBodyComponent implements OnInit {
+
   @Input() data: PostModel;
   @Output() openModal = new EventEmitter();
 
@@ -25,4 +26,5 @@ export class PostBodyComponent implements OnInit {
   onClickDelete(): void {
     this.openModal.emit();
   }
+
 }
