@@ -95,15 +95,15 @@ export class LoginFormComponent implements OnInit {
     // Activate loader
     this.loading = true;
 
+    // Clear messages
+    this.loginFormFeedback.fieldsErrors.email = [];
+    this.loginFormFeedback.fieldsErrors.password = [];
+
     if (this.loginForm.get('email').value === 'demo@demo.com') {
 
       // Error simulation
-      this.loginFormFeedback = {
-        fieldsErrors: {
-          email:    ['This e-mail does not exists.'],
-          password: ['The password is incorrect.']
-        }
-      };
+      this.loginFormFeedback.fieldsErrors.email.push('This e-mail does not exists.');
+      this.loginFormFeedback.fieldsErrors.password.push('The password is incorrect.');
 
       // Deactivate loader
       this.loading = false;

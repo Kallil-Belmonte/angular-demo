@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import * as AccountActions from 'app/core/redux/actions/account.actions';
@@ -39,10 +40,12 @@ export class AccountFormComponent implements OnInit {
   };
 
   constructor(private formBuilder: FormBuilder,
-              private store: Store<{userData}>) { }
+              private store: Store<{userData}>,
+              private localStorage: LocalStorage) { }
 
   ngOnInit() {
     this.buildAccountForm();
+    this.getUserData();
   }
 
 
@@ -57,6 +60,17 @@ export class AccountFormComponent implements OnInit {
       lastName:  ['', [Validators.required]],
       email:     ['', [Validators.required, Validators.email]]
     });
+  }
+
+
+  // GET USER DATA
+  getUserData(): void {
+    // Get User Data Reducer from local storage
+    this.localStorage.getItem('userData').subscribe(
+      (userData: UserModel) => {
+        this.accountForm.setValue(userData);
+      }
+    );
   }
 
 
@@ -99,6 +113,11 @@ export class AccountFormComponent implements OnInit {
 
   // On Submit
   onSubmit(): void {
+    // Clear messages
+    this.accountFormFeedback.messages.success = [];
+    this.accountFormFeedback.messages.error = [];
+    this.accountFormFeedback.fieldsErrors.email = [];
+
     if (this.accountForm.value.email === 'john.doe@email.com') {
       // Set field error messages
       this.accountFormFeedback.fieldsErrors.email.push('This e-mail already exists.');

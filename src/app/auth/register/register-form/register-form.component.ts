@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { Store } from '@ngrx/store';
+
+import * as AccountActions from 'app/core/redux/actions/account.actions';
 import { Utils } from 'app/shared/general/utils';
+import { UserModel } from 'app/account/_models/user.model';
 import { AuthService } from 'app/auth/auth.service';
 
 type registerFormFeedback = {
@@ -20,6 +24,7 @@ type registerFormFeedback = {
 export class RegisterFormComponent implements OnInit {
 
   loading: boolean = false;
+  userData: UserModel;
   registerForm: FormGroup;
   registerFormFeedback: registerFormFeedback = {
     fieldsErrors: {
@@ -30,6 +35,7 @@ export class RegisterFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
+              private store: Store<{userData}>,
               private authService: AuthService) { }
 
   ngOnInit() {
@@ -100,15 +106,15 @@ export class RegisterFormComponent implements OnInit {
     // Activate loader
     this.loading = true;
 
+    // Clear messages
+    this.registerFormFeedback.fieldsErrors.email = [];
+    this.registerFormFeedback.fieldsErrors.password = [];
+
     if (this.registerForm.get('email').value === 'demo@demo.com') {
 
       // Error simulation
-      this.registerFormFeedback = {
-        fieldsErrors: {
-          email:    ['This e-mail already exists.'],
-          password: ['Your password is too weak.']
-        }
-      };
+      this.registerFormFeedback.fieldsErrors.email.push('This e-mail does not exists.');
+      this.registerFormFeedback.fieldsErrors.password.push('Your password is too weak.');
 
       // Deactivate loader
       this.loading = false;
@@ -119,6 +125,16 @@ export class RegisterFormComponent implements OnInit {
         data => {
           // Store session data
           sessionStorage.setItem('authTokenAngularDemo', data.token);
+
+          // Set User Data
+          this.userData = {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email
+          };
+
+          // Set data to reducer
+          this.store.dispatch(new AccountActions.SetUserData(this.userData));
 
           // Deactivate loader
           this.loading = false;
