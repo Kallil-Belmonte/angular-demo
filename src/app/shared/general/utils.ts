@@ -1,13 +1,13 @@
 export class Utils {
 
   // CAPITALIZE FIRST LETTER
-  static capitalizeFirstLetter(string) {
+  static capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
 
   // LIMIT WORDS
-  static limitWords(string, numberOfWords) {
+  static limitWords(string: string, numberOfWords: number) {
     return string.split(' ').splice(0, numberOfWords).join(' ');
   }
 
@@ -17,7 +17,7 @@ export class Utils {
     let newArray = [[]];
 
     for (let item of array) {
-      let lastIndex = newArray.length - 1;
+      let lastIndex: number = newArray.length - 1;
 
       if (newArray[lastIndex].length < itemsQuantity) {
         newArray[lastIndex].push(item);
@@ -33,7 +33,7 @@ export class Utils {
 
   // SET INPUT CLASS NAME
   static setInputClassName(form, inputName, customClassNames: string[] = []): string[] {
-    let className = ['form-control', ...customClassNames];
+    let className: string[] = ['form-control', ...customClassNames];
 
     if (form.get(inputName).touched && form.get(inputName).invalid) {
       className.push('is-invalid');
