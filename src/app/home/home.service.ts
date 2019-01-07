@@ -22,4 +22,5 @@ export class HomeService {
 	getFeaturedPosts(): Observable<PostModel> {
 		return this.httpClient.get<PostModel>(environment.jsonPlaceholder + endpoints.blog.posts);
 	}
+
 }
