@@ -21,4 +21,5 @@ export class ContactService {
   getFavoriteColors(): Observable<string[]> {
     return this.httpClient.get<string[]>(environment.mocky + endpoints.contactForm.favoriteColors);
   }
+
 }
