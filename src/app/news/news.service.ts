@@ -48,4 +48,5 @@ export class NewsService {
   deleteCurrentPost(id: string): Observable<PostModel> {
     return this.httpClient.delete<PostModel>(environment.jsonPlaceholder + endpoints.blog.posts + id);
   }
+
 }
