@@ -1,4 +1,4 @@
-const updateState = (oldState, updatedProperties) => {
+const updateState = (oldState: any, updatedProperties: any) => {
   return {
     ...oldState,
     ...updatedProperties
