@@ -20,13 +20,13 @@ export class NewsService {
   //==============================
 
   // GET POSTS
-  getPosts(): Observable<PostModel> {
-    return this.httpClient.get<PostModel>(environment.jsonPlaceholder + endpoints.blog.posts);
+  getPosts(): Observable<PostModel[]> {
+    return this.httpClient.get<PostModel[]>(environment.jsonPlaceholder + endpoints.blog.posts);
   }
 
   // GET CATEGORIES
-  getCategories(): Observable<CategoryModel> {
-    return this.httpClient.get<CategoryModel>(environment.mocky + endpoints.blog.categories);
+  getCategories(): Observable<CategoryModel[]> {
+    return this.httpClient.get<CategoryModel[]>(environment.mocky + endpoints.blog.categories);
   }
 
 

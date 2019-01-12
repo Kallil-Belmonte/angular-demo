@@ -17,8 +17,8 @@ export class BlogComponent implements OnInit {
 
   loading: boolean = true;
   faNewspaper = faNewspaper;
-  posts: PostModel;
-  categories: CategoryModel;
+  posts: PostModel[];
+  categories: CategoryModel[];
   postsPerPage: number = 9;
   pagePosts = [];
   currentPage: number = 0;
@@ -57,17 +57,22 @@ export class BlogComponent implements OnInit {
       this.newsService.getCategories(),
       this.newsService.getPosts()
     )
-    .subscribe(([categories, posts]) => {
-      // Set data
-      this.categories = categories;
-      this.posts = posts;
+    .subscribe(
+      ([categories, posts]) => {
+        // Set data
+        this.categories = categories;
+        this.posts = posts;
 
-      // Set page posts
-      this.pagePosts = Utils.groupArrays(this.posts, this.postsPerPage)
+        // Set page posts
+        this.pagePosts = Utils.groupArrays(this.posts, this.postsPerPage)
 
-      // Deactivate loader
-      this.loading = false;
-    });
+        // Deactivate loader
+        this.loading = false;
+      },
+      error => {
+        console.error(error);
+      }
+    );
   }
 
 
