@@ -3,7 +3,7 @@ declare var $: any;
 export class ThemeFunctions {
 
   // TOGGLE MODAL STYLES
-  static toggleModalStyles(isModalOpen) {
+  static toggleModalStyles(isModalOpen: boolean) {
     if (isModalOpen) {
       $('body, .modal-open .modal').removeAttr('style');
       $('body').removeClass('modal-open');
@@ -19,21 +19,21 @@ export class ThemeFunctions {
   // JQUERY MASK PLUGIN
   static jQueryMaskPlugin() {
     // Credit card config
-    let creditCardNumberMaskBehavior = function(val) {
+    let creditCardNumberMaskBehavior = function(val: string) {
       return val.replace(/\D/g, '').length === 16 ? '0000 0000 0000 0000' : '0000 000000 000009';
     };
     let creditCardNumberMaskOptions = {
-      onKeyPress: function(_val, _e, field, options) {
+      onKeyPress: function(_val: any, _e: any, field: any, options: any) {
         field.mask(creditCardNumberMaskBehavior.apply({}, arguments), options);
       }
     };
 
     // Telephone config
-    let telephoneMaskBehavior = function (val) {
+    let telephoneMaskBehavior = function (val: string) {
       return val.replace(/\D/g, '').length === 11 ? '(00) 00000 0000' : '(00) 0000 00009';
     };
     let telephoneMaskOptions = {
-      onKeyPress: function(_val, _e, field, options) {
+      onKeyPress: function(_val: any, _e: any, field: any, options: any) {
         field.mask(telephoneMaskBehavior.apply({}, arguments), options);
       }
     };

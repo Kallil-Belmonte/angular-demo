@@ -58,7 +58,7 @@ export class BlogComponent implements OnInit {
       this.newsService.getPosts()
     )
     .subscribe(([categories, posts]) => {
-      // Data
+      // Set data
       this.categories = categories;
       this.posts = posts;
 
@@ -98,7 +98,7 @@ export class BlogComponent implements OnInit {
     // let category = document.querySelector('.list-group-item.active').getAttribute('data-name');
     this.newsService.getPosts().subscribe(
       data => {
-        // Data
+        // Set Posts
         this.posts = data;
 
         // Reset pagination
@@ -143,7 +143,7 @@ export class BlogComponent implements OnInit {
     let activePageItem = document.querySelector('.page-item.active');
 
     // Navigate back and forth
-    let navigateBackAndForth = (back) => {
+    let navigateBackAndForth = (back: any) => {
       if (activePageItem) activePageItem.classList.remove('active');
 
       for (let item of <any>document.querySelectorAll('.page-item .page-link')) {

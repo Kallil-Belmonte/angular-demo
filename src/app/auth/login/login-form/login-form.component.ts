@@ -35,7 +35,7 @@ export class LoginFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private store: Store<{userData}>,
+              private store: Store<{userData: UserModel}>,
               private authService: AuthService) { }
 
   ngOnInit() {
@@ -61,12 +61,12 @@ export class LoginFormComponent implements OnInit {
   // LOGIN FORM
 
   // On Set Input Class
-  onSetInputClass(formControlName, classNames?: string[]): string[] {
+  onSetInputClass(formControlName: string, classNames?: string[]): string[] {
     return Utils.setInputClassName(this.loginForm, formControlName, classNames);
   }
 
   // On Show Field Errors
-  onShowFieldErrors(formControlName): boolean {
+  onShowFieldErrors(formControlName: string): boolean {
     return Utils.showFieldErrors(this.loginForm, formControlName);
   }
 

@@ -53,7 +53,7 @@ export class ContactFormComponent implements OnInit {
   getFavoriteColors(): void {
     this.contactService.getFavoriteColors().subscribe(
       data => {
-        // Data
+        // Set Favorite Colors
         this.favoriteColors = data;
 
         // Deactivate loader
@@ -72,12 +72,12 @@ export class ContactFormComponent implements OnInit {
   // CONTACT FORM
 
   // On Set Input Class
-  onSetInputClass(formControlName, classNames?: string[]): string[] {
+  onSetInputClass(formControlName: any, classNames?: string[]): string[] {
     return Utils.setInputClassName(this.contactForm, formControlName, classNames);
   }
 
   // On Show Field Errors
-  onShowFieldErrors(formControlName): boolean {
+  onShowFieldErrors(formControlName: any): boolean {
     return Utils.showFieldErrors(this.contactForm, formControlName);
   }
 

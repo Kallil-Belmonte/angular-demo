@@ -22,7 +22,7 @@ import { NotFoundComponent } from 'app/not-found/not-found.component';
   imports: [
     BrowserModule,
     StoreModule.forRoot({
-      userData: userDataReducer,
+      userData:    userDataReducer,
       currentPost: currentPostReducer
     }),
     CoreModule,

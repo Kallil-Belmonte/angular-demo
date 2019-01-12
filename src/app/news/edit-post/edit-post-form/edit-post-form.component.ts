@@ -22,7 +22,7 @@ export class EditPostFormComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
-              private store: Store<{currentPost}>,
+              private store: Store<{currentPost: PostModel}>,
               private newsService: NewsService,
               private router: Router) { }
 
@@ -49,7 +49,7 @@ export class EditPostFormComponent implements OnInit {
   getCurrentPost(id: string): void {
     this.newsService.getCurrentPost(id).subscribe(
       data => {
-        // Data
+        // Set Current Post
         this.currentPost = data;
 
         // Set initial Edit Post Form value
@@ -85,12 +85,12 @@ export class EditPostFormComponent implements OnInit {
   // EDIT POST FORM
 
   // On Set Input Class
-  onSetInputClass(formControlName, classNames?: string[]): string[] {
+  onSetInputClass(formControlName: string, classNames?: string[]): string[] {
     return Utils.setInputClassName(this.editPostForm, formControlName, classNames);
   }
 
   // On Show Field Errors
-  onShowFieldErrors(formControlName): boolean {
+  onShowFieldErrors(formControlName: string): boolean {
     return Utils.showFieldErrors(this.editPostForm, formControlName);
   }
 

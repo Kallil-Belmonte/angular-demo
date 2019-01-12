@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
 
   fullName: string;
 
-  constructor(private store: Store<{userData}>,
+  constructor(private store: Store<{userData: UserModel}>,
               private localStorage: LocalStorage) { }
 
   ngOnInit() {

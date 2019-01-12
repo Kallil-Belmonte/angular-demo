@@ -21,7 +21,7 @@ export class PostComponent implements OnInit {
   currentPost: PostModel;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private store: Store<{currentPost}>,
+              private store: Store<{currentPost: PostModel}>,
               private localStorage: LocalStorage,
               private newsService: NewsService) { }
 
@@ -50,7 +50,7 @@ export class PostComponent implements OnInit {
             // Get Current Post Reducer from local storage
             this.localStorage.getItem('currentPost').subscribe(
               (currentPost: PostModel) => {
-                // Data
+                // Set Current Post
                 this.currentPost = currentPost;
               }
             );

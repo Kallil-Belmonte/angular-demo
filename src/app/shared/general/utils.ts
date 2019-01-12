@@ -1,9 +1,11 @@
+import { FormGroup } from '@angular/forms';
+
 import * as moment from 'moment';
 
 export class Utils {
 
   // FORMAT DATE
-  static formatDate(date, originalFormat = 'DD/MM/YYYY', newFormat = 'YYYY-MM-DD') {
+  static formatDate(date: string, originalFormat: string = 'DD/MM/YYYY', newFormat: string = 'YYYY-MM-DD') {
     return moment(date, originalFormat).format(newFormat);
   }
 
@@ -21,7 +23,7 @@ export class Utils {
 
 
   // GROUP ARRAYS
-  static groupArrays(array, itemsQuantity) {
+  static groupArrays(array: any[], itemsQuantity: number) {
     let newArray = [[]];
 
     for (let item of array) {
@@ -40,7 +42,7 @@ export class Utils {
 
 
   // SET INPUT CLASS NAME
-  static setInputClassName(form, inputName, customClassNames: string[] = []): string[] {
+  static setInputClassName(form: FormGroup, inputName: string, customClassNames: string[] = []): string[] {
     let className: string[] = ['form-control', ...customClassNames];
 
     if (form.get(inputName).touched && form.get(inputName).invalid) {
@@ -52,7 +54,7 @@ export class Utils {
 
 
   // SHOW FIELD ERRORS
-  static showFieldErrors(form, inputName): boolean {
+  static showFieldErrors(form: FormGroup, inputName: string): boolean {
     if (form.get(inputName).touched && form.get(inputName).errors) {
       return true;
     }
@@ -62,7 +64,7 @@ export class Utils {
 
 
   // SET ERROR CLASS NAME
-  static setErrorClassName(condition): string[] {
+  static setErrorClassName(condition: any): string[] {
     let className: string[] = ['invalid-feedback'];
 
     if (condition) {
