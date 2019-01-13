@@ -78,7 +78,7 @@ export class PostComponent implements OnInit {
   parameterListener(): void {
     this.activatedRoute.params.subscribe(
       (params: Params) => {
-        // Get current post
+        // Get Current Post
         this.getCurrentPost(params['id']);
       }
     );
