@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import ACTION_TYPES from 'app/core/redux/actions/action-types';
+import ACTION_TYPES from 'app/core/ngrx/actions/action-types';
 import { PostModel } from 'app/news/_models/post.model';
 
 // SET CURRENT POST

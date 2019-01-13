@@ -64,13 +64,16 @@ export class BlogComponent implements OnInit {
         this.posts = posts;
 
         // Set page posts
-        this.pagePosts = Utils.groupArrays(this.posts, this.postsPerPage)
+        this.pagePosts = Utils.groupArrays(this.posts, this.postsPerPage);
 
         // Deactivate loader
         this.loading = false;
       },
       error => {
         console.error(error);
+
+        // Deactivate loader
+        this.loading = false;
       }
     );
   }

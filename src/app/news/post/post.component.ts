@@ -4,10 +4,14 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 
-import * as PostActions from 'app/core/redux/actions/post.actions';
+import * as PostActions from 'app/core/ngrx/actions/post.actions';
 import { ThemeFunctions } from 'app/shared/general/theme-functions';
 import { PostModel } from 'app/news/_models/post.model';
 import { NewsService } from 'app/news/news.service';
+
+type postState = {
+  currentPost: PostModel
+};
 
 @Component({
   selector: 'app-post',
@@ -21,7 +25,7 @@ export class PostComponent implements OnInit {
   currentPost: PostModel;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private store: Store<{currentPost: PostModel}>,
+              private store: Store<postState>,
               private localStorage: LocalStorage,
               private newsService: NewsService) { }
 

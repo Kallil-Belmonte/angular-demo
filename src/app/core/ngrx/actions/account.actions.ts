@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import ACTION_TYPES from 'app/core/redux/actions/action-types';
+import ACTION_TYPES from 'app/core/ngrx/actions/action-types';
 import { UserModel } from 'app/account/_models/user.model';
 
 // SET USER DATA

@@ -1,6 +1,6 @@
-import { PostActions } from 'app/core/redux/actions/post.actions';
+import { PostActions } from 'app/core/ngrx/actions/post.actions';
 
-import ACTION_TYPES from 'app/core/redux/actions/action-types';
+import ACTION_TYPES from 'app/core/ngrx/actions/action-types';
 import updateState from './utility';
 
 // CURRENT POST

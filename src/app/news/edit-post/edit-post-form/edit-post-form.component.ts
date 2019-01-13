@@ -4,10 +4,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
-import * as PostActions from 'app/core/redux/actions/post.actions';
+import * as PostActions from 'app/core/ngrx/actions/post.actions';
 import { Utils } from 'app/shared/general/utils';
 import { PostModel } from 'app/news/_models/post.model';
 import { NewsService } from 'app/news/news.service';
+
+type postState = {
+  currentPost: PostModel
+};
 
 @Component({
   selector: 'app-edit-post-form',
@@ -22,7 +26,7 @@ export class EditPostFormComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
-              private store: Store<{currentPost: PostModel}>,
+              private store: Store<postState>,
               private newsService: NewsService,
               private router: Router) { }
 

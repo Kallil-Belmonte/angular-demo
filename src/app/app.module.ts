@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { StoreModule } from '@ngrx/store';
 
-import { userDataReducer } from 'app/core/redux/reducers/account.reducers';
-import { currentPostReducer } from 'app/core/redux/reducers/post.reducers';
+import { userDataReducer } from 'app/core/ngrx/reducers/account.reducers';
+import { currentPostReducer } from 'app/core/ngrx/reducers/post.reducers';
 import { AppComponent } from 'app/app.component';
 import { CoreModule } from 'app/core/core.module';
 import { AuthModule } from 'app/auth/auth.module';

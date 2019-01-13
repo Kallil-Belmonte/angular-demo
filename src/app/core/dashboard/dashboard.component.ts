@@ -5,6 +5,10 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
 
 import { UserModel } from 'app/account/_models/user.model';
 
+type accountState = {
+  userData: UserModel
+};
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
   fullName: string;
 
-  constructor(private store: Store<{userData: UserModel}>,
+  constructor(private store: Store<accountState>,
               private localStorage: LocalStorage) { }
 
   ngOnInit() {

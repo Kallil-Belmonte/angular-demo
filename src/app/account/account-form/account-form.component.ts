@@ -5,9 +5,13 @@ import { Store } from '@ngrx/store';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-import * as AccountActions from 'app/core/redux/actions/account.actions';
+import * as AccountActions from 'app/core/ngrx/actions/account.actions';
 import { Utils } from 'app/shared/general/utils';
 import { UserModel } from 'app/account/_models/user.model';
+
+type accountState = {
+  userData: UserModel
+};
 
 type accountFormFeedback = {
   messages: {
@@ -40,7 +44,7 @@ export class AccountFormComponent implements OnInit {
   };
 
   constructor(private formBuilder: FormBuilder,
-              private store: Store<{userData: UserModel}>,
+              private store: Store<accountState>,
               private localStorage: LocalStorage) { }
 
   ngOnInit() {
