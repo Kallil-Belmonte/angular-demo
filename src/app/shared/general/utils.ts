@@ -43,13 +43,13 @@ export class Utils {
 
   // SET INPUT CLASS NAME
   static setInputClassName(form: FormGroup, inputName: string, customClassNames: string[] = []): string[] {
-    const className: string[] = ['form-control', ...customClassNames];
+    const classList: string[] = ['form-control', ...customClassNames];
 
     if (form.get(inputName).touched && form.get(inputName).invalid) {
-      className.push('is-invalid');
+      classList.push('is-invalid');
     }
 
-    return className;
+    return classList;
   }
 
 
@@ -65,13 +65,13 @@ export class Utils {
 
   // SET ERROR CLASS NAME
   static setErrorClassName(condition: any): string[] {
-    const className: string[] = ['invalid-feedback'];
+    const classList: string[] = ['invalid-feedback'];
 
     if (condition) {
-      className.push('d-block');
+      classList.push('d-block');
     }
 
-    return className;
+    return classList;
   }
 
 };
