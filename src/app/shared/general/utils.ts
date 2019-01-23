@@ -24,10 +24,10 @@ export class Utils {
 
   // GROUP ARRAYS
   static groupArrays(array: any[], itemsQuantity: number) {
-    let newArray = [[]];
+    const newArray = [[]];
 
     for (let item of array) {
-      let lastIndex: number = newArray.length - 1;
+      const lastIndex: number = newArray.length - 1;
 
       if (newArray[lastIndex].length < itemsQuantity) {
         newArray[lastIndex].push(item);
@@ -43,7 +43,7 @@ export class Utils {
 
   // SET INPUT CLASS NAME
   static setInputClassName(form: FormGroup, inputName: string, customClassNames: string[] = []): string[] {
-    let className: string[] = ['form-control', ...customClassNames];
+    const className: string[] = ['form-control', ...customClassNames];
 
     if (form.get(inputName).touched && form.get(inputName).invalid) {
       className.push('is-invalid');
@@ -65,7 +65,7 @@ export class Utils {
 
   // SET ERROR CLASS NAME
   static setErrorClassName(condition: any): string[] {
-    let className: string[] = ['invalid-feedback'];
+    const className: string[] = ['invalid-feedback'];
 
     if (condition) {
       className.push('d-block');

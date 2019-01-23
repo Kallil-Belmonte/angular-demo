@@ -90,8 +90,8 @@ export class BlogComponent implements OnInit {
     }
 
     // Add active class
-    let targetElement = event.target as HTMLElement;
-    let parentElement = targetElement.parentNode as HTMLElement;
+    const targetElement = event.target as HTMLElement;
+    const parentElement = targetElement.parentNode as HTMLElement;
 
     if (targetElement.tagName === 'SPAN') {
       parentElement.classList.add('active');
@@ -132,7 +132,7 @@ export class BlogComponent implements OnInit {
 
   // ON FILTER POSTS
   onFilterPosts(): void {
-    let filterOption = event.target as HTMLInputElement;
+    const filterOption = event.target as HTMLInputElement;
 
     // Reset pagination
     this.resetPagination();
@@ -148,7 +148,7 @@ export class BlogComponent implements OnInit {
   // ON PAGINATE
   onPaginate(): void {
     // Select active page item
-    let activePageItem = document.querySelector('.page-item.active');
+    const activePageItem = document.querySelector('.page-item.active');
 
     // Navigate back and forth
     let navigateBackAndForth = (back: any) => {
@@ -166,8 +166,8 @@ export class BlogComponent implements OnInit {
     };
 
     // Update current page
-    let targetElement = event.target as HTMLElement;
-    let parentElement = targetElement.parentNode as HTMLElement;
+    const targetElement = event.target as HTMLElement;
+    const parentElement = targetElement.parentNode as HTMLElement;
 
     switch(targetElement.innerText) {
       case 'Previous':

@@ -21,8 +21,8 @@ export class RegisterComponent implements OnInit {
 
   // REDIRECT USER
   redirectUser(): void {
-    let authToken = sessionStorage.getItem('authTokenAngularDemo') || localStorage.getItem('authTokenAngularDemo');
-    let expiredSession = new Date().getTime() > Date.parse(localStorage.getItem('expirationDateAngularDemo'));
+    const authToken = sessionStorage.getItem('authTokenAngularDemo') || localStorage.getItem('authTokenAngularDemo');
+    const expiredSession = new Date().getTime() > Date.parse(localStorage.getItem('expirationDateAngularDemo'));
 
     if (authToken && !expiredSession) {
       this.router.navigate(['/']);

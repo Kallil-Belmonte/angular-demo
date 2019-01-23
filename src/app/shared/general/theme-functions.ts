@@ -8,7 +8,7 @@ export class ThemeFunctions {
       $('body, .modal-open .modal').removeAttr('style');
       $('body').removeClass('modal-open');
     } else {
-      let scrollbarWidth = window.innerWidth - document.body.clientWidth;
+      const scrollbarWidth = window.innerWidth - document.body.clientWidth;
 
       $('body').addClass('modal-open');
       $('body, .modal-open .modal').css({'padding-right': scrollbarWidth.toString() + 'px'});
@@ -19,20 +19,20 @@ export class ThemeFunctions {
   // JQUERY MASK PLUGIN
   static jQueryMaskPlugin() {
     // Credit card config
-    let creditCardNumberMaskBehavior = function(val: string) {
+    const creditCardNumberMaskBehavior = function(val: string) {
       return val.replace(/\D/g, '').length === 16 ? '0000 0000 0000 0000' : '0000 000000 000009';
     };
-    let creditCardNumberMaskOptions = {
+    const creditCardNumberMaskOptions = {
       onKeyPress: function(_val: any, _e: any, field: any, options: any) {
         field.mask(creditCardNumberMaskBehavior.apply({}, arguments), options);
       }
     };
 
     // Telephone config
-    let telephoneMaskBehavior = function (val: string) {
+    const telephoneMaskBehavior = function (val: string) {
       return val.replace(/\D/g, '').length === 11 ? '(00) 00000 0000' : '(00) 0000 00009';
     };
-    let telephoneMaskOptions = {
+    const telephoneMaskOptions = {
       onKeyPress: function(_val: any, _e: any, field: any, options: any) {
         field.mask(telephoneMaskBehavior.apply({}, arguments), options);
       }

@@ -27,7 +27,7 @@ export class DeletePostModalComponent implements OnInit {
   //==============================
 
   // DELETE CURRENT POST
-  deleteCurrentPost(id): void {
+  deleteCurrentPost(id: string): void {
     this.newsService.deleteCurrentPost(id).subscribe(
       data => {
         console.log(data);
@@ -73,7 +73,7 @@ export class DeletePostModalComponent implements OnInit {
 
 
   // ON CLICK OUT MODAL
-  onClickOutModal(event): void {
+  onClickOutModal(event: any): void {
     if (event.target.id === 'deletePost') {
       this.closeModal.emit();
     }

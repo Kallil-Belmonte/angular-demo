@@ -9,6 +9,12 @@ import { environment, endpoints } from 'environments/environment';
 import { LoginModel } from 'app/auth/_models/login.model';
 import { RegisterModel } from 'app/auth/_models/register.model';
 
+type authPayload = {
+  email: string,
+  password: string,
+  keepLogged: boolean;
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +30,7 @@ export class AuthService {
   //==============================
 
 	// LOG IN
-	logIn(payload): Observable<LoginModel> {
+	logIn(payload: authPayload): Observable<LoginModel> {
 		return this.httpClient.post<LoginModel>(environment.mocky + endpoints.auth.login, payload);
 	}
 
@@ -34,7 +40,7 @@ export class AuthService {
   //==============================
 
   // REGISTER
-  register(payload): Observable<RegisterModel> {
+  register(payload: authPayload): Observable<RegisterModel> {
     return this.httpClient.post<RegisterModel>(environment.mocky + endpoints.auth.register, payload);
   }
 

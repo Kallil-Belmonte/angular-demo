@@ -33,8 +33,8 @@ export class AppComponent implements OnInit {
         if (event.url === '/') {
           this.title.setTitle(this.pageTitle + 'Home');
         } else {
-          let pageUrl = event.url.split('-').join(' ');
-          let urlName = Utils.capitalizeFirstLetter(pageUrl.split('/')[1]);
+          const pageUrl = event.url.split('-').join(' ');
+          const urlName = Utils.capitalizeFirstLetter(pageUrl.split('/')[1]);
 
           this.title.setTitle(this.pageTitle + urlName);
         }
