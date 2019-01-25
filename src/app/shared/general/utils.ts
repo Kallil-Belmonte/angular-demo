@@ -5,25 +5,33 @@ import * as moment from 'moment';
 export class Utils {
 
   // FORMAT DATE
-  static formatDate(date: string, originalFormat: string = 'YYYY-MM-DD', newFormat: string = 'DD/MM/YYYY') {
+  static formatDate(date: string, originalFormat: string = 'YYYY-MM-DD', newFormat: string = 'DD/MM/YYYY'): string {
     return moment(date, originalFormat).format(newFormat);
   }
 
 
   // CAPITALIZE FIRST LETTER
-  static capitalizeFirstLetter(string: string) {
+  static capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
 
+  // CAPITALIZE TEXT
+  static capitalizeText(phrase: string): string {
+    return phrase.toLowerCase().replace(/\b./g, function(value: string) {
+      return value.toUpperCase();
+    });
+  };
+
+
   // LIMIT WORDS
-  static limitWords(string: string, numberOfWords: number) {
+  static limitWords(string: string, numberOfWords: number): string {
     return string.split(' ').splice(0, numberOfWords).join(' ');
   }
 
 
   // GROUP ARRAYS
-  static groupArrays(array: any[], itemsQuantity: number) {
+  static groupArrays(array: any[], itemsQuantity: number): any[] {
     const newArray = [[]];
 
     for (let item of array) {
