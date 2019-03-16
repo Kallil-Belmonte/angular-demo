@@ -53,9 +53,7 @@ export class Utils {
   static setInputClassName(form: FormGroup, inputName: string, customClassNames: string[] = []): string[] {
     const classList: string[] = ['form-control', ...customClassNames];
 
-    if (form.get(inputName).touched && form.get(inputName).invalid) {
-      classList.push('is-invalid');
-    }
+    if (form.get(inputName).touched && form.get(inputName).invalid) classList.push('is-invalid');
 
     return classList;
   }
@@ -63,23 +61,31 @@ export class Utils {
 
   // SHOW FIELD ERRORS
   static showFieldErrors(form: FormGroup, inputName: string): boolean {
-    if (form.get(inputName).touched && form.get(inputName).errors) {
-      return true;
-    }
+    if (form.get(inputName).touched && form.get(inputName).errors) return true;
 
     return false;
   }
 
 
   // SET ERROR CLASS NAME
-  static setErrorClassName(condition: any): string[] {
+  static setErrorClassName(condition: boolean): string[] {
     const classList: string[] = ['invalid-feedback'];
 
-    if (condition) {
-      classList.push('d-block');
-    }
+    if (condition) classList.push('d-block');
 
     return classList;
+  }
+
+
+  // REMOVE ITEMS FROM INDEXES
+  static removeItemsFromIndexes(array: any[], arrayIndexes: number[]) {
+    let newArray = array;
+
+    arrayIndexes.forEach((indexItem) => {
+      newArray = newArray.filter(arrayItem => array.indexOf(arrayItem) !== indexItem);
+    });
+
+    return newArray;
   }
 
 };
