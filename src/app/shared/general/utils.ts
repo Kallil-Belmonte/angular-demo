@@ -25,8 +25,8 @@ export class Utils {
 
 
   // LIMIT WORDS
-  static limitWords(string: string, numberOfWords: number): string {
-    return string.split(' ').splice(0, numberOfWords).join(' ');
+  static limitWords(text: string, numberOfWords: number): string {
+    return text.split(' ').splice(0, numberOfWords).join(' ');
   }
 
 
