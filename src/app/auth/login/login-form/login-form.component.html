@@ -13,9 +13,9 @@
     </ng-template>
 
     <ng-template [ngIf]="loginFormFeedback.fieldsErrors.email.length > 0">
-      <app-alert status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(loginFormFeedback.fieldsErrors.email, i)" *ngFor="let errorMessage of loginFormFeedback.fieldsErrors.email; let i = index">
+      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(loginFormFeedback.fieldsErrors.email, i)" *ngFor="let errorMessage of loginFormFeedback.fieldsErrors.email; let i = index">
         {{ errorMessage }}
-      </app-alert>
+      </app-alert-dismissible>
     </ng-template>
   </div>
 
@@ -29,9 +29,9 @@
     </ng-template>
 
     <ng-template [ngIf]="loginFormFeedback.fieldsErrors.password.length > 0">
-      <app-alert status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(loginFormFeedback.fieldsErrors.password, i)" *ngFor="let errorMessage of loginFormFeedback.fieldsErrors.password; let i = index">
+      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(loginFormFeedback.fieldsErrors.password, i)" *ngFor="let errorMessage of loginFormFeedback.fieldsErrors.password; let i = index">
         {{ errorMessage }}
-      </app-alert>
+      </app-alert-dismissible>
     </ng-template>
   </div>
 

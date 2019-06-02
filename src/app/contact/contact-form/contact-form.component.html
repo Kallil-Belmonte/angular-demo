@@ -1,9 +1,9 @@
 <app-loader *ngIf="loading"></app-loader>
 
 <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-  <app-alert status="success" [dismissible]="true" (dismissAlert)="onClearSuccessMessage()" *ngIf="contactFormSuccessMessage">
+  <app-alert-dismissible status="success" [dismissible]="true" (dismissAlert)="onClearSuccessMessage()" *ngIf="contactFormSuccessMessage">
     {{ contactFormSuccessMessage }}
-  </app-alert>
+  </app-alert-dismissible>
 
   <div class="form-row">
     <div class="col">

@@ -6,7 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { LimitWordsPipe } from 'app/shared/pipes/limit-words/limit-words.pipe';
 import { LoaderComponent } from 'app/shared/components/loader/loader.component';
-import { AlertComponent } from 'app/shared/components/alert/alert.component';
+import { AlertDismissibleComponent } from 'app/shared/components/alert-dismissible/alert-dismissible.component';
 import { PageHeaderComponent } from 'app/shared/components/page-header/page-header.component';
 import { PostItemComponent } from 'app/shared/components/post-item/post-item.component';
 
@@ -19,7 +19,7 @@ import { PostItemComponent } from 'app/shared/components/post-item/post-item.com
   declarations: [
     LimitWordsPipe,
     LoaderComponent,
-    AlertComponent,
+    AlertDismissibleComponent,
     PageHeaderComponent,
     PostItemComponent
   ],
@@ -28,7 +28,7 @@ import { PostItemComponent } from 'app/shared/components/post-item/post-item.com
     RouterModule,
     LimitWordsPipe,
     LoaderComponent,
-    AlertComponent,
+    AlertDismissibleComponent,
     PageHeaderComponent,
     PostItemComponent
   ]

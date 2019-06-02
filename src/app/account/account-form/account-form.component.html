@@ -1,15 +1,15 @@
 <div class="row">
   <div class="offset-md-3 col-md-6">
     <ng-template [ngIf]="accountFormFeedback.messages.success.length > 0">
-      <app-alert status="success" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormFeedback.messages.success, i)" *ngFor="let successMessage of accountFormFeedback.messages.success; let i = index">
+      <app-alert-dismissible status="success" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormFeedback.messages.success, i)" *ngFor="let successMessage of accountFormFeedback.messages.success; let i = index">
         {{ successMessage }}
-      </app-alert>
+      </app-alert-dismissible>
     </ng-template>
 
     <ng-template [ngIf]="accountFormFeedback.messages.error.length > 0">
-      <app-alert status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormFeedback.messages.error, i)" *ngFor="let errorMessage of accountFormFeedback.messages.error; let i = index">
+      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormFeedback.messages.error, i)" *ngFor="let errorMessage of accountFormFeedback.messages.error; let i = index">
         {{ errorMessage }}
-      </app-alert>
+      </app-alert-dismissible>
     </ng-template>
 
     <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
@@ -40,9 +40,9 @@
         </ng-template>
 
         <ng-template [ngIf]="accountFormFeedback.fieldsErrors.email.length > 0">
-          <app-alert status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormFeedback.fieldsErrors.email, i)" *ngFor="let errorMessage of accountFormFeedback.fieldsErrors.email; let i = index">
+          <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormFeedback.fieldsErrors.email, i)" *ngFor="let errorMessage of accountFormFeedback.fieldsErrors.email; let i = index">
             {{ errorMessage }}
-          </app-alert>
+          </app-alert-dismissible>
         </ng-template>
       </div>
 

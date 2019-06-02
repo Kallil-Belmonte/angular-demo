@@ -114,19 +114,17 @@ export class RegisterFormComponent implements OnInit {
     this.registerFormFeedback.fieldsErrors.email = [];
     this.registerFormFeedback.fieldsErrors.password = [];
 
-    if (this.registerForm.get('email').value === 'demo@demo.com') {
+    this.authService.register(this.registerForm.value).subscribe(
+      data => {
+        if (this.registerForm.get('email').value === 'demo@demo.com') {
+          // Error simulation
+          this.registerFormFeedback.fieldsErrors.email.push('This e-mail does not exists.');
+          this.registerFormFeedback.fieldsErrors.password.push('Your password is too weak.');
 
-      // Error simulation
-      this.registerFormFeedback.fieldsErrors.email.push('This e-mail does not exists.');
-      this.registerFormFeedback.fieldsErrors.password.push('Your password is too weak.');
+          // Deactivate loader
+          this.loading = false;
+        } else {
 
-      // Deactivate loader
-      this.loading = false;
-
-    } else {
-
-      this.authService.register(this.registerForm.value).subscribe(
-        data => {
           // Store session data
           sessionStorage.setItem('authTokenAngularDemo', data.token);
 
@@ -145,16 +143,16 @@ export class RegisterFormComponent implements OnInit {
 
           // Redirect
           this.router.navigate(['/']);
-        },
-        error => {
-          console.error(error);
 
-          // Deactivate loader
-          this.loading = false;
         }
-      );
+      },
+      error => {
+        console.error(error);
 
-    }
+        // Deactivate loader
+        this.loading = false;
+      }
+    );
   }
 
 

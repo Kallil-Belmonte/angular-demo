@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-alert',
-  templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.scss']
+  selector: 'app-alert-dismissible',
+  templateUrl: './alert-dismissible.component.html',
+  styleUrls: ['./alert-dismissible.component.scss']
 })
-export class AlertComponent implements OnInit {
+export class AlertDismissibleComponent implements OnInit {
 
   @Input() status: string;
   @Input() dismissible: boolean = false;

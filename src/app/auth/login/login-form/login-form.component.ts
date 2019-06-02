@@ -103,19 +103,17 @@ export class LoginFormComponent implements OnInit {
     this.loginFormFeedback.fieldsErrors.email = [];
     this.loginFormFeedback.fieldsErrors.password = [];
 
-    if (this.loginForm.get('email').value === 'demo@demo.com') {
+    this.authService.logIn(this.loginForm.value).subscribe(
+      data => {
+        if (this.loginForm.get('email').value === 'demo@demo.com') {
+          // Error simulation
+          this.loginFormFeedback.fieldsErrors.email.push('This e-mail does not exists.');
+          this.loginFormFeedback.fieldsErrors.password.push('The password is incorrect.');
 
-      // Error simulation
-      this.loginFormFeedback.fieldsErrors.email.push('This e-mail does not exists.');
-      this.loginFormFeedback.fieldsErrors.password.push('The password is incorrect.');
+          // Deactivate loader
+          this.loading = false;
+        } else {
 
-      // Deactivate loader
-      this.loading = false;
-
-    } else {
-
-      this.authService.logIn(this.loginForm.value).subscribe(
-        data => {
           // Store session data
           if (this.loginForm.get('keepLogged').value) {
             localStorage.setItem('authTokenAngularDemo', data.idToken);
@@ -139,16 +137,16 @@ export class LoginFormComponent implements OnInit {
 
           // Redirect
           this.router.navigate(['/']);
-        },
-        error => {
-          console.error(error);
 
-          // Deactivate loader
-          this.loading = false;
         }
-      );
+      },
+      error => {
+        console.error(error);
 
-    }
+        // Deactivate loader
+        this.loading = false;
+      }
+    );
   }
 
 
