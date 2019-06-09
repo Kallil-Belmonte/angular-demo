@@ -3,16 +3,18 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 
 import { Observable } from 'rxjs';
 
+import { environment } from 'environments/environment';
+
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		const authToken = sessionStorage.getItem('tokenAngularDemo') || localStorage.getItem('tokenAngularDemo');
+		if (req.url.includes(environment.jsonPlaceholder)) {
+			const authToken = sessionStorage.getItem('authTokenAngularDemo') || localStorage.getItem('authTokenAngularDemo');
 
-		if (authToken) {
 			// Intercept and modify the request
 			const copiedReq = req.clone({
-				headers: req.headers.append('Authorization', authToken)
+				headers: req.headers.append('Authorization', `Bearer ${authToken}`)
 			});
 
 			// Continue with the modified request
