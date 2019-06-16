@@ -117,12 +117,14 @@ export class RegisterFormComponent implements OnInit {
     this.authService.register(this.registerForm.value).subscribe(
       data => {
         if (this.registerForm.get('email').value === 'demo@demo.com') {
+
           // Error simulation
-          this.registerFormFeedback.fieldsErrors.email.push('This e-mail does not exists.');
+          this.registerFormFeedback.fieldsErrors.email.push('This e-mail already exists.');
           this.registerFormFeedback.fieldsErrors.password.push('Your password is too weak.');
 
           // Deactivate loader
           this.loading = false;
+
         } else {
 
           // Store session data

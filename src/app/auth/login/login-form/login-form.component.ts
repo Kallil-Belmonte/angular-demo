@@ -106,12 +106,14 @@ export class LoginFormComponent implements OnInit {
     this.authService.logIn(this.loginForm.value).subscribe(
       data => {
         if (this.loginForm.get('email').value === 'demo@demo.com') {
+
           // Error simulation
           this.loginFormFeedback.fieldsErrors.email.push('This e-mail does not exists.');
           this.loginFormFeedback.fieldsErrors.password.push('The password is incorrect.');
 
           // Deactivate loader
           this.loading = false;
+
         } else {
 
           // Store session data
