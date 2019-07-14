@@ -14,13 +14,13 @@ import { RegisterFormComponent } from 'app/auth/register/register-form/register-
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [
     LoginComponent,
     LoginFormComponent,
     RegisterComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
   ]
 })
 export class AuthModule { }

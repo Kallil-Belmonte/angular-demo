@@ -10,7 +10,7 @@ import { PostModel } from 'app/news/_models/post.model';
 import { NewsService } from 'app/news/news.service';
 
 type postState = {
-  currentPost: PostModel
+  currentPost: PostModel,
 };
 
 @Component({

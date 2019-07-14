@@ -14,14 +14,14 @@ import { PostItemComponent } from 'app/shared/components/post-item/post-item.com
   imports: [
     CommonModule,
     RouterModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   declarations: [
     LimitWordsPipe,
     LoaderComponent,
     AlertDismissibleComponent,
     PageHeaderComponent,
-    PostItemComponent
+    PostItemComponent,
   ],
   exports: [
     CommonModule,
@@ -30,7 +30,7 @@ import { PostItemComponent } from 'app/shared/components/post-item/post-item.com
     LoaderComponent,
     AlertDismissibleComponent,
     PageHeaderComponent,
-    PostItemComponent
+    PostItemComponent,
   ]
 })
 export class SharedModule { }

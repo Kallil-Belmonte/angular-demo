@@ -6,7 +6,7 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
 import { UserModel } from 'app/account/_models/user.model';
 
 type accountState = {
-  userData: UserModel
+  userData: UserModel,
 };
 
 @Component({
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
     this.store.select('userData').subscribe(
       state => {
         // If state is not empty, set/update User Data Reducer in local storage
-        if (Object.keys(state).length > 0) {
+        if (Object.keys(state).length) {
           this.localStorage.setItemSubscribe('userData', state);
         }
 

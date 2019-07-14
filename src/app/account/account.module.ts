@@ -13,11 +13,11 @@ import { AccountFormComponent } from 'app/account/account-form/account-form.comp
     CommonModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [
     AccountComponent,
-    AccountFormComponent
+    AccountFormComponent,
   ]
 })
 export class AccountModule { }

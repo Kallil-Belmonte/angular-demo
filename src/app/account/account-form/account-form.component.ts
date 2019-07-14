@@ -10,16 +10,16 @@ import { Utils } from 'app/shared/general/utils';
 import { UserModel } from 'app/account/_models/user.model';
 
 type accountState = {
-  userData: UserModel
+  userData: UserModel,
 };
 
 type accountFormFeedback = {
   messages: {
     success: string[],
-    error: string[]
+    error: string[],
   },
   fieldsErrors: {
-    email: string[]
+    email: string[],
   }
 };
 
@@ -36,11 +36,11 @@ export class AccountFormComponent implements OnInit {
   accountFormFeedback: accountFormFeedback = {
     messages: {
       success: [],
-      error: []
+      error: [],
     },
     fieldsErrors: {
-      email: []
-    }
+      email: [],
+    },
   };
 
   constructor(private formBuilder: FormBuilder,
@@ -62,7 +62,7 @@ export class AccountFormComponent implements OnInit {
     this.accountForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName:  ['', [Validators.required]],
-      email:     ['', [Validators.required, Validators.email]]
+      email:     ['', [Validators.required, Validators.email]],
     });
   }
 

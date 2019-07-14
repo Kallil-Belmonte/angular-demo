@@ -21,7 +21,7 @@ import { EditPostFormComponent } from 'app/news/edit-post/edit-post-form/edit-po
     CommonModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [
     BlogComponent,
@@ -33,7 +33,7 @@ import { EditPostFormComponent } from 'app/news/edit-post/edit-post-form/edit-po
     PostBodyComponent,
     DeletePostModalComponent,
     EditPostComponent,
-    EditPostFormComponent
+    EditPostFormComponent,
   ]
 })
 export class NewsModule { }

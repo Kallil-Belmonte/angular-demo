@@ -13,11 +13,11 @@ import { ContactFormComponent } from 'app/contact/contact-form/contact-form.comp
     CommonModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [
     ContactComponent,
-    ContactFormComponent
+    ContactFormComponent,
   ]
 })
 export class ContactModule { }

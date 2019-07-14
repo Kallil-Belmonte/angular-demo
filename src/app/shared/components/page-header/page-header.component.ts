@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PageHeaderComponent implements OnInit {
 
-  @Input() fontAwesomeIcon;
+  @Input() fontAwesomeIcon: any;
 
   constructor() { }
 

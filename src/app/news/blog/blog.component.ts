@@ -55,7 +55,7 @@ export class BlogComponent implements OnInit {
   getAllData(): void {
     forkJoin(
       this.newsService.getCategories(),
-      this.newsService.getPosts()
+      this.newsService.getPosts(),
     )
     .subscribe(
       ([categories, posts]) => {

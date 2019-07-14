@@ -15,15 +15,15 @@ import { AuthInterceptor } from 'app/auth/auth.interceptor';
     CommonModule,
     HttpClientModule,
     FontAwesomeModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   declarations: [
     HeaderComponent,
     DashboardComponent,
-    FooterComponent
+    FooterComponent,
   ],
   exports: [
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

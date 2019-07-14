@@ -10,11 +10,11 @@ import { FeaturedPostsComponent } from 'app/home/featured-posts/featured-posts.c
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [
     HomeComponent,
-    FeaturedPostsComponent
+    FeaturedPostsComponent,
   ]
 })
 export class HomeModule { }

@@ -9,7 +9,7 @@
     <div class="col">
       <div class="form-group">
         <label for="first-name">First name</label>
-        <input id="first-name" [ngClass]="onSetInputClass('firstName')" type="text" formControlName="firstName" placeholder="First name" />
+        <input id="first-name" [ngClass]="onSetInputClass('firstName')" type="text" formControlName="firstName" />
 
         <ng-template [ngIf]="onShowFieldErrors('firstName')">
           <div [ngClass]="onSetFirstNameFirstErrorClass()">First name is required</div>
@@ -21,7 +21,7 @@
     <div class="col">
       <div class="form-group">
         <label for="last-name">Last name</label>
-        <input id="last-name" [ngClass]="onSetInputClass('lastName')" type="text" formControlName="lastName" placeholder="Last name" />
+        <input id="last-name" [ngClass]="onSetInputClass('lastName')" type="text" formControlName="lastName" />
 
         <div [ngClass]="onSetLastNameErrorClass()">Last name is required</div>
       </div>
@@ -32,7 +32,7 @@
     <div class="col">
       <div class="form-group">
         <label for="email">E-mail</label>
-        <input id="email" [ngClass]="onSetInputClass('email')" type="email" formControlName="email" placeholder="E-mail" />
+        <input id="email" [ngClass]="onSetInputClass('email')" type="email" formControlName="email" />
 
         <ng-template [ngIf]="onShowFieldErrors('email')">
           <div [ngClass]="onSetEmailFirstErrorClass()">E-mail is required</div>

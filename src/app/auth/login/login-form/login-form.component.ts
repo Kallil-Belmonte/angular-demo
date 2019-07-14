@@ -10,13 +10,13 @@ import { UserModel } from 'app/account/_models/user.model';
 import { AuthService } from 'app/auth/auth.service';
 
 type accountState = {
-  userData: UserModel
+  userData: UserModel,
 };
 
 type loginFormFeedback = {
   fieldsErrors: {
     email: string[],
-    password: string[]
+    password: string[],
   }
 };
 
@@ -33,8 +33,8 @@ export class LoginFormComponent implements OnInit {
   loginFormFeedback: loginFormFeedback = {
     fieldsErrors: {
       email:    [],
-      password: []
-    }
+      password: [],
+    },
   };
 
   constructor(private formBuilder: FormBuilder,
@@ -57,7 +57,7 @@ export class LoginFormComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email:      ['', [Validators.required, Validators.email]],
       password:   ['', [Validators.required, Validators.minLength(3)]],
-      keepLogged: [false]
+      keepLogged: [false],
     });
   }
 
@@ -128,7 +128,7 @@ export class LoginFormComponent implements OnInit {
           this.userData = {
             firstName: data.firstName,
             lastName: data.lastName,
-            email: data.email
+            email: data.email,
           };
 
           // Set data to reducer
