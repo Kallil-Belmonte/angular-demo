@@ -114,9 +114,7 @@ export class EditPostFormComponent implements OnInit {
     this.loading = true;
 
     this.newsService.editCurrentPost(this.currentPost.id, this.editPostForm.value).subscribe(
-      data => {
-        console.log(data);
-
+      () => {
         // Update Current Post
         this.currentPost = {
           userId: this.currentPost.userId,
