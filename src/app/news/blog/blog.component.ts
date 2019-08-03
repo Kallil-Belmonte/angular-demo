@@ -151,7 +151,7 @@ export class BlogComponent implements OnInit {
     const activePageItem = document.querySelector('.page-item.active');
 
     // Navigate back and forth
-    let navigateBackAndForth = (back: any) => {
+    const navigateBackAndForth = (back: any) => {
       if (activePageItem) activePageItem.classList.remove('active');
 
       for (let item of <any>document.querySelectorAll('.page-item .page-link')) {
