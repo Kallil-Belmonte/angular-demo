@@ -64,7 +64,7 @@ export class BlogComponent implements OnInit {
         this.posts = posts;
 
         // Set page posts
-        this.pagePosts = Utils.groupArrays(this.posts, this.postsPerPage);
+        this.pagePosts = Utils.groupArrayItems(this.posts, this.postsPerPage);
 
         // Deactivate loader
         this.loading = false;
@@ -113,7 +113,7 @@ export class BlogComponent implements OnInit {
         this.resetPagination();
 
         // Set page settings
-        this.pagePosts = Utils.groupArrays(this.posts, this.postsPerPage);
+        this.pagePosts = Utils.groupArrayItems(this.posts, this.postsPerPage);
         this.currentPage = 0;
         this.firstPaginationItem = 1;
 
@@ -139,7 +139,7 @@ export class BlogComponent implements OnInit {
 
     // Set page settings
     this.postsPerPage = +filterOption.value;
-    this.pagePosts = Utils.groupArrays(this.posts, +filterOption.value);
+    this.pagePosts = Utils.groupArrayItems(this.posts, +filterOption.value);
     this.currentPage = 0;
     this.firstPaginationItem = 1;
   }
