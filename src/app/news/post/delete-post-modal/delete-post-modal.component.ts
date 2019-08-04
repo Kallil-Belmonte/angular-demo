@@ -29,9 +29,7 @@ export class DeletePostModalComponent implements OnInit {
   // DELETE CURRENT POST
   deleteCurrentPost(id: string): void {
     this.newsService.deleteCurrentPost(id).subscribe(
-      data => {
-        console.log(data);
-
+      () => {
         // Close modal
         this.closeModal.emit();
 

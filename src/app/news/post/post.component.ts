@@ -85,7 +85,7 @@ export class PostComponent implements OnInit {
   }
 
 
-  // ON OPEN MODAL
+  // ON HANDLE MODAL
   onToggleModal(): void {
     // Toggle styles
     ThemeFunctions.toggleModalStyles(this.isModalOpen);

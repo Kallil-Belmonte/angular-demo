@@ -41,7 +41,7 @@ export class BlogComponent implements OnInit {
     if (document.querySelector('.page-item.active')) document.querySelector('.page-item.active').classList.remove('active');
 
     // Add active class
-    let firstPageItem: HTMLElement = document.querySelector('.page-item .page-link:first-child');
+    const firstPageItem: HTMLElement = document.querySelector('.page-item .page-link:first-child');
 
     if (firstPageItem.innerText !== 'Previous') {
       document.querySelector('.page-item:nth-child(1)').classList.add('active');
@@ -103,7 +103,7 @@ export class BlogComponent implements OnInit {
     this.pagePosts = [];
 
     // Get posts from the selected category
-    // let category = document.querySelector('.list-group-item.active').getAttribute('data-name');
+    // const category = document.querySelector('.list-group-item.active').getAttribute('data-name');
     this.newsService.getPosts().subscribe(
       data => {
         // Set Posts

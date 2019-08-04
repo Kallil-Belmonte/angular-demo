@@ -1,14 +1,6 @@
 import { FormGroup } from '@angular/forms';
 
-import * as moment from 'moment';
-
 export class Utils {
-
-  // FORMAT DATE
-  static formatDate(date: string, originalFormat: string = 'YYYY-MM-DD', newFormat: string = 'DD/MM/YYYY'): string {
-    return moment(date, originalFormat).format(newFormat);
-  }
-
 
   // CAPITALIZE FIRST LETTER
   static capitalizeFirstLetter(string: string): string {
@@ -18,7 +10,7 @@ export class Utils {
 
   // CAPITALIZE TEXT
   static capitalizeText(text: string): string {
-    return text.toLowerCase().split(' ').map((word, index) => {
+    return text.toLowerCase().split(' ').map(word => {
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     }).join(' ');
   };

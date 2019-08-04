@@ -5,8 +5,8 @@ export class ThemeFunctions {
   // TOGGLE MODAL STYLES
   static toggleModalStyles(isModalOpen: boolean) {
     if (isModalOpen) {
-      $('body, .modal-open .modal').removeAttr('style');
       $('body').removeClass('modal-open');
+      $('body, .modal-open .modal').removeAttr('style');
     } else {
       const scrollbarWidth = window.innerWidth - document.body.clientWidth;
 
