@@ -85,7 +85,7 @@ export class BlogComponent implements OnInit {
     this.loading = true;
 
     // Remove active class
-    for (let item of <any>document.querySelectorAll('.list-group-item')) {
+    for (const item of <any>document.querySelectorAll('.list-group-item')) {
       item.classList.remove('active');
     }
 
@@ -154,7 +154,7 @@ export class BlogComponent implements OnInit {
     const navigateBackAndForth = (back: any) => {
       if (activePageItem) activePageItem.classList.remove('active');
 
-      for (let item of <any>document.querySelectorAll('.page-item .page-link')) {
+      for (const item of <any>document.querySelectorAll('.page-item .page-link')) {
         if (back) {
           if (+item.innerText === this.currentPage + 2) item.parentNode.classList.add('active');
         } else {
