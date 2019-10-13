@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { Utils } from 'app/shared/general/utils';
+import * as Helpers from 'app/shared/helpers';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
           this.title.setTitle(this.pageTitle + 'Home');
         } else {
           const pageUrl = event.url.split('-').join(' ');
-          const urlName = Utils.capitalizeFirstLetter(pageUrl.split('/')[1]);
+          const urlName = Helpers.capitalizeFirstLetter(pageUrl.split('/')[1]);
 
           this.title.setTitle(this.pageTitle + urlName);
         }

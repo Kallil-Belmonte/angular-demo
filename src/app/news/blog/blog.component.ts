@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
 
-import { Utils } from 'app/shared/general/utils';
+import * as Helpers from 'app/shared/helpers';
 import { PostModel } from 'app/news/_models/post.model';
 import { CategoryModel } from 'app/news/_models/category.model';
 import { NewsService } from 'app/news/news.service';
@@ -64,7 +64,7 @@ export class BlogComponent implements OnInit {
         this.posts = posts;
 
         // Set page posts
-        this.pagePosts = Utils.groupArrayItems(this.posts, this.postsPerPage);
+        this.pagePosts = Helpers.groupArrayItems(this.posts, this.postsPerPage);
 
         // Deactivate loader
         this.loading = false;
@@ -113,7 +113,7 @@ export class BlogComponent implements OnInit {
         this.resetPagination();
 
         // Set page settings
-        this.pagePosts = Utils.groupArrayItems(this.posts, this.postsPerPage);
+        this.pagePosts = Helpers.groupArrayItems(this.posts, this.postsPerPage);
         this.currentPage = 0;
         this.firstPaginationItem = 1;
 
@@ -139,7 +139,7 @@ export class BlogComponent implements OnInit {
 
     // Set page settings
     this.postsPerPage = +filterOption.value;
-    this.pagePosts = Utils.groupArrayItems(this.posts, +filterOption.value);
+    this.pagePosts = Helpers.groupArrayItems(this.posts, +filterOption.value);
     this.currentPage = 0;
     this.firstPaginationItem = 1;
   }

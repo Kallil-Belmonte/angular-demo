@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 
 import * as PostActions from 'app/core/ngrx/actions/post.actions';
-import { ThemeFunctions } from 'app/shared/general/theme-functions';
+import { ThemeFunctions } from 'app/shared/helpers/theme-functions';
 import { PostModel } from 'app/news/_models/post.model';
 import { NewsService } from 'app/news/news.service';
 

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import * as AccountActions from 'app/core/ngrx/actions/account.actions';
-import { Utils } from 'app/shared/general/utils';
+import * as Helpers from 'app/shared/helpers';
 import { UserModel } from 'app/account/_models/user.model';
 import { AuthService } from 'app/auth/auth.service';
 
@@ -66,32 +66,32 @@ export class LoginFormComponent implements OnInit {
 
   // On Set Input Class
   onSetInputClass(formControlName: string, classNames?: string[]): string[] {
-    return Utils.setInputClassName(this.loginForm, formControlName, classNames);
+    return Helpers.setInputClassName(this.loginForm, formControlName, classNames);
   }
 
   // On Show Field Errors
   onShowFieldErrors(formControlName: string): boolean {
-    return Utils.showFieldErrors(this.loginForm, formControlName);
+    return Helpers.showFieldErrors(this.loginForm, formControlName);
   }
 
   // On Set Email First Error Class
   onSetEmailFirstErrorClass(): string[] {
-    return Utils.setErrorClassName(this.loginForm.get('email').errors.required);
+    return Helpers.setErrorClassName(this.loginForm.get('email').errors.required);
   }
 
   // On Set Email Second Error Class
   onSetEmailSecondErrorClass(): string[] {
-    return Utils.setErrorClassName(this.loginForm.get('email').errors.email);
+    return Helpers.setErrorClassName(this.loginForm.get('email').errors.email);
   }
 
   // On Set Password First Error Class
   onSetPasswordFirstErrorClass(): string[] {
-    return Utils.setErrorClassName(this.loginForm.get('password').errors.required);
+    return Helpers.setErrorClassName(this.loginForm.get('password').errors.required);
   }
 
   // On Set Password Second Error Class
   onSetPasswordSecondErrorClass(): string[] {
-    return Utils.setErrorClassName(this.loginForm.get('password').errors.email);
+    return Helpers.setErrorClassName(this.loginForm.get('password').errors.email);
   }
 
   // On Submit

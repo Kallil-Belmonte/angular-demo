@@ -6,7 +6,7 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import * as AccountActions from 'app/core/ngrx/actions/account.actions';
-import { Utils } from 'app/shared/general/utils';
+import * as Helpers from 'app/shared/helpers';
 import { UserModel } from 'app/account/_models/user.model';
 
 type accountState = {
@@ -82,37 +82,37 @@ export class AccountFormComponent implements OnInit {
 
   // On Set Input Class
   onSetInputClass(formControlName: string, classNames?: string[]): string[] {
-    return Utils.setInputClassName(this.accountForm, formControlName, classNames);
+    return Helpers.setInputClassName(this.accountForm, formControlName, classNames);
   }
 
   // On Show Field Errors
   onShowFieldErrors(formControlName: string): boolean {
-    return Utils.showFieldErrors(this.accountForm, formControlName);
+    return Helpers.showFieldErrors(this.accountForm, formControlName);
   }
 
   // On Set First Name First Error Class
   onSetFirstNameFirstErrorClass(): string[] {
-    return Utils.setErrorClassName(this.accountForm.get('firstName').errors.required);
+    return Helpers.setErrorClassName(this.accountForm.get('firstName').errors.required);
   }
 
   // On Set First Name Second Error Class
   onSetFirstNameSecondErrorClass(): string[] {
-    return Utils.setErrorClassName(this.accountForm.get('firstName').errors.minlength);
+    return Helpers.setErrorClassName(this.accountForm.get('firstName').errors.minlength);
   }
 
   // On Set Last Name Error Class
   onSetLastNameErrorClass(): string[] {
-    return Utils.setErrorClassName(this.accountForm.get('lastName').touched && this.accountForm.get('lastName').invalid);
+    return Helpers.setErrorClassName(this.accountForm.get('lastName').touched && this.accountForm.get('lastName').invalid);
   }
 
   // On Set Email First Error Class
   onSetEmailFirstErrorClass(): string[] {
-    return Utils.setErrorClassName(this.accountForm.get('email').errors.required);
+    return Helpers.setErrorClassName(this.accountForm.get('email').errors.required);
   }
 
   // On Set Email Second Error Class
   onSetEmailSecondErrorClass(): string[] {
-    return Utils.setErrorClassName(this.accountForm.get('email').errors.email);
+    return Helpers.setErrorClassName(this.accountForm.get('email').errors.email);
   }
 
   // On Submit

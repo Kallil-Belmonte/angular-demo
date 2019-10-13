@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import * as PostActions from 'app/core/ngrx/actions/post.actions';
-import { Utils } from 'app/shared/general/utils';
+import * as Helpers from 'app/shared/helpers';
 import { PostModel } from 'app/news/_models/post.model';
 import { NewsService } from 'app/news/news.service';
 
@@ -90,22 +90,22 @@ export class EditPostFormComponent implements OnInit {
 
   // On Set Input Class
   onSetInputClass(formControlName: string, classNames?: string[]): string[] {
-    return Utils.setInputClassName(this.editPostForm, formControlName, classNames);
+    return Helpers.setInputClassName(this.editPostForm, formControlName, classNames);
   }
 
   // On Show Field Errors
   onShowFieldErrors(formControlName: string): boolean {
-    return Utils.showFieldErrors(this.editPostForm, formControlName);
+    return Helpers.showFieldErrors(this.editPostForm, formControlName);
   }
 
   // On Set Title Error Class
   onSetTitleErrorClass(): string[] {
-    return Utils.setErrorClassName(this.editPostForm.get('title').errors.required);
+    return Helpers.setErrorClassName(this.editPostForm.get('title').errors.required);
   }
 
   // On Set Body Error Class
   onSetBodyErrorClass(): string[] {
-    return Utils.setErrorClassName(this.editPostForm.get('body').errors.required);
+    return Helpers.setErrorClassName(this.editPostForm.get('body').errors.required);
   }
 
   // On Submit

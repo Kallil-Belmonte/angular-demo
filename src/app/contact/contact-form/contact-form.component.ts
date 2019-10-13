@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Utils } from 'app/shared/general/utils';
-import { ThemeFunctions } from 'app/shared/general/theme-functions';
+import * as Helpers from 'app/shared/helpers';
+import { ThemeFunctions } from 'app/shared/helpers/theme-functions';
 import { ContactService } from 'app/contact/contact.service';
 
 @Component({
@@ -73,52 +73,52 @@ export class ContactFormComponent implements OnInit {
 
   // On Set Input Class
   onSetInputClass(formControlName: any, classNames?: string[]): string[] {
-    return Utils.setInputClassName(this.contactForm, formControlName, classNames);
+    return Helpers.setInputClassName(this.contactForm, formControlName, classNames);
   }
 
   // On Show Field Errors
   onShowFieldErrors(formControlName: any): boolean {
-    return Utils.showFieldErrors(this.contactForm, formControlName);
+    return Helpers.showFieldErrors(this.contactForm, formControlName);
   }
 
   // On Set First Name First Error Class
   onSetFirstNameFirstErrorClass(): string[] {
-    return Utils.setErrorClassName(this.contactForm.get('firstName').errors.required);
+    return Helpers.setErrorClassName(this.contactForm.get('firstName').errors.required);
   }
 
   // On Set First Name Second Error Class
   onSetFirstNameSecondErrorClass(): string[] {
-    return Utils.setErrorClassName(this.contactForm.get('firstName').errors.minlength);
+    return Helpers.setErrorClassName(this.contactForm.get('firstName').errors.minlength);
   }
 
   // On Set Last Name Error Class
   onSetLastNameErrorClass(): string[] {
-    return Utils.setErrorClassName(this.contactForm.get('lastName').touched && this.contactForm.get('lastName').invalid);
+    return Helpers.setErrorClassName(this.contactForm.get('lastName').touched && this.contactForm.get('lastName').invalid);
   }
 
   // On Set Email First Error Class
   onSetEmailFirstErrorClass(): string[] {
-    return Utils.setErrorClassName(this.contactForm.get('email').errors.required);
+    return Helpers.setErrorClassName(this.contactForm.get('email').errors.required);
   }
 
   // On Set Email Second Error Class
   onSetEmailSecondErrorClass(): string[] {
-    return Utils.setErrorClassName(this.contactForm.get('email').errors.email);
+    return Helpers.setErrorClassName(this.contactForm.get('email').errors.email);
   }
 
   // On Set Telephone Error Class
   onSetTelephoneErrorClass(): string[] {
-    return Utils.setErrorClassName(this.contactForm.get('telephone').touched && this.contactForm.get('telephone').invalid);
+    return Helpers.setErrorClassName(this.contactForm.get('telephone').touched && this.contactForm.get('telephone').invalid);
   }
 
   // On Set Favorite Color Error Class
   onSetFavoriteColorErrorClass(): string[] {
-    return Utils.setErrorClassName(this.contactForm.get('favoriteColor').touched && this.contactForm.get('favoriteColor').value === 'select');
+    return Helpers.setErrorClassName(this.contactForm.get('favoriteColor').touched && this.contactForm.get('favoriteColor').value === 'select');
   }
 
   // On Set Message Error Class
   onSetMessageErrorClass(): string[] {
-    return Utils.setErrorClassName(this.contactForm.get('message').touched && this.contactForm.get('message').invalid);
+    return Helpers.setErrorClassName(this.contactForm.get('message').touched && this.contactForm.get('message').invalid);
   }
 
   // On Submit
