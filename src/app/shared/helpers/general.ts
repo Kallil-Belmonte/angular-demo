@@ -1,7 +1,7 @@
 import { FormGroup } from '@angular/forms';
 
-// GROUP ARRAY ITEMS
-export const groupArrayItems = (array: any[], itemsQuantity: number): any[] => {
+// GROUP ARRAY ITEMS IN ARRAYS
+export const groupArrayItemsInArrays = (array: any[], itemsQuantity: number): any[] => {
   const newArray = [[]];
 
   array.forEach(item => {
