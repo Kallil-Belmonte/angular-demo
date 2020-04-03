@@ -57,7 +57,7 @@ export class AuthService {
     localStorage.removeItem('expirationDateAngularDemo');
 
     // Clear app data
-    this.localStorage.clearSubscribe();
+    this.localStorage.clear();
 
     // Redirect
     this.router.navigate(['/login']);

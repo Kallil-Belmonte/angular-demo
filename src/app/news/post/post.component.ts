@@ -49,7 +49,7 @@ export class PostComponent implements OnInit {
         this.store.select('currentPost').subscribe(
           state => {
             // Set/update Current Post Reducer in local storage
-            this.localStorage.setItemSubscribe('currentPost', state);
+            this.localStorage.setItem('currentPost', state);
 
             // Get Current Post Reducer from local storage
             this.localStorage.getItem('currentPost').subscribe(

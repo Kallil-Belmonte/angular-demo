@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
       state => {
         // If state is not empty, set/update User Data Reducer in local storage
         if (Object.keys(state).length) {
-          this.localStorage.setItemSubscribe('userData', state);
+          this.localStorage.setItem('userData', state);
         }
 
         // Get User Data Reducer from local storage
