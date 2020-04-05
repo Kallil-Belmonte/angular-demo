@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Store } from '@ngrx/store';
-import { LocalStorage } from '@ngx-pwa/local-storage';
+import { StorageMap } from '@ngx-pwa/local-storage';
 
 import * as PostActions from 'app/core/ngrx/actions/post.actions';
 import { ThemeFunctions } from 'app/shared/helpers/theme-functions';
@@ -26,7 +26,7 @@ export class PostComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private store: Store<postState>,
-              private localStorage: LocalStorage,
+              private storage: StorageMap,
               private newsService: NewsService) { }
 
   ngOnInit() {
@@ -49,10 +49,10 @@ export class PostComponent implements OnInit {
         this.store.select('currentPost').subscribe(
           state => {
             // Set/update Current Post Reducer in local storage
-            this.localStorage.setItem('currentPost', state);
+            this.storage.set('currentPost', state);
 
             // Get Current Post Reducer from local storage
-            this.localStorage.getItem('currentPost').subscribe(
+            this.storage.get('currentPost').subscribe(
               (currentPost: PostModel) => {
                 // Set Current Post
                 this.currentPost = currentPost;

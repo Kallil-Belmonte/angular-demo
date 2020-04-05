@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { LocalStorage } from '@ngx-pwa/local-storage';
+import { StorageMap } from '@ngx-pwa/local-storage';
 
 import { environment, endpoints } from 'environments/environment';
 import { LoginModel } from 'app/auth/_models/login.model';
@@ -22,7 +22,7 @@ export class AuthService {
 
 	constructor(private httpClient: HttpClient,
               private router: Router,
-              private localStorage: LocalStorage) { }
+              private storage: StorageMap) { }
 
 
 	//==============================
@@ -57,7 +57,7 @@ export class AuthService {
     localStorage.removeItem('expirationDateAngularDemo');
 
     // Clear app data
-    this.localStorage.clear();
+    this.storage.clear();
 
     // Redirect
     this.router.navigate(['/login']);
