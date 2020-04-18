@@ -19,8 +19,8 @@ export const groupArrayItemsInArrays = (array: any[], itemsQuantity: number): an
 };
 
 
-// SET INPUT CLASS NAME
-export const setInputClassName = (form: FormGroup, inputName: string, customClassNames: string[] = []): string[] => {
+// SET FIELD CLASS NAME
+export const setFieldClassName = (form: FormGroup, inputName: string, customClassNames: string[] = []): string[] => {
   const classList: string[] = ['form-control', ...customClassNames];
 
   if (form.get(inputName).touched && form.get(inputName).invalid) classList.push('is-invalid');

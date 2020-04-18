@@ -1,6 +1,6 @@
 import {
   groupArrayItemsInArrays,
-  setInputClassName,
+  setFieldClassName,
   showFieldErrors,
   setErrorClassName,
   removeItemsFromIndexes,
@@ -15,7 +15,7 @@ import {
 export {
   // General
   groupArrayItemsInArrays,
-  setInputClassName,
+  setFieldClassName,
   showFieldErrors,
   setErrorClassName,
   removeItemsFromIndexes,

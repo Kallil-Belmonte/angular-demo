@@ -73,7 +73,7 @@ export class ContactFormComponent implements OnInit {
 
   // On Set Input Class
   onSetInputClass(formControlName: any, classNames?: string[]): string[] {
-    return Helpers.setInputClassName(this.contactForm, formControlName, classNames);
+    return Helpers.setFieldClassName(this.contactForm, formControlName, classNames);
   }
 
   // On Show Field Errors

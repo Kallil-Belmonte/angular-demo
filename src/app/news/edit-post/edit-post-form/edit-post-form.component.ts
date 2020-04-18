@@ -90,7 +90,7 @@ export class EditPostFormComponent implements OnInit {
 
   // On Set Input Class
   onSetInputClass(formControlName: string, classNames?: string[]): string[] {
-    return Helpers.setInputClassName(this.editPostForm, formControlName, classNames);
+    return Helpers.setFieldClassName(this.editPostForm, formControlName, classNames);
   }
 
   // On Show Field Errors

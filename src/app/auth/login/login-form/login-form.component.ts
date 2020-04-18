@@ -66,7 +66,7 @@ export class LoginFormComponent implements OnInit {
 
   // On Set Input Class
   onSetInputClass(formControlName: string, classNames?: string[]): string[] {
-    return Helpers.setInputClassName(this.loginForm, formControlName, classNames);
+    return Helpers.setFieldClassName(this.loginForm, formControlName, classNames);
   }
 
   // On Show Field Errors
