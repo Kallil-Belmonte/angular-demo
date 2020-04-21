@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
-import { StorageMap } from '@ngx-pwa/local-storage';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import * as AccountActions from 'app/core/ngrx/actions/account.actions';
@@ -44,8 +43,7 @@ export class AccountFormComponent implements OnInit {
   };
 
   constructor(private formBuilder: FormBuilder,
-              private store: Store<accountState>,
-              private storage: StorageMap) { }
+              private store: Store<accountState>) { }
 
   ngOnInit() {
     this.buildAccountForm();
@@ -69,10 +67,10 @@ export class AccountFormComponent implements OnInit {
 
   // GET USER DATA
   getUserData(): void {
-    // Get User Data Reducer from local storage
-    this.storage.get('userData').subscribe(
-      (userData: UserModel) => {
-        this.accountForm.setValue(userData);
+    // Get User Data from reducer
+    this.store.select('userData').subscribe(
+      (state: UserModel) => {
+        this.accountForm.setValue(state);
       }
     );
   }

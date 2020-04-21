@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  jsonPlaceholder: 'https://jsonplaceholder.typicode.com/',
+  jsonPlaceholder: 'http://jsonplaceholder.typicode.com/',
   mocky: 'http://www.mocky.io/v2/',
 };
 

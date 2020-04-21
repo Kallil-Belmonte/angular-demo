@@ -3,9 +3,11 @@ import { Action } from '@ngrx/store';
 import ACTION_TYPES from 'app/core/ngrx/actions/action-types';
 import { UserModel } from 'app/account/_models/user.model';
 
+const { SET_USER_DATA, EDIT_USER_DATA } = ACTION_TYPES;
+
 // SET USER DATA
 export class SetUserData implements Action {
-  readonly type = ACTION_TYPES.SET_USER_DATA;
+  readonly type = SET_USER_DATA;
 
   constructor(public payload: UserModel) { }
 }
@@ -13,7 +15,7 @@ export class SetUserData implements Action {
 
 // EDIT USER DATA
 export class EditUserData implements Action {
-  readonly type = ACTION_TYPES.EDIT_USER_DATA;
+  readonly type = EDIT_USER_DATA;
 
   constructor(public payload: UserModel) { }
 }

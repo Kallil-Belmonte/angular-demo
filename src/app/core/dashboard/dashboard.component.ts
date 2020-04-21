@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { StorageMap } from '@ngx-pwa/local-storage';
 
 import { UserModel } from 'app/account/_models/user.model';
 
@@ -18,8 +17,7 @@ export class DashboardComponent implements OnInit {
 
   fullName: string;
 
-  constructor(private store: Store<accountState>,
-              private storage: StorageMap) { }
+  constructor(private store: Store<accountState>) { }
 
   ngOnInit() {
     this.getUserData();
@@ -32,20 +30,11 @@ export class DashboardComponent implements OnInit {
 
   // GET USER DATA
   getUserData(): void {
-    // Get User Data Reducer
+    // Get User Data from reducer
     this.store.select('userData').subscribe(
-      state => {
-        // If state is not empty, set/update User Data Reducer in local storage
-        if (Object.keys(state).length) {
-          this.storage.set('userData', state);
-        }
-
-        // Get User Data Reducer from local storage
-        this.storage.get('userData').subscribe(
-          (userData: UserModel) => {
-            this.fullName = userData.firstName + ' ' + userData.lastName;
-          }
-        );
+      (state: UserModel) => {
+        const { firstName, lastName } = state;
+        this.fullName = `${firstName} ${lastName}`;
       }
     );
   }

@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { StorageMap } from '@ngx-pwa/local-storage';
 
 import { environment, endpoints } from 'environments/environment';
+import { Reducers } from 'app/core/ngrx/reducers/config.reducers';
 import { LoginModel } from 'app/auth/_models/login.model';
 import { RegisterModel } from 'app/auth/_models/register.model';
 
@@ -21,8 +21,7 @@ type authPayload = {
 export class AuthService {
 
 	constructor(private httpClient: HttpClient,
-              private router: Router,
-              private storage: StorageMap) { }
+              private router: Router) { }
 
 
 	//==============================
@@ -56,8 +55,8 @@ export class AuthService {
     localStorage.removeItem('authTokenAngularDemo');
     localStorage.removeItem('expirationDateAngularDemo');
 
-    // Clear app data
-    this.storage.clear();
+    // Remove reducers
+    Object.keys(Reducers).forEach(reducerKey => localStorage.removeItem(reducerKey));
 
     // Redirect
     this.router.navigate(['/login']);
