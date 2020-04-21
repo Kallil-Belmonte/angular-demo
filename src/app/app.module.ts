@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { StoreModule, MetaReducer } from '@ngrx/store';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxMaskModule, IConfig } from 'ngx-mask'
 
 import { Reducers, localStorageSyncReducer } from 'app/core/ngrx/reducers/config.reducers';
 import { AppComponent } from 'app/app.component';
@@ -18,9 +17,6 @@ import { NotFoundComponent } from 'app/not-found/not-found.component';
 // ngrx-store-localstorage
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
-// ngx-mask
-export let options: Partial<IConfig> | (() => Partial<IConfig>);
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +26,6 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     BrowserModule,
     StoreModule.forRoot(Reducers, { metaReducers }),
     NgbModule,
-    NgxMaskModule.forRoot(options),
     CoreModule,
     AuthModule,
     HomeModule,

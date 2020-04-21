@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import * as Helpers from 'app/shared/helpers';
-import { ThemeFunctions } from 'app/shared/helpers/theme-functions';
 import { ContactService } from 'app/contact/contact.service';
 
 @Component({
@@ -23,10 +22,6 @@ export class ContactFormComponent implements OnInit {
   ngOnInit() {
     this.buildContactForm();
     this.getFavoriteColors();
-  }
-
-  ngAfterViewInit() {
-    ThemeFunctions.jQueryMaskPlugin();
   }
 
 

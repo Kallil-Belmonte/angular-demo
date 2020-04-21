@@ -44,7 +44,7 @@
     <div class="col">
       <div class="form-group">
         <label for="telephone">Telephone</label>
-        <input id="telephone" [ngClass]="onSetInputClass('telephone', ['telephone-mask'])" type="tel" formControlName="telephone" placeholder="(00) 0000 0000" />
+        <input id="telephone" [ngClass]="onSetInputClass('telephone', ['telephone-mask'])" type="tel" formControlName="telephone" placeholder="(00) 0000 0000" mask="(00) 0000 00000" />
 
         <div [ngClass]="onSetTelephoneErrorClass()">Telephone is required</div>
       </div>
