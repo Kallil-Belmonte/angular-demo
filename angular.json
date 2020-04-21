@@ -33,7 +33,6 @@
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/popper.js/dist/umd/popper.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "./node_modules/jquery-mask-plugin/dist/jquery.mask.min.js"
             ],
             "es5BrowserSupport": true
           },
@@ -91,10 +90,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [
-              "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/jquery-mask-plugin/dist/jquery.mask.min.js",
-            ],
+            "scripts": [],
             "assets": [
               "src/favicon.ico",
               "src/assets"
