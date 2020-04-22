@@ -3,6 +3,8 @@ import { Router, CanActivate } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
+import { clearStorageData } from 'app/core/ngrx/reducers/store';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,12 +19,7 @@ export class AuthGuardService implements CanActivate {
     if (authToken && !expiredSession) {
       return true;
     } else {
-      // Remove token
-      sessionStorage.removeItem('authTokenAngularDemo');
-      localStorage.removeItem('authTokenAngularDemo');
-      localStorage.removeItem('expirationDateAngularDemo');
-
-      // Redirect
+      clearStorageData();
       this.router.navigate(['/login']);
     }
   }

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { environment, endpoints } from 'environments/environment';
-import { Reducers } from 'app/core/ngrx/reducers/config.reducers';
+import { clearStorageData } from 'app/core/ngrx/reducers/store';
 import { LoginModel } from 'app/auth/_models/login.model';
 import { RegisterModel } from 'app/auth/_models/register.model';
 
@@ -50,15 +50,7 @@ export class AuthService {
 
   // LOG OUT
   logOut(): void {
-    // Remove token
-    sessionStorage.removeItem('authTokenAngularDemo');
-    localStorage.removeItem('authTokenAngularDemo');
-    localStorage.removeItem('expirationDateAngularDemo');
-
-    // Remove reducers
-    Object.keys(Reducers).forEach(reducerKey => localStorage.removeItem(reducerKey));
-
-    // Redirect
+    clearStorageData();
     this.router.navigate(['/login']);
   }
 

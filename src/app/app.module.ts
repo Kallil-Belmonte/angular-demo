@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule, MetaReducer } from '@ngrx/store';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { Reducers, localStorageSyncReducer } from 'app/core/ngrx/reducers/config.reducers';
+import { Reducers, localStorageSyncReducer } from 'app/core/ngrx/reducers/store';
 import { AppComponent } from 'app/app.component';
 import { CoreModule } from 'app/core/core.module';
 import { AuthModule } from 'app/auth/auth.module';
