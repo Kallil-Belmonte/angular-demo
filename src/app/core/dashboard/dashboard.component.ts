@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { UserModel } from 'app/account/_models/user.model';
+import { UserModel } from 'app/pages/account/_models/user.model';
 
 type accountState = {
   userData: UserModel,

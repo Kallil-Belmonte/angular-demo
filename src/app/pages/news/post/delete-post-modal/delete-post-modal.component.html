@@ -1,0 +1,23 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div [ngClass]="{ 'modal fade': true, 'show d-block': open }" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="deletePostLabel" [attr.aria-hidden]="open ? false : true" (click)="onClickOutModal($event)">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deletePostLabel">Delete confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onCloseModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-center mb-0">Are you sure you want to delete this post?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeletePost()">Confirm</button>
+        <button type="button" class="btn btn-light" (click)="onCloseModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop fade show" *ngIf="open"></div>

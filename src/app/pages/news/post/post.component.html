@@ -1,0 +1,13 @@
+<main>
+  <app-loader *ngIf="isLoading"></app-loader>
+
+  <div class="container">
+    <div class="row">
+      <div class="offset-md-2 col-md-8">
+        <app-post-body [data]="currentPost" (openModal)="onToggleModal()"></app-post-body>
+      </div>
+    </div>
+  </div>
+
+  <app-delete-post-modal [open]="isModalOpen" (closeModal)="onToggleModal()"></app-delete-post-modal>
+</main>

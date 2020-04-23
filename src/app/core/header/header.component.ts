@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { faHome, faNewspaper, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 
-import { AuthService } from 'app/auth/auth.service';
+import { AuthService } from 'app/pages/auth/auth.service';
 
 @Component({
   selector: 'app-header',

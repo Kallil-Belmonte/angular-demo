@@ -7,12 +7,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Reducers, localStorageSyncReducer } from 'app/core/ngrx/reducers/store';
 import { AppComponent } from 'app/app.component';
 import { CoreModule } from 'app/core/core.module';
-import { AuthModule } from 'app/auth/auth.module';
-import { HomeModule } from 'app/home/home.module';
-import { NewsModule } from 'app/news/news.module';
-import { ContactModule } from 'app/contact/contact.module';
-import { AccountModule } from 'app/account/account.module';
-import { NotFoundComponent } from 'app/not-found/not-found.component';
+import { AuthModule } from 'app/pages/auth/auth.module';
+import { HomeModule } from 'app/pages/home/home.module';
+import { NewsModule } from 'app/pages/news/news.module';
+import { ContactModule } from 'app/pages/contact/contact.module';
+import { AccountModule } from 'app/pages/account/account.module';
+import { NotFoundComponent } from 'app/pages/not-found/not-found.component';
 
 // ngrx-store-localstorage
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];

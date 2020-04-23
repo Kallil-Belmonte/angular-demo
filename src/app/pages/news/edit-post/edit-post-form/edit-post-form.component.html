@@ -1,0 +1,24 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<form class="edit-post-form" [formGroup]="editPostForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input id="title" [ngClass]="onSetInputClass('title')" type="text" formControlName="title" />
+
+    <ng-template [ngIf]="onShowFieldErrors('title')">
+      <div [ngClass]="onSetTitleErrorClass()">Title is required</div>
+    </ng-template>
+  </div>
+
+  <div class="form-group">
+    <label for="body">Body</label>
+    <textarea id="body" [ngClass]="onSetInputClass('body')" formControlName="body" rows="6"></textarea>
+
+    <ng-template [ngIf]="onShowFieldErrors('body')">
+      <div [ngClass]="onSetBodyErrorClass()">Title is required</div>
+    </ng-template>
+  </div>
+
+  <button class="btn btn-primary mr-2" type="submit" [disabled]="!editPostForm.valid || editPostForm.pristine">Edit</button>
+  <button class="btn btn-light" type="button" [disabled]="editPostForm.pristine" (click)="editPostForm.reset()">Reset form</button>
+</form>

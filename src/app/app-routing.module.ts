@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from 'app/core/dashboard/dashboard.component';
-import { AuthGuardService } from 'app/auth/auth-guard.service';
-import { HomeComponent } from 'app/home/home.component';
-import { BlogComponent } from 'app/news/blog/blog.component';
-import { PostComponent } from 'app/news/post/post.component';
-import { EditPostComponent } from 'app/news/edit-post/edit-post.component';
-import { ContactComponent } from 'app/contact/contact.component';
-import { AccountComponent } from 'app/account/account.component';
-import { LoginComponent } from 'app/auth/login/login.component';
-import { RegisterComponent } from 'app/auth/register/register.component';
-import { NotFoundComponent } from 'app/not-found/not-found.component';
+import { AuthGuardService } from 'app/pages/auth/auth-guard.service';
+import { HomeComponent } from 'app/pages/home/home.component';
+import { BlogComponent } from 'app/pages/news/blog/blog.component';
+import { PostComponent } from 'app/pages/news/post/post.component';
+import { EditPostComponent } from 'app/pages/news/edit-post/edit-post.component';
+import { ContactComponent } from 'app/pages/contact/contact.component';
+import { AccountComponent } from 'app/pages/account/account.component';
+import { LoginComponent } from 'app/pages/auth/login/login.component';
+import { RegisterComponent } from 'app/pages/auth/register/register.component';
+import { NotFoundComponent } from 'app/pages/not-found/not-found.component';
 
 const routes: Routes = [
   {

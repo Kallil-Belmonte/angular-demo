@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import ACTION_TYPES from 'app/core/ngrx/actions/action-types';
-import { PostModel } from 'app/news/_models/post.model';
+import { PostModel } from 'app/pages/news/_models/post.model';
 
 const { SET_CURRENT_POST, EDIT_CURRENT_POST } = ACTION_TYPES;
 

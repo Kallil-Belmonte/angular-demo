@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import ACTION_TYPES from 'app/core/ngrx/actions/action-types';
-import { UserModel } from 'app/account/_models/user.model';
+import { UserModel } from 'app/pages/account/_models/user.model';
 
 const { SET_USER_DATA, EDIT_USER_DATA } = ACTION_TYPES;
 
