@@ -40,7 +40,7 @@ export class NewsService {
   }
 
   // EDIT CURRENT POST
-  editCurrentPost(id: number, payload: { title: string, body: string }): Observable<PostModel> {
+  EditPost(id: number, payload: { title: string, body: string }): Observable<PostModel> {
     return this.httpClient.put<PostModel>(environment.jsonPlaceholder + endpoints.blog.posts + id, payload);
   }
 

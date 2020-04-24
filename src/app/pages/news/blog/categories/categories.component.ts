@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 import { CategoryModel } from 'app/pages/news/_models/category.model';
 
@@ -9,8 +9,9 @@ import { CategoryModel } from 'app/pages/news/_models/category.model';
 })
 export class CategoriesComponent implements OnInit {
 
-  @Input() data: CategoryModel[];
-  @Output() selectCategory = new EventEmitter();
+  activeCategory: string;
+  @Input() categories: CategoryModel[];
+  @Output() onSelectCategory = new EventEmitter();
 
   constructor() { }
 
@@ -22,9 +23,15 @@ export class CategoriesComponent implements OnInit {
   // GENERAL METHODS
   //==============================
 
-  // ON CLICK CATEGORY
-  onClickCategory(): void {
-    this.selectCategory.emit();
+  // IS CATEGORY ACTIVE
+  isCategoryActive(category: string): boolean {
+    return this.activeCategory === category;
+  }
+
+  // SELECT CATEGORY
+  selectCategory(category: string): void {
+    this.activeCategory = category === this.activeCategory ? undefined : category;
+    this.onSelectCategory.emit(category);
   }
 
 }

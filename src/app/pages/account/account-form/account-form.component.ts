@@ -8,6 +8,8 @@ import * as AccountActions from 'app/core/ngrx/actions/account.actions';
 import * as Helpers from 'app/shared/helpers';
 import { UserModel } from 'app/pages/account/_models/user.model';
 
+const { EditUserData } = AccountActions;
+
 type accountState = {
   userData: UserModel,
 };
@@ -133,7 +135,7 @@ export class AccountFormComponent implements OnInit {
       this.userData = this.accountForm.value;
 
       // Set data to reducer
-      this.store.dispatch(new AccountActions.EditUserData(this.userData));
+      this.store.dispatch(new EditUserData(this.userData));
 
       // Set success message
       this.accountFormFeedback.messages.success.push('Account saved successfully.');

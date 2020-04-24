@@ -1,12 +1,12 @@
 <div class="post-item">
-  <img class="img-fluid" src="{{ data.image }}" alt="Capa" *ngIf="data.image; else imagePlaceholder" />
+  <img class="img-fluid" src="{{ post.image }}" alt="Capa" *ngIf="post.image; else imagePlaceholder" />
   <ng-template #imagePlaceholder>
     <div class="img-placeholder">Não há imagem para esse post</div>
   </ng-template>
 
   <article>
-    <h3 class="title">{{ data.title }}</h3>
-    <p class="mb-0" *ngIf="data.body">{{ data.body | limitWords: 8 }}</p>
-    <a class="btn btn-primary mt-3" [routerLink]="['/post/', data.id]">Read more</a>
+    <h3 class="title">{{ post.title }}</h3>
+    <p class="mb-0" *ngIf="post.body">{{ post.body | limitWords: 8 }}</p>
+    <a class="btn btn-primary mt-3" [routerLink]="['/post/', post.id]">Read more</a>
   </article>
 </div>

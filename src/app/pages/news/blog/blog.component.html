@@ -4,16 +4,22 @@
   <div class="container">
     <app-page-header [fontAwesomeIcon]="faNewspaper">Blog</app-page-header>
 
-    <app-posts-filter (filterPosts)="onFilterPosts()"></app-posts-filter>
+    <app-posts-per-page [postsPerPage]="postsPerPage" (onChange)="setPaginationSettings(posts, $event)"></app-posts-per-page>
 
     <div class="row">
       <div class="col-md-9">
-        <app-posts [data]="pagePosts" [page]="currentPage"></app-posts>
+        <app-posts [pages]="pages" [currentPage]="currentPage"></app-posts>
 
-        <app-pagination [firstItem]="firstPaginationItem" [totalItems]="pagePosts.length" (paginate)="onPaginate()"></app-pagination>
+        <app-blog-pagination
+          [pages]="pagesKeys"
+          [firstItem]="firstPaginationItem"
+          [maxItem]="maxPaginationItem"
+          [currentPage]="currentPage"
+          (onPaginate)="onPaginate($event)">
+        </app-blog-pagination>
       </div>
       <div class="col-md-3">
-        <app-categories [data]="categories" (selectCategory)="onSelectCategory()"></app-categories>
+        <app-categories [categories]="categories" (onSelectCategory)="onSelectCategory($event)"></app-categories>
       </div>
     </div>
   </div>

@@ -1,6 +1,15 @@
 <aside>
   <div class="list-group">
-    <button class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" type="button" data-name="{{ category.name }}" (click)="onClickCategory()" *ngFor="let category of data">
+    <button
+      [ngClass]="{
+        'list-group-item list-group-item-action d-flex justify-content-between align-items-center': true,
+        'active': isCategoryActive(category.name)
+      }"
+      type="button"
+      data-name="{{ category.name }}"
+      (click)="selectCategory(category.name)"
+      *ngFor="let category of categories"
+    >
       {{ category.name }}
       <span class="badge badge-primary badge-pill">{{ category.posts }}</span>
     </button>

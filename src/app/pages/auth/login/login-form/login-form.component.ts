@@ -9,6 +9,8 @@ import * as Helpers from 'app/shared/helpers';
 import { UserModel } from 'app/pages/account/_models/user.model';
 import { AuthService } from 'app/pages/auth/auth.service';
 
+const { SetUserData } = AccountActions;
+
 type accountState = {
   userData: UserModel,
 };
@@ -132,7 +134,7 @@ export class LoginFormComponent implements OnInit {
           };
 
           // Set data to reducer
-          this.store.dispatch(new AccountActions.SetUserData(this.userData));
+          this.store.dispatch(new SetUserData(this.userData));
 
           // Deactivate loader
           this.isLoading = false;

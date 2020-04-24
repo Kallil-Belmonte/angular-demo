@@ -9,7 +9,7 @@ import { PostModel } from 'app/pages/news/_models/post.model';
 })
 export class PostItemComponent implements OnInit {
 
-  @Input() data: PostModel;
+  @Input() post: PostModel;
 
   constructor() { }
 

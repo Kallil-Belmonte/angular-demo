@@ -8,6 +8,8 @@ import { ThemeFunctions } from 'app/shared/helpers/theme-functions';
 import { PostModel } from 'app/pages/news/_models/post.model';
 import { NewsService } from 'app/pages/news/news.service';
 
+const { SetCurrentPost } = PostActions;
+
 type postState = {
   currentPost: PostModel,
 };
@@ -41,7 +43,7 @@ export class PostComponent implements OnInit {
     this.newsService.getCurrentPost(id).subscribe(
       data => {
         // Set data to reducer
-        this.store.dispatch(new PostActions.SetCurrentPost(data));
+        this.store.dispatch(new SetCurrentPost(data));
 
         // Get Current Post from reducer
         this.store.select('currentPost').subscribe(

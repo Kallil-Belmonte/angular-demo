@@ -1,0 +1,19 @@
+<nav class="pagination d-inline-block" aria-label="Blog Pagination">
+  <ul class="pagination mb-0">
+    <li class="page-item" *ngIf="firstItem > 1">
+      <button class="page-link" type="button" (click)="onPaginate.emit('previous')">Previous</button>
+    </li>
+
+    <li
+      *ngFor="let page of pageItems"
+      [ngClass]="{ 'page-item': true, 'active': isItemActive(page) }"
+      (click)="isItemActive(page) ? undefined : onPaginate.emit(page)"
+    >
+      <button class="page-link" type="button">{{ page }}</button>
+    </li>
+
+    <li class="page-item" *ngIf="endPages < pages.length">
+      <button class="page-link" type="button" (click)="onPaginate.emit('next')">Next</button>
+    </li>
+  </ul>
+</nav>

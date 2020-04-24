@@ -12,7 +12,6 @@ export class SetCurrentPost implements Action {
   constructor(public payload: PostModel) { }
 }
 
-
 // EDIT CURRENT POST
 export class EditCurrentPost implements Action {
   readonly type = EDIT_CURRENT_POST;

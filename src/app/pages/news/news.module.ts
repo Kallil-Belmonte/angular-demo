@@ -6,9 +6,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { BlogComponent } from 'app/pages/news/blog/blog.component';
-import { PostsFilterComponent } from 'app/pages/news/blog/posts-filter/posts-filter.component';
+import { PostsPerPageComponent } from 'app/pages/news/blog/posts-per-page/posts-per-page.component';
 import { PostsComponent } from 'app/pages/news/blog/posts/posts.component';
-import { PaginationComponent } from 'app/pages/news/blog/pagination/pagination.component';
+import { BlogPaginationComponent } from 'app/pages/news/blog/blog-pagination/blog-pagination.component';
 import { CategoriesComponent } from 'app/pages/news/blog/categories/categories.component';
 import { PostComponent } from 'app/pages/news/post/post.component';
 import { PostBodyComponent } from 'app/pages/news/post/post-body/post-body.component';
@@ -25,9 +25,9 @@ import { EditPostFormComponent } from 'app/pages/news/edit-post/edit-post-form/e
   ],
   declarations: [
     BlogComponent,
-    PostsFilterComponent,
+    PostsPerPageComponent,
     PostsComponent,
-    PaginationComponent,
+    BlogPaginationComponent,
     CategoriesComponent,
     PostComponent,
     PostBodyComponent,

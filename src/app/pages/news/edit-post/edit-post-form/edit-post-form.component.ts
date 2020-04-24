@@ -9,6 +9,8 @@ import * as Helpers from 'app/shared/helpers';
 import { PostModel } from 'app/pages/news/_models/post.model';
 import { NewsService } from 'app/pages/news/news.service';
 
+const { EditCurrentPost } = PostActions;
+
 type postState = {
   currentPost: PostModel
 };
@@ -113,7 +115,7 @@ export class EditPostFormComponent implements OnInit {
     // Activate loader
     this.isLoading = true;
 
-    this.newsService.editCurrentPost(this.currentPost.id, this.editPostForm.value).subscribe(
+    this.newsService.EditPost(this.currentPost.id, this.editPostForm.value).subscribe(
       () => {
         // Update Current Post
         this.currentPost = {
@@ -124,7 +126,7 @@ export class EditPostFormComponent implements OnInit {
         }
 
         // Set data to reducer
-        this.store.dispatch(new PostActions.EditCurrentPost(this.currentPost));
+        this.store.dispatch(new EditCurrentPost(this.currentPost));
 
         // Deactivate loader
         this.isLoading = false;

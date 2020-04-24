@@ -12,7 +12,6 @@ export class SetUserData implements Action {
   constructor(public payload: UserModel) { }
 }
 
-
 // EDIT USER DATA
 export class EditUserData implements Action {
   readonly type = EDIT_USER_DATA;
