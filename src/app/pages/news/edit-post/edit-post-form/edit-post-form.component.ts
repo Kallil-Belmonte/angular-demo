@@ -131,7 +131,7 @@ export class EditPostFormComponent implements OnInit {
         this.isLoading = false;
 
         // Redirect
-        this.router.navigate(['/post/' + this.currentPost.id]);
+        this.router.navigate([`/post/${this.currentPost.id}`]);
       },
       error => {
         console.error(error);

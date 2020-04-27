@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 
 import { environment, endpoints } from 'environments/environment';
 
+const { mocky } = environment;
+const { contactForm } = endpoints;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +22,7 @@ export class ContactService {
 
   // GET FAVORITE COLORS
   getFavoriteColors(): Observable<string[]> {
-    return this.httpClient.get<string[]>(environment.mocky + endpoints.contactForm.favoriteColors);
+    return this.httpClient.get<string[]>(`${mocky}${contactForm.favoriteColors}`);
   }
 
 }

@@ -9,6 +9,9 @@ import { clearStorageData } from 'app/core/ngrx/reducers/store';
 import { LoginModel } from 'app/pages/auth/_models/login.model';
 import { RegisterModel } from 'app/pages/auth/_models/register.model';
 
+const { mocky } = environment;
+const { auth } = endpoints;
+
 type authPayload = {
   email: string,
   password: string,
@@ -30,7 +33,7 @@ export class AuthService {
 
 	// LOG IN
 	logIn(payload: authPayload): Observable<LoginModel> {
-		return this.httpClient.post<LoginModel>(environment.mocky + endpoints.auth.login, payload);
+		return this.httpClient.post<LoginModel>(`${mocky}${auth.login}`, payload);
 	}
 
 
@@ -40,7 +43,7 @@ export class AuthService {
 
   // REGISTER
   register(payload: authPayload): Observable<RegisterModel> {
-    return this.httpClient.post<RegisterModel>(environment.mocky + endpoints.auth.register, payload);
+    return this.httpClient.post<RegisterModel>(`${mocky}${auth.register}`, payload);
   }
 
 

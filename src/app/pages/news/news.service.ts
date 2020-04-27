@@ -7,6 +7,9 @@ import { environment, endpoints } from 'environments/environment';
 import { PostModel } from 'app/pages/news/_models/post.model';
 import { CategoryModel } from 'app/pages/news/_models/category.model';
 
+const { jsonPlaceholder, mocky } = environment;
+const { blog } = endpoints;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,12 +24,12 @@ export class NewsService {
 
   // GET POSTS
   getPosts(): Observable<PostModel[]> {
-    return this.httpClient.get<PostModel[]>(environment.jsonPlaceholder + endpoints.blog.posts);
+    return this.httpClient.get<PostModel[]>(`${jsonPlaceholder}${blog.posts}`);
   }
 
   // GET CATEGORIES
   getCategories(): Observable<CategoryModel[]> {
-    return this.httpClient.get<CategoryModel[]>(environment.mocky + endpoints.blog.categories);
+    return this.httpClient.get<CategoryModel[]>(`${mocky}${blog.categories}`);
   }
 
 
@@ -36,17 +39,17 @@ export class NewsService {
 
   // GET CURRENT POST
   getCurrentPost(id: string): Observable<PostModel> {
-    return this.httpClient.get<PostModel>(environment.jsonPlaceholder + endpoints.blog.posts + id);
+    return this.httpClient.get<PostModel>(`${jsonPlaceholder}${blog.posts}${id}`);
   }
 
   // EDIT CURRENT POST
   EditPost(id: number, payload: { title: string, body: string }): Observable<PostModel> {
-    return this.httpClient.put<PostModel>(environment.jsonPlaceholder + endpoints.blog.posts + id, payload);
+    return this.httpClient.put<PostModel>(`${jsonPlaceholder}${blog.posts}${id}`, payload);
   }
 
   // DELETE CURRENT POST
   deleteCurrentPost(id: string): Observable<PostModel> {
-    return this.httpClient.delete<PostModel>(environment.jsonPlaceholder + endpoints.blog.posts + id);
+    return this.httpClient.delete<PostModel>(`${jsonPlaceholder}${blog.posts}${id}`);
   }
 
 }
