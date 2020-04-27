@@ -9,17 +9,17 @@ import * as Helpers from 'app/shared/helpers';
 import { UserModel } from 'app/pages/account/_models/user.model';
 import { AuthService } from 'app/pages/auth/auth.service';
 
+const { required, email, minLength } = Validators;
 const { SetUserData } = AccountActions;
+const { setFieldClassName, showFieldErrors, setErrorClassName } = Helpers;
 
 type accountState = {
   userData: UserModel,
 };
 
-type loginFormFeedback = {
-  fieldsErrors: {
-    email: string[],
-    password: string[],
-  }
+type loginFormErrors = {
+  email: string[],
+  password: string[],
 };
 
 @Component({
@@ -32,11 +32,9 @@ export class LoginFormComponent implements OnInit {
   isLoading: boolean = false;
   userData: UserModel;
   loginForm: FormGroup;
-  loginFormFeedback: loginFormFeedback = {
-    fieldsErrors: {
-      email:    [],
-      password: [],
-    },
+  loginFormErrors: loginFormErrors = {
+    email:    [],
+    password: [],
   };
 
   constructor(private formBuilder: FormBuilder,
@@ -57,8 +55,8 @@ export class LoginFormComponent implements OnInit {
   // BUILD LOGIN FORM
   buildLoginForm(): void {
     this.loginForm = this.formBuilder.group({
-      email:      ['', [Validators.required, Validators.email]],
-      password:   ['', [Validators.required, Validators.minLength(3)]],
+      email:      ['', [required, email]],
+      password:   ['', [required, minLength(3)]],
       keepLogged: [false],
     });
   }
@@ -68,57 +66,52 @@ export class LoginFormComponent implements OnInit {
 
   // On Set Input Class
   onSetInputClass(formControlName: string, classNames?: string[]): string[] {
-    return Helpers.setFieldClassName(this.loginForm, formControlName, classNames);
+    return setFieldClassName(this.loginForm, formControlName, classNames);
   }
 
   // On Show Field Errors
   onShowFieldErrors(formControlName: string): boolean {
-    return Helpers.showFieldErrors(this.loginForm, formControlName);
+    return showFieldErrors(this.loginForm, formControlName);
   }
 
   // On Set Email First Error Class
   onSetEmailFirstErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.loginForm.get('email').errors.required);
+    return setErrorClassName(this.loginForm.get('email').errors.required);
   }
 
   // On Set Email Second Error Class
   onSetEmailSecondErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.loginForm.get('email').errors.email);
+    return setErrorClassName(this.loginForm.get('email').errors.email);
   }
 
   // On Set Password First Error Class
   onSetPasswordFirstErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.loginForm.get('password').errors.required);
+    return setErrorClassName(this.loginForm.get('password').errors.required);
   }
 
   // On Set Password Second Error Class
   onSetPasswordSecondErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.loginForm.get('password').errors.email);
+    return setErrorClassName(this.loginForm.get('password').errors.email);
   }
 
   // On Submit
   onSubmit(): void {
-    // Activate loader
     this.isLoading = true;
-
-    // Clear messages
-    this.loginFormFeedback.fieldsErrors.email = [];
-    this.loginFormFeedback.fieldsErrors.password = [];
+    this.loginFormErrors.email = [];
+    this.loginFormErrors.password = [];
 
     this.authService.logIn(this.loginForm.value).subscribe(
       data => {
         if (this.loginForm.get('email').value === 'demo@demo.com') {
 
           // Error simulation
-          this.loginFormFeedback.fieldsErrors.email.push('This e-mail does not exists.');
-          this.loginFormFeedback.fieldsErrors.password.push('The password is incorrect.');
+          this.loginFormErrors.email.push('This e-mail does not exists.');
+          this.loginFormErrors.password.push('The password is incorrect.');
 
-          // Deactivate loader
           this.isLoading = false;
 
         } else {
 
-          // Store session data
           if (this.loginForm.get('keepLogged').value) {
             localStorage.setItem('authTokenAngularDemo', data.idToken);
             localStorage.setItem('expirationDateAngularDemo', new Date(new Date().getTime() + parseInt(data.expiresIn) * 1000).toISOString());
@@ -126,28 +119,19 @@ export class LoginFormComponent implements OnInit {
             sessionStorage.setItem('authTokenAngularDemo', data.idToken);
           }
 
-          // Set User Data
           this.userData = {
             firstName: data.firstName,
             lastName: data.lastName,
             email: data.email,
           };
-
-          // Set data to reducer
           this.store.dispatch(new SetUserData(this.userData));
-
-          // Deactivate loader
           this.isLoading = false;
-
-          // Redirect
           this.router.navigate(['/']);
 
         }
       },
       error => {
         console.error(error);
-
-        // Deactivate loader
         this.isLoading = false;
       }
     );

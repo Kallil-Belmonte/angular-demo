@@ -39,7 +39,6 @@ export class PostComponent implements OnInit {
   getCurrentPost(id: string): void {
     this.newsService.getCurrentPost(id).subscribe(
       data => {
-        // Set data to reducer
         this.store.dispatch(new SetCurrentPost(data));
 
         // Get Current Post from reducer
@@ -49,13 +48,10 @@ export class PostComponent implements OnInit {
           }
         );
 
-        // Deactivate loader
         this.isLoading = false;
       },
       error => {
         console.error(error);
-
-        // Deactivate loader
         this.isLoading = false;
       }
     );

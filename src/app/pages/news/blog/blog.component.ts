@@ -74,7 +74,6 @@ export class BlogComponent implements OnInit {
    )
    .subscribe(
      ([categories, posts]) => {
-       // Set data to reducer
        this.store.dispatch(new SetCategories(categories));
        this.store.dispatch(new SetPosts(posts));
 

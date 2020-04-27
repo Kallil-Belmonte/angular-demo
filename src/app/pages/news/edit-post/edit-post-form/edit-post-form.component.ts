@@ -125,7 +125,6 @@ export class EditPostFormComponent implements OnInit {
           body:  this.editPostForm.value.body
         }
 
-        // Set data to reducer
         this.store.dispatch(new EditCurrentPost(this.currentPost));
 
         // Deactivate loader

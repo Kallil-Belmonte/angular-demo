@@ -9,17 +9,18 @@ import * as Helpers from 'app/shared/helpers';
 import { AppState } from 'app/core/ngrx/reducers/store';
 import { UserModel } from 'app/pages/account/_models/user.model';
 
+const { required, minLength, email } = Validators;
 const { EditUserData } = AccountActions;
+const { setFieldClassName, showFieldErrors, setErrorClassName } = Helpers;
 
-type accountFormFeedback = {
-  messages: {
-    success: string[],
-    error: string[],
-  },
-  fieldsErrors: {
-    email: string[],
-  }
+type accountFormMessages = {
+  success: string[],
+  error: string[],
 };
+
+type accountFormErrors = {
+  email: string[],
+}
 
 @Component({
   selector: 'app-account-form',
@@ -31,14 +32,12 @@ export class AccountFormComponent implements OnInit {
   faUser = faUser;
   userData: UserModel;
   accountForm: FormGroup;
-  accountFormFeedback: accountFormFeedback = {
-    messages: {
-      success: [],
-      error: [],
-    },
-    fieldsErrors: {
-      email: [],
-    },
+  accountFormMessages: accountFormMessages = {
+    success: [],
+    error: [],
+  };
+  accountFormErrors: accountFormErrors = {
+    email: [],
   };
 
   constructor(private formBuilder: FormBuilder,
@@ -57,9 +56,9 @@ export class AccountFormComponent implements OnInit {
   // BUILD ACCOUNT FORM
   buildAccountForm(): void {
     this.accountForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(3)]],
-      lastName:  ['', [Validators.required]],
-      email:     ['', [Validators.required, Validators.email]],
+      firstName: ['', [required, minLength(3)]],
+      lastName:  ['', [required]],
+      email:     ['', [required, email]],
     });
   }
 
@@ -79,63 +78,56 @@ export class AccountFormComponent implements OnInit {
 
   // On Set Input Class
   onSetInputClass(formControlName: string, classNames?: string[]): string[] {
-    return Helpers.setFieldClassName(this.accountForm, formControlName, classNames);
+    return setFieldClassName(this.accountForm, formControlName, classNames);
   }
 
   // On Show Field Errors
   onShowFieldErrors(formControlName: string): boolean {
-    return Helpers.showFieldErrors(this.accountForm, formControlName);
+    return showFieldErrors(this.accountForm, formControlName);
   }
 
   // On Set First Name First Error Class
   onSetFirstNameFirstErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.accountForm.get('firstName').errors.required);
+    return setErrorClassName(this.accountForm.get('firstName').errors.required);
   }
 
   // On Set First Name Second Error Class
   onSetFirstNameSecondErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.accountForm.get('firstName').errors.minlength);
+    return setErrorClassName(this.accountForm.get('firstName').errors.minlength);
   }
 
   // On Set Last Name Error Class
   onSetLastNameErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.accountForm.get('lastName').touched && this.accountForm.get('lastName').invalid);
+    return setErrorClassName(this.accountForm.get('lastName').touched && this.accountForm.get('lastName').invalid);
   }
 
   // On Set Email First Error Class
   onSetEmailFirstErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.accountForm.get('email').errors.required);
+    return setErrorClassName(this.accountForm.get('email').errors.required);
   }
 
   // On Set Email Second Error Class
   onSetEmailSecondErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.accountForm.get('email').errors.email);
+    return setErrorClassName(this.accountForm.get('email').errors.email);
   }
 
   // On Submit
   onSubmit(): void {
-    // Clear messages
-    this.accountFormFeedback.messages.success = [];
-    this.accountFormFeedback.messages.error = [];
-    this.accountFormFeedback.fieldsErrors.email = [];
+    const { value } = this.accountForm;
+    this.accountFormMessages.success = [];
+    this.accountFormMessages.error = [];
+    this.accountFormErrors.email = [];
 
-    if (this.accountForm.value.email === 'john.doe@email.com') {
-      // Set field error messages
-      this.accountFormFeedback.fieldsErrors.email.push('This e-mail already exists.');
+    if (value.email === 'john.doe@email.com') {
+      this.accountFormErrors.email.push('This e-mail already exists.');
     }
-    else if (this.accountForm.value.email === 'demo@demo.com') {
-      // Set error messages
-      this.accountFormFeedback.messages.error.push('An error occurred, please try again later.');
+    else if (value.email === 'demo@demo.com') {
+      this.accountFormMessages.error.push('An error occurred, please try again later.');
     }
     else {
-      // Update User Data
       this.userData = this.accountForm.value;
-
-      // Set data to reducer
       this.store.dispatch(new EditUserData(this.userData));
-
-      // Set success message
-      this.accountFormFeedback.messages.success.push('Account saved successfully.');
+      this.accountFormMessages.success.push('Account saved successfully.');
     }
   }
 

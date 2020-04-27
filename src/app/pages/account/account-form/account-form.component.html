@@ -1,13 +1,13 @@
 <div class="row">
   <div class="offset-md-3 col-md-6">
-    <ng-template [ngIf]="accountFormFeedback.messages.success.length">
-      <app-alert-dismissible status="success" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormFeedback.messages.success, i)" *ngFor="let successMessage of accountFormFeedback.messages.success; let i = index">
+    <ng-template [ngIf]="accountFormMessages.success.length">
+      <app-alert-dismissible status="success" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormMessages.success, i)" *ngFor="let successMessage of accountFormMessages.success; let i = index">
         {{ successMessage }}
       </app-alert-dismissible>
     </ng-template>
 
-    <ng-template [ngIf]="accountFormFeedback.messages.error.length">
-      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormFeedback.messages.error, i)" *ngFor="let errorMessage of accountFormFeedback.messages.error; let i = index">
+    <ng-template [ngIf]="accountFormMessages.error.length">
+      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormMessages.error, i)" *ngFor="let errorMessage of accountFormMessages.error; let i = index">
         {{ errorMessage }}
       </app-alert-dismissible>
     </ng-template>
@@ -39,8 +39,8 @@
           <div [ngClass]="onSetEmailSecondErrorClass()">Invalid e-mail</div>
         </ng-template>
 
-        <ng-template [ngIf]="accountFormFeedback.fieldsErrors.email.length">
-          <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormFeedback.fieldsErrors.email, i)" *ngFor="let errorMessage of accountFormFeedback.fieldsErrors.email; let i = index">
+        <ng-template [ngIf]="accountFormErrors.email.length">
+          <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormErrors.email, i)" *ngFor="let errorMessage of accountFormErrors.email; let i = index">
             {{ errorMessage }}
           </app-alert-dismissible>
         </ng-template>

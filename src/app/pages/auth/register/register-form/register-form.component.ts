@@ -9,17 +9,17 @@ import * as Helpers from 'app/shared/helpers';
 import { UserModel } from 'app/pages/account/_models/user.model';
 import { AuthService } from 'app/pages/auth/auth.service';
 
+const { required, email, minLength } = Validators;
 const { SetUserData } = AccountActions;
+const { setFieldClassName, showFieldErrors, setErrorClassName } = Helpers;
 
 type accountState = {
   userData: UserModel
 };
 
-type registerFormFeedback = {
-  fieldsErrors: {
-    email: string[],
-    password: string[]
-  }
+type registerFormErrors = {
+  email: string[],
+  password: string[]
 };
 
 @Component({
@@ -32,11 +32,9 @@ export class RegisterFormComponent implements OnInit {
   isLoading: boolean = false;
   userData: UserModel;
   registerForm: FormGroup;
-  registerFormFeedback: registerFormFeedback = {
-    fieldsErrors: {
-      email:    [],
-      password: []
-    }
+  registerFormErrors: registerFormErrors = {
+    email:    [],
+    password: []
   };
 
   constructor(private formBuilder: FormBuilder,
@@ -57,10 +55,10 @@ export class RegisterFormComponent implements OnInit {
   // BUILD REGISTER FORM
   buildRegisterForm(): void {
     this.registerForm = this.formBuilder.group({
-      firstName:  ['', [Validators.required]],
-      lastName:   ['', [Validators.required]],
-      email:      ['', [Validators.required, Validators.email]],
-      password:   ['', [Validators.required, Validators.minLength(3)]]
+      firstName:  ['', [required]],
+      lastName:   ['', [required]],
+      email:      ['', [required, email]],
+      password:   ['', [required, minLength(3)]]
     });
   }
 
@@ -69,91 +67,77 @@ export class RegisterFormComponent implements OnInit {
 
   // On Set Input Class
   onSetInputClass(formControlName: string, classNames?: string[]): string[] {
-    return Helpers.setFieldClassName(this.registerForm, formControlName, classNames);
+    return setFieldClassName(this.registerForm, formControlName, classNames);
   }
 
   // On Show Field Errors
   onShowFieldErrors(formControlName: string): boolean {
-    return Helpers.showFieldErrors(this.registerForm, formControlName);
+    return showFieldErrors(this.registerForm, formControlName);
   }
 
   // On Set First Name Error Class
   onSetFirstNameErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.registerForm.get('firstName').errors.required);
+    return setErrorClassName(this.registerForm.get('firstName').errors.required);
   }
 
   // On Set Last Name Error Class
   onSetLastNameErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.registerForm.get('lastName').errors.required);
+    return setErrorClassName(this.registerForm.get('lastName').errors.required);
   }
 
   // On Set Email First Error Class
   onSetEmailFirstErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.registerForm.get('email').errors.required);
+    return setErrorClassName(this.registerForm.get('email').errors.required);
   }
 
   // On Set Email Second Error Class
   onSetEmailSecondErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.registerForm.get('email').errors.email);
+    return setErrorClassName(this.registerForm.get('email').errors.email);
   }
 
   // On Set Password First Error Class
   onSetPasswordFirstErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.registerForm.get('password').errors.required);
+    return setErrorClassName(this.registerForm.get('password').errors.required);
   }
 
   // On Set Password Second Error Class
   onSetPasswordSecondErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.registerForm.get('password').errors.minlength);
+    return setErrorClassName(this.registerForm.get('password').errors.minlength);
   }
 
   // On Submit
   onSubmit(): void {
-    // Activate loader
     this.isLoading = true;
-
-    // Clear messages
-    this.registerFormFeedback.fieldsErrors.email = [];
-    this.registerFormFeedback.fieldsErrors.password = [];
+    this.registerFormErrors.email = [];
+    this.registerFormErrors.password = [];
 
     this.authService.register(this.registerForm.value).subscribe(
       data => {
         if (this.registerForm.get('email').value === 'demo@demo.com') {
 
           // Error simulation
-          this.registerFormFeedback.fieldsErrors.email.push('This e-mail already exists.');
-          this.registerFormFeedback.fieldsErrors.password.push('Your password is too weak.');
+          this.registerFormErrors.email.push('This e-mail already exists.');
+          this.registerFormErrors.password.push('Your password is too weak.');
 
-          // Deactivate loader
           this.isLoading = false;
 
         } else {
 
-          // Store session data
           sessionStorage.setItem('authTokenAngularDemo', data.token);
 
-          // Set User Data
           this.userData = {
             firstName: data.firstName,
             lastName: data.lastName,
             email: data.email
           };
-
-          // Set data to reducer
           this.store.dispatch(new SetUserData(this.userData));
-
-          // Deactivate loader
           this.isLoading = false;
-
-          // Redirect
           this.router.navigate(['/']);
 
         }
       },
       error => {
         console.error(error);
-
-        // Deactivate loader
         this.isLoading = false;
       }
     );
