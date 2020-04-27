@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
 
 import * as Helpers from 'app/shared/helpers';
 import * as BlogActions from 'app/core/ngrx/actions/blog.actions';
+import { AppState } from 'app/core/ngrx/reducers/store';
 import { CategoryModel } from 'app/pages/news/_models/category.model';
 import { PostModel } from 'app/pages/news/_models/post.model';
 import { NewsService } from 'app/pages/news/news.service';
 
-const { keys } = Object;
+const { keys, values } = Object;
 const { groupArrayItemsInArrays } = Helpers;
 const { SetCategories, SetPosts } = BlogActions;
 
@@ -32,7 +33,7 @@ export class BlogComponent implements OnInit {
   maxPaginationItem: number = 5;
   currentPage: number = 1;
 
-  constructor(private store: Store,
+  constructor(private store: Store<AppState>,
               private newsService: NewsService) { }
 
   ngOnInit() {
@@ -73,11 +74,19 @@ export class BlogComponent implements OnInit {
    )
    .subscribe(
      ([categories, posts]) => {
+       // Set data to reducer
        this.store.dispatch(new SetCategories(categories));
        this.store.dispatch(new SetPosts(posts));
-       this.categories = categories;
-       this.posts = posts;
-       this.setPaginationSettings(posts);
+
+       // Get data from reducer
+       this.store.pipe(select((state: AppState) => state)).subscribe(
+         (state) => {
+           this.categories = values(state.categories);
+           this.posts = values(state.posts);
+           this.setPaginationSettings(posts);
+         }
+       );
+
        this.isLoading = false;
      },
      error => {

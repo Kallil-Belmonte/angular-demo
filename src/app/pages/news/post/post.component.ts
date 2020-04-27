@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
 import * as PostActions from 'app/core/ngrx/actions/post.actions';
+import { AppState } from 'app/core/ngrx/reducers/store';
 import { ThemeFunctions } from 'app/shared/helpers/theme-functions';
 import { PostModel } from 'app/pages/news/_models/post.model';
 import { NewsService } from 'app/pages/news/news.service';
 
 const { SetCurrentPost } = PostActions;
-
-type postState = {
-  currentPost: PostModel,
-};
 
 @Component({
   selector: 'app-post',
@@ -26,7 +23,7 @@ export class PostComponent implements OnInit {
   currentPost: PostModel;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private store: Store<postState>,
+              private store: Store<AppState>,
               private newsService: NewsService) { }
 
   ngOnInit() {
@@ -46,9 +43,9 @@ export class PostComponent implements OnInit {
         this.store.dispatch(new SetCurrentPost(data));
 
         // Get Current Post from reducer
-        this.store.select('currentPost').subscribe(
-          (state: PostModel) => {
-            this.currentPost = state;
+        this.store.pipe(select((state: AppState) => state)).subscribe(
+          ({ currentPost }) => {
+            this.currentPost = currentPost;
           }
         );
 

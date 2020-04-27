@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import * as AccountActions from 'app/core/ngrx/actions/account.actions';
 import * as Helpers from 'app/shared/helpers';
+import { AppState } from 'app/core/ngrx/reducers/store';
 import { UserModel } from 'app/pages/account/_models/user.model';
 
 const { EditUserData } = AccountActions;
-
-type accountState = {
-  userData: UserModel,
-};
 
 type accountFormFeedback = {
   messages: {
@@ -45,7 +42,7 @@ export class AccountFormComponent implements OnInit {
   };
 
   constructor(private formBuilder: FormBuilder,
-              private store: Store<accountState>) { }
+              private store: Store<AppState>) { }
 
   ngOnInit() {
     this.buildAccountForm();
@@ -70,9 +67,9 @@ export class AccountFormComponent implements OnInit {
   // GET USER DATA
   getUserData(): void {
     // Get User Data from reducer
-    this.store.select('userData').subscribe(
-      (state: UserModel) => {
-        this.accountForm.setValue(state);
+    this.store.pipe(select((state: AppState) => state)).subscribe(
+      ({ userData }) => {
+        this.accountForm.setValue(userData);
       }
     );
   }

@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
-import { UserModel } from 'app/pages/account/_models/user.model';
-
-type accountState = {
-  userData: UserModel,
-};
+import { AppState } from 'app/core/ngrx/reducers/store';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +13,7 @@ export class DashboardComponent implements OnInit {
 
   fullName: string;
 
-  constructor(private store: Store<accountState>) { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
     this.getUserData();
@@ -31,9 +27,8 @@ export class DashboardComponent implements OnInit {
   // GET USER DATA
   getUserData(): void {
     // Get User Data from reducer
-    this.store.select('userData').subscribe(
-      (state: UserModel) => {
-        const { firstName, lastName } = state;
+    this.store.pipe(select((state: AppState) => state)).subscribe(
+      ({ userData: { firstName, lastName } }) => {
         this.fullName = `${firstName} ${lastName}`;
       }
     );
