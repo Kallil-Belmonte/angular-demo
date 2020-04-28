@@ -28,16 +28,11 @@ export class HomeComponent implements OnInit {
   getFeaturedPosts(): void {
     this.homeService.getFeaturedPosts().subscribe(
       data => {
-        // Set Posts
         this.posts = [data[0], data[1], data[2]];
-
-        // Deactivate loader
         this.isLoading = false;
       },
       error => {
         console.error(error);
-
-        // Deactivate loader
         this.isLoading = false;
       }
     );

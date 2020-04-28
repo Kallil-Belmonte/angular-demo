@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
+import { PAGE_TITLE } from 'app/shared/files/consts';
 import * as Helpers from 'app/shared/helpers';
+
+const { capitalizeFirstLetter } = Helpers;
 
 @Component({
   selector: 'app-root',
@@ -10,8 +13,6 @@ import * as Helpers from 'app/shared/helpers';
   styleUrls: []
 })
 export class AppComponent implements OnInit {
-
-  pageTitle: string = 'Angular Demo |';
 
   public constructor(private router: Router,
                      private title: Title) { }
@@ -31,12 +32,12 @@ export class AppComponent implements OnInit {
       if (event instanceof NavigationEnd) {
 
         if (event.url === '/') {
-          this.title.setTitle(`${this.pageTitle} Home`);
+          this.title.setTitle(`${PAGE_TITLE} Home`);
         } else {
           const pageUrl = event.url.split('-').join(' ');
-          const urlName = Helpers.capitalizeFirstLetter(pageUrl.split('/')[1]);
+          const urlName = capitalizeFirstLetter(pageUrl.split('/')[1]);
 
-          this.title.setTitle(`${this.pageTitle} ${urlName}`);
+          this.title.setTitle(`${PAGE_TITLE} ${urlName}`);
         }
 
       }

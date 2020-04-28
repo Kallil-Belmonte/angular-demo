@@ -31,19 +31,12 @@ export class DeletePostModalComponent implements OnInit {
   deleteCurrentPost(id: string): void {
     this.newsService.deleteCurrentPost(id).subscribe(
       () => {
-        // Close modal
         this.closeModal.emit();
-
-        // Deactivate loader
         this.isLoading = false;
-
-        // Redirect
         this.router.navigate(['/blog']);
       },
       error => {
         console.error(error);
-
-        // Deactivate loader
         this.isLoading = false;
       }
     );
@@ -54,7 +47,6 @@ export class DeletePostModalComponent implements OnInit {
   parameterListener(): void {
     this.activatedRoute.params.subscribe(
       (params: Params) => {
-        // Delete current post
         this.deleteCurrentPost(params['id']);
       }
     );
@@ -63,10 +55,7 @@ export class DeletePostModalComponent implements OnInit {
 
   // ON DELETE POST
   onDeletePost(): void {
-    // Activate loader
     this.isLoading = true
-
-    // Parameter listener
     this.parameterListener();
   }
 

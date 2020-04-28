@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { PAGE_TITLE } from 'app/shared/files/consts';
+
 @Component({
   selector: 'app-not-found',
   templateUrl: './not-found.component.html',
@@ -20,7 +22,7 @@ export class NotFoundComponent implements OnInit {
 
   // SET PAGE TITLE
   setPageTitle(): void {
-    document.title = 'Angular Demo | Error 404';
+    document.title = `${PAGE_TITLE} Error 404`;
   }
 
 }

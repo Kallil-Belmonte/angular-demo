@@ -6,14 +6,13 @@ import { Store } from '@ngrx/store';
 
 import * as PostActions from 'app/core/ngrx/actions/post.actions';
 import * as Helpers from 'app/shared/helpers';
+import { AppState } from 'app/core/ngrx/reducers/store';
 import { PostModel } from 'app/pages/news/_models/post.model';
 import { NewsService } from 'app/pages/news/news.service';
 
+const { required } = Validators;
 const { EditCurrentPost } = PostActions;
-
-type postState = {
-  currentPost: PostModel
-};
+const { setFieldClassName, showFieldErrors, setErrorClassName } = Helpers;
 
 @Component({
   selector: 'app-edit-post-form',
@@ -28,7 +27,7 @@ export class EditPostFormComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
-              private store: Store<postState>,
+              private store: Store<AppState>,
               private newsService: NewsService,
               private router: Router) { }
 
@@ -45,9 +44,16 @@ export class EditPostFormComponent implements OnInit {
   // BUILD EDIT POST FORM
   buildEditPostForm(): void {
     this.editPostForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
-      body:  ['', [Validators.required]]
+      title: ['', [required]],
+      body:  ['', [required]]
     });
+  }
+
+
+  // SET FORM DATA
+  setFormData(): void {
+    const { title, body } = this.currentPost;
+    this.editPostForm.setValue({ title, body });
   }
 
 
@@ -55,22 +61,13 @@ export class EditPostFormComponent implements OnInit {
   getCurrentPost(id: string): void {
     this.newsService.getCurrentPost(id).subscribe(
       data => {
-        // Set Current Post
         this.currentPost = data;
-
-        // Set initial Edit Post Form value
-        this.editPostForm.setValue({
-          title: this.currentPost.title,
-          body:  this.currentPost.body
-        });
-
-        // Deactivate loader
+        this.setFormData();
+        this.store.dispatch(new EditCurrentPost(this.currentPost));
         this.isLoading = false;
       },
       error => {
         console.error(error);
-
-        // Deactivate loader
         this.isLoading = false;
       }
     );
@@ -81,7 +78,6 @@ export class EditPostFormComponent implements OnInit {
   parameterListener(): void {
     this.activatedRoute.params.subscribe(
       (params: Params) => {
-        // Get current post
         this.getCurrentPost(params['id']);
       }
     );
@@ -92,51 +88,45 @@ export class EditPostFormComponent implements OnInit {
 
   // On Set Input Class
   onSetInputClass(formControlName: string, classNames?: string[]): string[] {
-    return Helpers.setFieldClassName(this.editPostForm, formControlName, classNames);
+    return setFieldClassName(this.editPostForm, formControlName, classNames);
   }
 
   // On Show Field Errors
   onShowFieldErrors(formControlName: string): boolean {
-    return Helpers.showFieldErrors(this.editPostForm, formControlName);
+    return showFieldErrors(this.editPostForm, formControlName);
   }
 
   // On Set Title Error Class
   onSetTitleErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.editPostForm.get('title').errors.required);
+    return setErrorClassName(this.editPostForm.get('title').errors.required);
   }
 
   // On Set Body Error Class
   onSetBodyErrorClass(): string[] {
-    return Helpers.setErrorClassName(this.editPostForm.get('body').errors.required);
+    return setErrorClassName(this.editPostForm.get('body').errors.required);
   }
 
   // On Submit
   onSubmit(): void {
-    // Activate loader
     this.isLoading = true;
 
     this.newsService.EditPost(this.currentPost.id, this.editPostForm.value).subscribe(
       () => {
-        // Update Current Post
+        const { userId, id } = this.currentPost;
+        const { title, body } = this.editPostForm.value;
+
         this.currentPost = {
-          userId: this.currentPost.userId,
-          id: this.currentPost.id,
-          title: this.editPostForm.value.title,
-          body:  this.editPostForm.value.body
-        }
-
+          userId,
+          id,
+          title,
+          body,
+        };
         this.store.dispatch(new EditCurrentPost(this.currentPost));
-
-        // Deactivate loader
         this.isLoading = false;
-
-        // Redirect
         this.router.navigate([`/post/${this.currentPost.id}`]);
       },
       error => {
         console.error(error);
-
-        // Deactivate loader
         this.isLoading = false;
       }
     );

@@ -45,11 +45,6 @@ export class BlogComponent implements OnInit {
   // GENERAL METHODS
   //==============================
 
-  // SET LOADING
-  setLoading(value: boolean): void {
-    this.isLoading = value;
-  }
-
   // SET PAGINATION SETTINGS
   setPaginationSettings(posts: PostModel[], quantPostsPerPage: number = 9): void {
     const pages = {};
@@ -97,7 +92,7 @@ export class BlogComponent implements OnInit {
 
   // ON SELECT CATEGORY
   onSelectCategory(/* category */): void {
-    this.setLoading(true);
+    this.isLoading = true;
 
     this.newsService.getPosts().subscribe(
       data => {

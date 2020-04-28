@@ -6,16 +6,13 @@ import { Store } from '@ngrx/store';
 
 import * as AccountActions from 'app/core/ngrx/actions/account.actions';
 import * as Helpers from 'app/shared/helpers';
+import { AppState } from 'app/core/ngrx/reducers/store';
 import { UserModel } from 'app/pages/account/_models/user.model';
 import { AuthService } from 'app/pages/auth/auth.service';
 
 const { required, email, minLength } = Validators;
 const { SetUserData } = AccountActions;
 const { setFieldClassName, showFieldErrors, setErrorClassName } = Helpers;
-
-type accountState = {
-  userData: UserModel
-};
 
 type registerFormErrors = {
   email: string[],
@@ -39,7 +36,7 @@ export class RegisterFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private store: Store<accountState>,
+              private store: Store<AppState>,
               private authService: AuthService) { }
 
   ngOnInit() {
