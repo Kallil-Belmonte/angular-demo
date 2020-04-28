@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PAGE_TITLE } from 'app/shared/files/consts';
+import { PROJECT_TITLE } from 'app/shared/files/consts';
 
 @Component({
   selector: 'app-not-found',
@@ -22,7 +22,7 @@ export class NotFoundComponent implements OnInit {
 
   // SET PAGE TITLE
   setPageTitle(): void {
-    document.title = `${PAGE_TITLE} Error 404`;
+    document.title = `${PROJECT_TITLE} | Error 404`;
   }
 
 }

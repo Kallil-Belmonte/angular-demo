@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { PAGE_TITLE } from 'app/shared/files/consts';
+import { PROJECT_TITLE } from 'app/shared/files/consts';
 import * as Helpers from 'app/shared/helpers';
 
 const { capitalizeFirstLetter } = Helpers;
@@ -32,12 +32,12 @@ export class AppComponent implements OnInit {
       if (event instanceof NavigationEnd) {
 
         if (event.url === '/') {
-          this.title.setTitle(`${PAGE_TITLE} Home`);
+          this.title.setTitle(`${PROJECT_TITLE} | Home`);
         } else {
           const pageUrl = event.url.split('-').join(' ');
           const urlName = capitalizeFirstLetter(pageUrl.split('/')[1]);
 
-          this.title.setTitle(`${PAGE_TITLE} ${urlName}`);
+          this.title.setTitle(`${PROJECT_TITLE} | ${urlName}`);
         }
 
       }

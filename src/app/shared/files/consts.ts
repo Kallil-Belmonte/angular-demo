@@ -1,1 +1,1 @@
-export const PAGE_TITLE: string = 'Angular Demo |';
+export const PROJECT_TITLE: string = 'Angular Demo';
