@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
     this.getFeaturedPosts();
   }
 
-
 	//==============================
   // GENERAL METHODS
   //==============================

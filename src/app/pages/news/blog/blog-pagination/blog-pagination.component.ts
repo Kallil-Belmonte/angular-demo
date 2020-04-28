@@ -18,7 +18,6 @@ export class BlogPaginationComponent implements OnInit {
   ngOnInit() {
   }
 
-
 	//==============================
   // GENERAL METHODS
   //==============================

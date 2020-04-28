@@ -44,7 +44,6 @@ export class LoginFormComponent implements OnInit {
     this.buildLoginForm();
   }
 
-
 	//==============================
   // GENERAL METHODS
   //==============================
@@ -57,7 +56,6 @@ export class LoginFormComponent implements OnInit {
       keepLogged: [false],
     });
   }
-
 
   // LOGIN FORM
 
@@ -133,7 +131,6 @@ export class LoginFormComponent implements OnInit {
       }
     );
   }
-
 
   // ON CLEAR FORM MESSAGE
   onClearFormMessage(field: string[], index: number): void {

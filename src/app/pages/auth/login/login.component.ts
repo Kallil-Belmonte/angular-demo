@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
     this.redirectUser();
   }
 
-
 	//==============================
   // GENERAL METHODS
   //==============================

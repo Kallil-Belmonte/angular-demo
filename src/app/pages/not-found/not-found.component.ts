@@ -15,7 +15,6 @@ export class NotFoundComponent implements OnInit {
     this.setPageTitle();
   }
 
-
 	//==============================
   // GENERAL METHODS
   //==============================

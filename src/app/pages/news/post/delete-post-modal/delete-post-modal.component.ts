@@ -22,7 +22,6 @@ export class DeletePostModalComponent implements OnInit {
   ngOnInit() {
   }
 
-
   //==============================
   // GENERAL METHODS
   //==============================
@@ -42,7 +41,6 @@ export class DeletePostModalComponent implements OnInit {
     );
   }
 
-
   // PARAMETER LISTENER
   parameterListener(): void {
     this.activatedRoute.params.subscribe(
@@ -52,13 +50,11 @@ export class DeletePostModalComponent implements OnInit {
     );
   }
 
-
   // ON DELETE POST
   onDeletePost(): void {
     this.isLoading = true
     this.parameterListener();
   }
-
 
   // ON CLICK OUT MODAL
   onClickOutModal(event: any): void {
@@ -66,7 +62,6 @@ export class DeletePostModalComponent implements OnInit {
       this.closeModal.emit();
     }
   }
-
 
   // ON CLOSE MODAL
   onCloseModal(): void {

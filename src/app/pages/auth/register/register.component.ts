@@ -14,7 +14,6 @@ export class RegisterComponent implements OnInit {
     this.redirectUser();
   }
 
-
 	//==============================
   // GENERAL METHODS
   //==============================

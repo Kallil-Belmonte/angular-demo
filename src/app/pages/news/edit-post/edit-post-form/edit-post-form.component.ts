@@ -36,7 +36,6 @@ export class EditPostFormComponent implements OnInit {
     this.parameterListener();
   }
 
-
   //==============================
   // GENERAL METHODS
   //==============================
@@ -49,13 +48,11 @@ export class EditPostFormComponent implements OnInit {
     });
   }
 
-
   // SET FORM DATA
   setFormData(): void {
     const { title, body } = this.currentPost;
     this.editPostForm.setValue({ title, body });
   }
-
 
   // GET CURRENT POST
   getCurrentPost(id: string): void {
@@ -73,7 +70,6 @@ export class EditPostFormComponent implements OnInit {
     );
   }
 
-
   // PARAMETER LISTENER
   parameterListener(): void {
     this.activatedRoute.params.subscribe(
@@ -82,7 +78,6 @@ export class EditPostFormComponent implements OnInit {
       }
     );
   }
-
 
   // EDIT POST FORM
 

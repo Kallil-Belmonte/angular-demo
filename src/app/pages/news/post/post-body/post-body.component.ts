@@ -17,7 +17,6 @@ export class PostBodyComponent implements OnInit {
   ngOnInit() {
   }
 
-
 	//==============================
   // GENERAL METHODS
   //==============================

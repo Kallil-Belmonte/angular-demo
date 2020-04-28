@@ -48,7 +48,6 @@ export class AccountFormComponent implements OnInit {
     this.getUserData();
   }
 
-
 	//==============================
   // GENERAL METHODS
   //==============================
@@ -62,7 +61,6 @@ export class AccountFormComponent implements OnInit {
     });
   }
 
-
   // GET USER DATA
   getUserData(): void {
     // Get User Data from reducer
@@ -72,7 +70,6 @@ export class AccountFormComponent implements OnInit {
       }
     );
   }
-
 
   // ACCOUNT FORM
 
@@ -130,7 +127,6 @@ export class AccountFormComponent implements OnInit {
       this.accountFormMessages.success.push('Account saved successfully.');
     }
   }
-
 
   // ON CLEAR FORM MESSAGE
   onClearFormMessage(field: string[], index: number): void {

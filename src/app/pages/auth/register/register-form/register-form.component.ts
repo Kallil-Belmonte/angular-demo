@@ -44,7 +44,6 @@ export class RegisterFormComponent implements OnInit {
     this.buildRegisterForm();
   }
 
-
 	//==============================
   // GENERAL METHODS
   //==============================
@@ -58,7 +57,6 @@ export class RegisterFormComponent implements OnInit {
       password:   ['', [required, minLength(3)]]
     });
   }
-
 
   // REGISTER FORM
 
@@ -139,7 +137,6 @@ export class RegisterFormComponent implements OnInit {
       }
     );
   }
-
 
   // ON CLEAR FORM MESSAGE
   onClearFormMessage(field: string[], index: number): void {

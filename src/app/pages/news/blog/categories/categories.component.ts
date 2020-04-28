@@ -18,7 +18,6 @@ export class CategoriesComponent implements OnInit {
   ngOnInit() {
   }
 
-
 	//==============================
   // GENERAL METHODS
   //==============================

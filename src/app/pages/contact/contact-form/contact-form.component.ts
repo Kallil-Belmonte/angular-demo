@@ -27,7 +27,6 @@ export class ContactFormComponent implements OnInit {
     this.getFavoriteColors();
   }
 
-
 	//==============================
   // GENERAL METHODS
   //==============================
@@ -46,7 +45,6 @@ export class ContactFormComponent implements OnInit {
     });
   }
 
-
   // GET FAVORITE COLORS
   getFavoriteColors(): void {
     this.contactService.getFavoriteColors().subscribe(
@@ -60,7 +58,6 @@ export class ContactFormComponent implements OnInit {
       }
     );
   }
-
 
   // CONTACT FORM
 
@@ -120,7 +117,6 @@ export class ContactFormComponent implements OnInit {
     this.contactFormSuccessMessage = 'Message sent successfully.';
     this.contactForm.reset();
   }
-
 
   // ON CLEAR SUCCESS MESSAGE
   onClearSuccessMessage(): void {
