@@ -22,8 +22,8 @@ export class HomeService {
   //==============================
 
   // GET FEATURED POSTS
-	getFeaturedPosts(): Observable<PostModel> {
-		return this.httpClient.get<PostModel>(`${jsonPlaceholder}${blog.posts}`);
+	getFeaturedPosts(): Observable<PostModel[]> {
+		return this.httpClient.get<PostModel[]>(`${jsonPlaceholder}${blog.posts}`);
 	}
 
 }

@@ -17,7 +17,7 @@
         <label for="first-name">First name</label>
         <input id="first-name" [ngClass]="onSetInputClass('firstName')" type="text" formControlName="firstName" />
 
-        <ng-template [ngIf]="onShowFieldErrors('firstName')">
+        <ng-template [ngIf]="onGetFieldErrorMessages('firstName')">
           <div [ngClass]="onSetFirstNameFirstErrorClass()">First name is required</div>
           <div [ngClass]="onSetFirstNameSecondErrorClass()">Minimum 3 characters required</div>
         </ng-template>
@@ -34,7 +34,7 @@
         <label for="email">E-mail</label>
         <input id="email" [ngClass]="onSetInputClass('email')" type="email" formControlName="email" />
 
-        <ng-template [ngIf]="onShowFieldErrors('email')">
+        <ng-template [ngIf]="onGetFieldErrorMessages('email')">
           <div [ngClass]="onSetEmailFirstErrorClass()">E-mail is required</div>
           <div [ngClass]="onSetEmailSecondErrorClass()">Invalid e-mail</div>
         </ng-template>

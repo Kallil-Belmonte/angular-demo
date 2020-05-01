@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
 import * as PostActions from 'app/core/ngrx/actions/post.actions';
 import * as Helpers from 'app/shared/helpers';
@@ -12,7 +12,7 @@ import { NewsService } from 'app/pages/news/news.service';
 
 const { required } = Validators;
 const { SetCurrentPost } = PostActions;
-const { setFieldClassName, showFieldErrors, setErrorClassName } = Helpers;
+const { setFieldClassName, getFieldErrorMessages, setErrorClassName } = Helpers;
 
 @Component({
   selector: 'app-edit-post-form',
@@ -50,17 +50,21 @@ export class EditPostFormComponent implements OnInit {
 
   // SET FORM DATA
   setFormData(): void {
-    const { title, body } = this.currentPost;
-    this.editPostForm.setValue({ title, body });
+    this.store.pipe(select((state: AppState) => state)).subscribe(
+      ({ currentPost }) => {
+        const { title, body } = currentPost;
+        this.currentPost = currentPost;
+        this.editPostForm.setValue({ title, body });
+      }
+    );
   }
 
   // GET CURRENT POST
   getCurrentPost(id: string): void {
     this.newsService.getCurrentPost(id).subscribe(
       data => {
-        this.currentPost = data;
+        this.store.dispatch(new SetCurrentPost(data));
         this.setFormData();
-        this.store.dispatch(new SetCurrentPost(this.currentPost));
         this.isLoading = false;
       },
       error => {
@@ -87,8 +91,8 @@ export class EditPostFormComponent implements OnInit {
   }
 
   // On Show Field Errors
-  onShowFieldErrors(formControlName: string): boolean {
-    return showFieldErrors(this.editPostForm, formControlName);
+  onGetFieldErrorMessages(formControlName: string): boolean {
+    return getFieldErrorMessages(this.editPostForm, formControlName);
   }
 
   // On Set Title Error Class
@@ -107,14 +111,9 @@ export class EditPostFormComponent implements OnInit {
 
     this.newsService.EditPost(this.currentPost.id, this.editPostForm.value).subscribe(
       () => {
-        const { userId, id } = this.currentPost;
-        const { title, body } = this.editPostForm.value;
-
         this.currentPost = {
-          userId,
-          id,
-          title,
-          body,
+          ...this.currentPost,
+          ...this.editPostForm.value,
         };
         this.store.dispatch(new SetCurrentPost(this.currentPost));
         this.isLoading = false;

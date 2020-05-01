@@ -1,27 +1,23 @@
 import {
   groupArrayItemsInArrays,
+  removeItemsFromArray,
   setFieldClassName,
-  showFieldErrors,
   setErrorClassName,
-  removeItemsFromIndexes,
+  getFieldErrorMessages,
 } from './general';
 
 import {
   capitalizeFirstLetter,
-  capitalizeText,
-  limitWords,
 } from './formatters';
 
 export {
   // General
   groupArrayItemsInArrays,
+  removeItemsFromArray,
   setFieldClassName,
-  showFieldErrors,
   setErrorClassName,
-  removeItemsFromIndexes,
+  getFieldErrorMessages,
 
   // Formatters
   capitalizeFirstLetter,
-  capitalizeText,
-  limitWords,
 };

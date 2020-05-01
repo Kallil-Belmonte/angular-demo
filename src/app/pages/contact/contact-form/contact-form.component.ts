@@ -5,7 +5,7 @@ import * as Helpers from 'app/shared/helpers';
 import { ContactService } from 'app/pages/contact/contact.service';
 
 const { required, minLength, email } = Validators;
-const { setFieldClassName, showFieldErrors, setErrorClassName } = Helpers;
+const { setFieldClassName, getFieldErrorMessages, setErrorClassName } = Helpers;
 
 @Component({
   selector: 'app-contact-form',
@@ -17,7 +17,7 @@ export class ContactFormComponent implements OnInit {
   isLoading: boolean = true;
   contactForm: FormGroup;
   favoriteColors: string[];
-  contactFormSuccessMessage: string;
+  feedbackSuccessMessage: string;
 
   constructor(private formBuilder: FormBuilder,
               private contactService: ContactService) { }
@@ -67,8 +67,8 @@ export class ContactFormComponent implements OnInit {
   }
 
   // On Show Field Errors
-  onShowFieldErrors(formControlName: any): boolean {
-    return showFieldErrors(this.contactForm, formControlName);
+  onGetFieldErrorMessages(formControlName: any): boolean {
+    return getFieldErrorMessages(this.contactForm, formControlName);
   }
 
   // On Set First Name First Error Class
@@ -114,13 +114,13 @@ export class ContactFormComponent implements OnInit {
   // On Submit
   onSubmit(): void {
     console.log('Form submitted:', this.contactForm.value);
-    this.contactFormSuccessMessage = 'Message sent successfully.';
+    this.feedbackSuccessMessage = 'Message sent successfully.';
     this.contactForm.reset();
   }
 
-  // ON CLEAR SUCCESS MESSAGE
-  onClearSuccessMessage(): void {
-    this.contactFormSuccessMessage = null;
+  // ON CLEAR FEEDBACK SUCCESS MESSAGE
+  onClearFeedbackSuccessMessage(): void {
+    this.feedbackSuccessMessage = null;
   }
 
 }

@@ -5,7 +5,7 @@
     <label for="title">Title</label>
     <input id="title" [ngClass]="onSetInputClass('title')" type="text" formControlName="title" />
 
-    <ng-template [ngIf]="onShowFieldErrors('title')">
+    <ng-template [ngIf]="onGetFieldErrorMessages('title')">
       <div [ngClass]="onSetTitleErrorClass()">Title is required</div>
     </ng-template>
   </div>
@@ -14,7 +14,7 @@
     <label for="body">Body</label>
     <textarea id="body" [ngClass]="onSetInputClass('body')" formControlName="body" rows="6"></textarea>
 
-    <ng-template [ngIf]="onShowFieldErrors('body')">
+    <ng-template [ngIf]="onGetFieldErrorMessages('body')">
       <div [ngClass]="onSetBodyErrorClass()">Title is required</div>
     </ng-template>
   </div>

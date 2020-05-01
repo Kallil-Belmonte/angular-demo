@@ -7,13 +7,13 @@
     <label for="email">E-mail</label>
     <input id="email" [ngClass]="onSetInputClass('email')" type="email" formControlName="email" />
 
-    <ng-template [ngIf]="onShowFieldErrors('email')">
+    <ng-template [ngIf]="onGetFieldErrorMessages('email')">
       <div [ngClass]="onSetEmailFirstErrorClass()">E-mail is required</div>
       <div [ngClass]="onSetEmailSecondErrorClass()">Invalid e-mail</div>
     </ng-template>
 
     <ng-template [ngIf]="loginFormErrors.email.length">
-      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(loginFormErrors.email, i)" *ngFor="let errorMessage of loginFormErrors.email; let i = index">
+      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage('email', i)" *ngFor="let errorMessage of loginFormErrors.email; let i = index">
         {{ errorMessage }}
       </app-alert-dismissible>
     </ng-template>
@@ -23,13 +23,13 @@
     <label for="password">Password</label>
     <input id="password" [ngClass]="onSetInputClass('password')" type="password" formControlName="password" />
 
-    <ng-template [ngIf]="onShowFieldErrors('password')">
+    <ng-template [ngIf]="onGetFieldErrorMessages('password')">
       <div [ngClass]="onSetPasswordFirstErrorClass()">Password is required</div>
       <div [ngClass]="onSetPasswordSecondErrorClass()">Minimum 3 characters required</div>
     </ng-template>
 
     <ng-template [ngIf]="loginFormErrors.password.length">
-      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(loginFormErrors.password, i)" *ngFor="let errorMessage of loginFormErrors.password; let i = index">
+      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage('password', i)" *ngFor="let errorMessage of loginFormErrors.password; let i = index">
         {{ errorMessage }}
       </app-alert-dismissible>
     </ng-template>

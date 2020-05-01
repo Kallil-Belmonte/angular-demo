@@ -12,7 +12,7 @@ import { AuthService } from 'app/pages/auth/auth.service';
 
 const { required, email, minLength } = Validators;
 const { SetUserData } = AccountActions;
-const { setFieldClassName, showFieldErrors, setErrorClassName } = Helpers;
+const { setFieldClassName, getFieldErrorMessages, setErrorClassName, removeItemsFromArray } = Helpers;
 
 type loginFormErrors = {
   email: string[],
@@ -65,8 +65,8 @@ export class LoginFormComponent implements OnInit {
   }
 
   // On Show Field Errors
-  onShowFieldErrors(formControlName: string): boolean {
-    return showFieldErrors(this.loginForm, formControlName);
+  onGetFieldErrorMessages(formControlName: string): boolean {
+    return getFieldErrorMessages(this.loginForm, formControlName);
   }
 
   // On Set Email First Error Class
@@ -133,8 +133,8 @@ export class LoginFormComponent implements OnInit {
   }
 
   // ON CLEAR FORM MESSAGE
-  onClearFormMessage(field: string[], index: number): void {
-    field.splice(index, 1);
+  onClearFormMessage(field: string, index: number): void {
+    this.loginFormErrors[field] = removeItemsFromArray(false, this.loginFormErrors[field], [index]);
   }
 
 }

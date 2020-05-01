@@ -12,7 +12,7 @@ import { AuthService } from 'app/pages/auth/auth.service';
 
 const { required, email, minLength } = Validators;
 const { SetUserData } = AccountActions;
-const { setFieldClassName, showFieldErrors, setErrorClassName } = Helpers;
+const { setFieldClassName, getFieldErrorMessages, setErrorClassName, removeItemsFromArray } = Helpers;
 
 type registerFormErrors = {
   email: string[],
@@ -66,8 +66,8 @@ export class RegisterFormComponent implements OnInit {
   }
 
   // On Show Field Errors
-  onShowFieldErrors(formControlName: string): boolean {
-    return showFieldErrors(this.registerForm, formControlName);
+  onGetFieldErrorMessages(formControlName: string): boolean {
+    return getFieldErrorMessages(this.registerForm, formControlName);
   }
 
   // On Set First Name Error Class
@@ -139,8 +139,8 @@ export class RegisterFormComponent implements OnInit {
   }
 
   // ON CLEAR FORM MESSAGE
-  onClearFormMessage(field: string[], index: number): void {
-    field.splice(index, 1);
+  onClearFormMessage(field: string, index: number): void {
+    this.registerFormErrors[field] = removeItemsFromArray(false, this.registerFormErrors[field], [index]);
   }
 
 }

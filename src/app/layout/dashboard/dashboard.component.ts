@@ -26,7 +26,6 @@ export class DashboardComponent implements OnInit {
 
   // GET USER DATA
   getUserData(): void {
-    // Get User Data from reducer
     this.store.pipe(select((state: AppState) => state)).subscribe(
       ({ userData: { firstName, lastName } }) => {
         this.fullName = `${firstName} ${lastName}`;

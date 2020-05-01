@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
 
 import * as Helpers from 'app/shared/helpers';
@@ -22,7 +21,7 @@ const { SetCategories, SetPosts } = BlogActions;
 })
 export class BlogComponent implements OnInit {
 
-  isLoading: boolean = true;
+  isLoading: boolean = false;
   faNewspaper = faNewspaper;
   pages: object = {};
   categories: CategoryModel[] = [];
@@ -63,31 +62,50 @@ export class BlogComponent implements OnInit {
 
   // GET ALL DATA
   getAllData(): void {
-   forkJoin(
-     this.newsService.getCategories(),
-     this.newsService.getPosts(),
-   )
-   .subscribe(
-     ([categories, posts]) => {
-       this.store.dispatch(new SetCategories(categories));
-       this.store.dispatch(new SetPosts(posts));
+    this.store.pipe(select((state: AppState) => state)).subscribe(
+      (state) => {
+        const categories: CategoryModel[] = values(state.categories);
+        const posts: PostModel[] = values(state.posts);
 
-       // Get data from reducer
-       this.store.pipe(select((state: AppState) => state)).subscribe(
-         (state) => {
-           this.categories = values(state.categories);
-           this.posts = values(state.posts);
-           this.setPaginationSettings(posts);
-         }
-       );
+        if (!categories.length) {
+          this.isLoading = true;
 
-       this.isLoading = false;
-     },
-     error => {
-       console.error(error);
-       this.isLoading = false;
-     }
-   );
+          this.newsService.getCategories().subscribe(
+            data => {
+              this.categories = data;
+              this.store.dispatch(new SetCategories(data));
+              this.isLoading = false;
+            },
+            error => {
+              console.error(error);
+              this.isLoading = false;
+            }
+          );
+        } else {
+          this.categories = categories;
+        }
+
+        if (!posts.length) {
+          this.isLoading = true;
+
+          this.newsService.getPosts().subscribe(
+            data => {
+              this.posts = data;
+              this.setPaginationSettings(data);
+              this.store.dispatch(new SetPosts(data));
+              this.isLoading = false;
+            },
+            error => {
+              console.error(error);
+              this.isLoading = false;
+            }
+          );
+        } else {
+          this.posts = posts;
+          this.setPaginationSettings(posts);
+        }
+      }
+    );
   }
 
   // ON SELECT CATEGORY
@@ -96,8 +114,8 @@ export class BlogComponent implements OnInit {
 
     this.newsService.getPosts().subscribe(
       data => {
-        this.store.dispatch(new SetPosts(data));
         this.setPaginationSettings(data);
+        this.store.dispatch(new SetPosts(data));
         this.isLoading = false;
       },
       error => {

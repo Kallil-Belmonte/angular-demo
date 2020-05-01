@@ -41,7 +41,6 @@ export class PostComponent implements OnInit {
       data => {
         this.store.dispatch(new SetCurrentPost(data));
 
-        // Get Current Post from reducer
         this.store.pipe(select((state: AppState) => state)).subscribe(
           ({ currentPost }) => {
             this.currentPost = currentPost;

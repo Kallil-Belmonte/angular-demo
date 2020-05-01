@@ -1,18 +1,64 @@
 import { FormGroup } from '@angular/forms';
 
 // GROUP ARRAY ITEMS IN ARRAYS
-export const groupArrayItemsInArrays = (array: any[], itemsQuantity: number): any[] => {
-  const newArray = [[]];
+export const groupArrayItemsInArrays = (array: any[], itemsQuantity: number, repeatLastItem?: boolean): any[] => {
+  const matrix = [[]];
 
-  array.forEach(item => {
-    const lastIndex = newArray.length - 1;
+  if (repeatLastItem && itemsQuantity > 1) {
+    let counter = 0;
+    let startSlice = 0;
+    let endSlice = itemsQuantity;
 
-    if (newArray[lastIndex].length < itemsQuantity) {
-      newArray[lastIndex].push(item);
-    } else {
-      newArray.push([]);
-      newArray[newArray.length - 1].push(item);
+    while (counter <= array.length) {
+      const lastIndex = matrix.length - 1;
+
+      if (!matrix[lastIndex].length) {
+        matrix[lastIndex].push(...array.slice(startSlice, endSlice));
+
+        const ultimoItem = matrix[matrix.length - 1];
+        const ultimoItemLastIndex = ultimoItem.length - 1;
+
+        startSlice = array.findIndex(item => item === ultimoItem[ultimoItemLastIndex]);
+        endSlice = startSlice + itemsQuantity;
+
+        if (ultimoItem.length < itemsQuantity) {
+          break;
+        }
+
+        matrix.push([]);
+      }
+
+      counter += 1;
     }
+  } else {
+    array.forEach(item => {
+      const lastIndex = matrix.length - 1;
+
+      if (matrix[lastIndex].length < itemsQuantity) {
+        matrix[lastIndex].push(item);
+      } else {
+        matrix.push([]);
+        matrix[matrix.length - 1].push(item);
+      }
+    });
+  }
+
+  return matrix;
+};
+
+
+// REMOVE ITEMS FROM ARRAY
+export const removeItemsFromArray = (useIndex: boolean, array: any[], itemsToRemove: any) => {
+  let newArray: any[] = array;
+
+  itemsToRemove.forEach((itemToRemove: any) => {
+    newArray = newArray.filter((arrayItem: any) => {
+      if (useIndex) {
+        return array.indexOf(arrayItem) !== itemToRemove;
+      }
+
+      return arrayItem !== itemToRemove;
+    });
   });
 
   return newArray;
@@ -29,14 +75,6 @@ export const setFieldClassName = (form: FormGroup, inputName: string, customClas
 };
 
 
-// SHOW FIELD ERRORS
-export const showFieldErrors = (form: FormGroup, inputName: string): boolean => {
-  if (form.get(inputName).touched && form.get(inputName).errors) return true;
-
-  return false;
-};
-
-
 // SET ERROR CLASS NAME
 export const setErrorClassName = (condition: boolean): string[] => {
   const classList: string[] = ['invalid-feedback'];
@@ -47,13 +85,9 @@ export const setErrorClassName = (condition: boolean): string[] => {
 };
 
 
-// REMOVE ITEMS FROM INDEXES
-export const removeItemsFromIndexes = (array: any[], arrayIndexes: number[]) => {
-  let newArray = array;
+// GET FIELD ERROR MESSAGES
+export const getFieldErrorMessages = (form: FormGroup, inputName: string): boolean => {
+  if (form.get(inputName).touched && form.get(inputName).errors) return true;
 
-  arrayIndexes.forEach((indexItem) => {
-    newArray = newArray.filter(arrayItem => array.indexOf(arrayItem) !== indexItem);
-  });
-
-  return newArray;
+  return false;
 };

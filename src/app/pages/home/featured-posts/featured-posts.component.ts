@@ -9,7 +9,7 @@ import { PostModel } from 'app/pages/news/_models/post.model';
 })
 export class FeaturedPostsComponent implements OnInit {
 
-  @Input() featuredPosts: PostModel[];
+  @Input() posts: PostModel[];
 
   constructor() { }
 

@@ -11,7 +11,7 @@ import { UserModel } from 'app/pages/account/_models/user.model';
 
 const { required, minLength, email } = Validators;
 const { EditUserData } = AccountActions;
-const { setFieldClassName, showFieldErrors, setErrorClassName } = Helpers;
+const { setFieldClassName, getFieldErrorMessages, setErrorClassName } = Helpers;
 
 type accountFormMessages = {
   success: string[],
@@ -63,7 +63,6 @@ export class AccountFormComponent implements OnInit {
 
   // GET USER DATA
   getUserData(): void {
-    // Get User Data from reducer
     this.store.pipe(select((state: AppState) => state)).subscribe(
       ({ userData }) => {
         this.accountForm.setValue(userData);
@@ -79,8 +78,8 @@ export class AccountFormComponent implements OnInit {
   }
 
   // On Show Field Errors
-  onShowFieldErrors(formControlName: string): boolean {
-    return showFieldErrors(this.accountForm, formControlName);
+  onGetFieldErrorMessages(formControlName: string): boolean {
+    return getFieldErrorMessages(this.accountForm, formControlName);
   }
 
   // On Set First Name First Error Class
