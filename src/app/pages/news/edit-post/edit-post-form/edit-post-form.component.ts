@@ -11,7 +11,7 @@ import { PostModel } from 'app/pages/news/_models/post.model';
 import { NewsService } from 'app/pages/news/news.service';
 
 const { required } = Validators;
-const { EditCurrentPost } = PostActions;
+const { SetCurrentPost } = PostActions;
 const { setFieldClassName, showFieldErrors, setErrorClassName } = Helpers;
 
 @Component({
@@ -60,7 +60,7 @@ export class EditPostFormComponent implements OnInit {
       data => {
         this.currentPost = data;
         this.setFormData();
-        this.store.dispatch(new EditCurrentPost(this.currentPost));
+        this.store.dispatch(new SetCurrentPost(this.currentPost));
         this.isLoading = false;
       },
       error => {
@@ -116,7 +116,7 @@ export class EditPostFormComponent implements OnInit {
           title,
           body,
         };
-        this.store.dispatch(new EditCurrentPost(this.currentPost));
+        this.store.dispatch(new SetCurrentPost(this.currentPost));
         this.isLoading = false;
         this.router.navigate([`/post/${this.currentPost.id}`]);
       },
