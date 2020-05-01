@@ -67,7 +67,9 @@ export class BlogComponent implements OnInit {
         const categories: CategoryModel[] = values(state.categories);
         const posts: PostModel[] = values(state.posts);
 
-        if (!categories.length) {
+        if (categories.length) {
+          this.categories = categories;
+        } else {
           this.isLoading = true;
 
           this.newsService.getCategories().subscribe(
@@ -81,11 +83,12 @@ export class BlogComponent implements OnInit {
               this.isLoading = false;
             }
           );
-        } else {
-          this.categories = categories;
         }
 
-        if (!posts.length) {
+        if (posts.length) {
+          this.posts = posts;
+          this.setPaginationSettings(posts);
+        } else {
           this.isLoading = true;
 
           this.newsService.getPosts().subscribe(
@@ -100,9 +103,6 @@ export class BlogComponent implements OnInit {
               this.isLoading = false;
             }
           );
-        } else {
-          this.posts = posts;
-          this.setPaginationSettings(posts);
         }
       }
     );

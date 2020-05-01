@@ -30,11 +30,9 @@
       <div [ngClass]="onSetEmailSecondErrorClass()">Invalid e-mail</div>
     </ng-template>
 
-    <ng-template [ngIf]="registerFormErrors.email.length">
-      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="clearFormMessage(registerFormErrors.email, i)" *ngFor="let errorMessage of registerFormErrors.email; let i = index">
-        {{ errorMessage }}
-      </app-alert-dismissible>
-    </ng-template>
+    <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="clearFormMessage(registerFormErrors.email, i)" *ngFor="let errorMessage of registerFormErrors.email; let i = index">
+      {{ errorMessage }}
+    </app-alert-dismissible>
   </div>
 
   <div class="form-group">
@@ -46,11 +44,9 @@
       <div [ngClass]="onSetPasswordSecondErrorClass()">Minimum 3 characters required</div>
     </ng-template>
 
-    <ng-template [ngIf]="registerFormErrors.password.length">
-      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="clearFormMessage(registerFormErrors.password, i)" *ngFor="let errorMessage of registerFormErrors.password; let i = index">
-        {{ errorMessage }}
-      </app-alert-dismissible>
-    </ng-template>
+    <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="clearFormMessage(registerFormErrors.password, i)" *ngFor="let errorMessage of registerFormErrors.password; let i = index">
+      {{ errorMessage }}
+    </app-alert-dismissible>
   </div>
 
   <button class="btn btn-primary d-block mx-auto" type="submit" [disabled]="!registerForm.valid || registerForm.pristine">

@@ -36,13 +36,16 @@ export class HomeComponent implements OnInit {
       (state) => {
         const posts: PostModel[] = values(state.posts);
 
-        if (!posts.length) {
+        if (posts.length) {
+          const [firstPost, secondPost, thirdPost] = posts;
+          this.featuredPosts = [firstPost, secondPost, thirdPost];
+        } else {
           this.isLoading = true;
 
           this.homeService.getFeaturedPosts().subscribe(
             data => {
-
-              this.featuredPosts = [data[0], data[1], data[2]];
+              const [firstPost, secondPost, thirdPost] = data;
+              this.featuredPosts = [firstPost, secondPost, thirdPost];
               this.store.dispatch(new SetPosts(data));
               this.isLoading = false;
             },
@@ -51,8 +54,6 @@ export class HomeComponent implements OnInit {
               this.isLoading = false;
             }
           );
-        } else {
-          this.featuredPosts = [posts[0], posts[1], posts[2]];
         }
       }
     );

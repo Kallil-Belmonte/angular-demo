@@ -5,7 +5,11 @@ import * as Helpers from 'app/shared/helpers';
 import { ContactService } from 'app/pages/contact/contact.service';
 
 const { required, minLength, email } = Validators;
-const { setFieldClassName, getFieldErrorMessages, setErrorClassName } = Helpers;
+const { setFieldClassName, getFieldErrorMessages, setErrorClassName, clearFormMessage } = Helpers;
+
+type contactFormMessages = {
+  success: string[],
+};
 
 @Component({
   selector: 'app-contact-form',
@@ -17,7 +21,10 @@ export class ContactFormComponent implements OnInit {
   isLoading: boolean = true;
   contactForm: FormGroup;
   favoriteColors: string[];
-  feedbackSuccessMessage: string;
+  contactFormMessages: contactFormMessages = {
+    success: [],
+  };
+  clearFormMessage = clearFormMessage;
 
   constructor(private formBuilder: FormBuilder,
               private contactService: ContactService) { }
@@ -38,7 +45,7 @@ export class ContactFormComponent implements OnInit {
       lastName:      ['', [required]],
       email:         ['', [required, email]],
       telephone:     ['', [required]],
-      sex:           [''],
+      sex:           ['male'],
       favoriteColor: ['select'],
       employed:      [false],
       message:       ['', [required]],
@@ -114,13 +121,8 @@ export class ContactFormComponent implements OnInit {
   // On Submit
   onSubmit(): void {
     console.log('Form submitted:', this.contactForm.value);
-    this.feedbackSuccessMessage = 'Message sent successfully.';
+    this.contactFormMessages.success.push('Message sent successfully.');
     this.contactForm.reset();
-  }
-
-  // ON CLEAR FEEDBACK SUCCESS MESSAGE
-  onClearFeedbackSuccessMessage(): void {
-    this.feedbackSuccessMessage = null;
   }
 
 }

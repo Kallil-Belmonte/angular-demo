@@ -1,8 +1,8 @@
 <app-loader *ngIf="isLoading"></app-loader>
 
 <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-  <app-alert-dismissible status="success" [dismissible]="true" (dismissAlert)="onClearFeedbackSuccessMessage()" *ngIf="feedbackSuccessMessage">
-    {{ feedbackSuccessMessage }}
+  <app-alert-dismissible status="success" [dismissible]="true" (dismissAlert)="clearFormMessage(contactFormMessages.success, i)" *ngFor="let successMessage of contactFormMessages.success; let i = index">
+    {{ successMessage }}
   </app-alert-dismissible>
 
   <div class="form-row">
