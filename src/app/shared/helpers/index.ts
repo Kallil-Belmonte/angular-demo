@@ -1,9 +1,9 @@
 import {
   groupArrayItemsInArrays,
-  removeItemsFromArray,
   setFieldClassName,
   setErrorClassName,
   getFieldErrorMessages,
+  clearFormMessage,
 } from './general';
 
 import {
@@ -13,10 +13,10 @@ import {
 export {
   // General
   groupArrayItemsInArrays,
-  removeItemsFromArray,
   setFieldClassName,
   setErrorClassName,
   getFieldErrorMessages,
+  clearFormMessage,
 
   // Formatters
   capitalizeFirstLetter,

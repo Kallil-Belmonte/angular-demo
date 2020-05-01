@@ -11,7 +11,7 @@ import { UserModel } from 'app/pages/account/_models/user.model';
 
 const { required, minLength, email } = Validators;
 const { EditUserData } = AccountActions;
-const { setFieldClassName, getFieldErrorMessages, setErrorClassName } = Helpers;
+const { setFieldClassName, setErrorClassName, getFieldErrorMessages, clearFormMessage } = Helpers;
 
 type accountFormMessages = {
   success: string[],
@@ -39,6 +39,7 @@ export class AccountFormComponent implements OnInit {
   accountFormErrors: accountFormErrors = {
     email: [],
   };
+  clearFormMessage = clearFormMessage;
 
   constructor(private formBuilder: FormBuilder,
               private store: Store<AppState>) { }

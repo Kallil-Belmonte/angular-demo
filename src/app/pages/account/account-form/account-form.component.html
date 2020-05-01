@@ -1,13 +1,13 @@
 <div class="row">
   <div class="offset-md-3 col-md-6">
     <ng-template [ngIf]="accountFormMessages.success.length">
-      <app-alert-dismissible status="success" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormMessages.success, i)" *ngFor="let successMessage of accountFormMessages.success; let i = index">
+      <app-alert-dismissible status="success" [dismissible]="true" (dismissAlert)="clearFormMessage(accountFormMessages.success, i)" *ngFor="let successMessage of accountFormMessages.success; let i = index">
         {{ successMessage }}
       </app-alert-dismissible>
     </ng-template>
 
     <ng-template [ngIf]="accountFormMessages.error.length">
-      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormMessages.error, i)" *ngFor="let errorMessage of accountFormMessages.error; let i = index">
+      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="clearFormMessage(accountFormMessages.error, i)" *ngFor="let errorMessage of accountFormMessages.error; let i = index">
         {{ errorMessage }}
       </app-alert-dismissible>
     </ng-template>
@@ -40,7 +40,7 @@
         </ng-template>
 
         <ng-template [ngIf]="accountFormErrors.email.length">
-          <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage(accountFormErrors.email, i)" *ngFor="let errorMessage of accountFormErrors.email; let i = index">
+          <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="clearFormMessage(accountFormErrors.email, i)" *ngFor="let errorMessage of accountFormErrors.email; let i = index">
             {{ errorMessage }}
           </app-alert-dismissible>
         </ng-template>

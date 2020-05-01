@@ -12,7 +12,7 @@ import { AuthService } from 'app/pages/auth/auth.service';
 
 const { required, email, minLength } = Validators;
 const { SetUserData } = AccountActions;
-const { setFieldClassName, getFieldErrorMessages, setErrorClassName, removeItemsFromArray } = Helpers;
+const { setFieldClassName, getFieldErrorMessages, setErrorClassName, clearFormMessage } = Helpers;
 
 type loginFormErrors = {
   email: string[],
@@ -33,6 +33,7 @@ export class LoginFormComponent implements OnInit {
     email:    [],
     password: [],
   };
+  clearFormMessage = clearFormMessage;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -133,8 +134,8 @@ export class LoginFormComponent implements OnInit {
   }
 
   // ON CLEAR FORM MESSAGE
-  onClearFormMessage(field: string, index: number): void {
-    this.loginFormErrors[field] = removeItemsFromArray(false, this.loginFormErrors[field], [index]);
-  }
+  // onClearFormMessage(field: string, index: number): void {
+  //   this.loginFormErrors[field] = removeItemsFromArray(true, this.loginFormErrors[field], [index]);
+  // }
 
 }

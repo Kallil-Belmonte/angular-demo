@@ -31,7 +31,7 @@
     </ng-template>
 
     <ng-template [ngIf]="registerFormErrors.email.length">
-      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage('email', i)" *ngFor="let errorMessage of registerFormErrors.email; let i = index">
+      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="clearFormMessage(registerFormErrors.email, i)" *ngFor="let errorMessage of registerFormErrors.email; let i = index">
         {{ errorMessage }}
       </app-alert-dismissible>
     </ng-template>
@@ -47,7 +47,7 @@
     </ng-template>
 
     <ng-template [ngIf]="registerFormErrors.password.length">
-      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="onClearFormMessage('password', i)" *ngFor="let errorMessage of registerFormErrors.password; let i = index">
+      <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="clearFormMessage(registerFormErrors.password, i)" *ngFor="let errorMessage of registerFormErrors.password; let i = index">
         {{ errorMessage }}
       </app-alert-dismissible>
     </ng-template>

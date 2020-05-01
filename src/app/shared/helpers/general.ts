@@ -47,24 +47,6 @@ export const groupArrayItemsInArrays = (array: any[], itemsQuantity: number, rep
 };
 
 
-// REMOVE ITEMS FROM ARRAY
-export const removeItemsFromArray = (useIndex: boolean, array: any[], itemsToRemove: any) => {
-  let newArray: any[] = array;
-
-  itemsToRemove.forEach((itemToRemove: any) => {
-    newArray = newArray.filter((arrayItem: any) => {
-      if (useIndex) {
-        return array.indexOf(arrayItem) !== itemToRemove;
-      }
-
-      return arrayItem !== itemToRemove;
-    });
-  });
-
-  return newArray;
-};
-
-
 // SET FIELD CLASS NAME
 export const setFieldClassName = (form: FormGroup, inputName: string, customClassNames: string[] = []): string[] => {
   const classList: string[] = ['form-control', ...customClassNames];
@@ -90,4 +72,10 @@ export const getFieldErrorMessages = (form: FormGroup, inputName: string): boole
   if (form.get(inputName).touched && form.get(inputName).errors) return true;
 
   return false;
+};
+
+
+// CLEAR FORM MESSAGE
+export const clearFormMessage = (field: string[], index: number): void => {
+  field.splice(index, 1);
 };
