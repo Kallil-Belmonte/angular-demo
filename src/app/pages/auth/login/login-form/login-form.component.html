@@ -5,7 +5,7 @@
 
   <div class="form-group">
     <label for="email">E-mail</label>
-    <input id="email" [ngClass]="getInputClass('email')" type="email" formControlName="email" />
+    <input id="email" [ngClass]="getFieldClass('email')" type="email" formControlName="email" />
 
     <ng-template [ngIf]="hasErrorMessages('email')">
       <div [ngClass]="getErrorMessageClass('email', ['required'])">E-mail is required</div>
@@ -26,7 +26,7 @@
     <label for="password">Password</label>
     <input
       id="password"
-      [ngClass]="getInputClass('password')"
+      [ngClass]="getFieldClass('password')"
       type="password"
       formControlName="password"
     />

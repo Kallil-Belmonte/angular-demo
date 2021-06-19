@@ -1,8 +1,8 @@
 import {
   groupArrayItemsInArrays,
   getFieldClass,
-  getErrorClass,
-  getFieldErrorMessages,
+  getErrorMessageClass,
+  hasErrorMessages,
   clearFormMessage,
 } from './general';
 
@@ -12,8 +12,8 @@ export {
   // General
   groupArrayItemsInArrays,
   getFieldClass,
-  getErrorClass,
-  getFieldErrorMessages,
+  getErrorMessageClass,
+  hasErrorMessages,
   clearFormMessage,
   // Formatters
   capitalizeFirstLetter,

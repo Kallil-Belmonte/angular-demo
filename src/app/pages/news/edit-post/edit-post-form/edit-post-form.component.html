@@ -3,21 +3,25 @@
 <form class="edit-post-form" [formGroup]="editPostForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="title">Title</label>
-    <input id="title" [ngClass]="getInputClass('title')" type="text" formControlName="title" />
+    <input id="title" [ngClass]="getFieldClass('title')" type="text" formControlName="title" />
 
-    <div [ngClass]="getErrorMessageClass('title', ['required'])">Title is required</div>
+    <ng-template [ngIf]="hasErrorMessages('title')">
+      <div [ngClass]="getErrorMessageClass('title', ['required'])">Title is required</div>
+    </ng-template>
   </div>
 
   <div class="form-group">
     <label for="body">Body</label>
     <textarea
       id="body"
-      [ngClass]="getInputClass('body')"
+      [ngClass]="getFieldClass('body')"
       formControlName="body"
       rows="6"
     ></textarea>
 
-    <div [ngClass]="getErrorMessageClass('body', ['required'])">Title is required</div>
+    <ng-template [ngIf]="hasErrorMessages('body')">
+      <div [ngClass]="getErrorMessageClass('body', ['required'])">Title is required</div>
+    </ng-template>
   </div>
 
   <button

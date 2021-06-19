@@ -17,10 +17,9 @@ const { SetCategories, SetPosts } = BlogActions;
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
+  styleUrls: ['./blog.component.scss'],
 })
 export class BlogComponent implements OnInit {
-
   isLoading: boolean = false;
   faNewspaper = faNewspaper;
   pages: object = {};
@@ -32,19 +31,16 @@ export class BlogComponent implements OnInit {
   maxPaginationItem: number = 5;
   currentPage: number = 1;
 
-  constructor(private store: Store<AppState>,
-              private newsService: NewsService) { }
+  constructor(private store: Store<AppState>, private newsService: NewsService) {}
 
   ngOnInit() {
     this.getAllData();
   }
 
-
-	//==============================
-  // GENERAL METHODS
+  //==============================
+  // METHODS
   //==============================
 
-  // SET PAGINATION SETTINGS
   setPaginationSettings(posts: PostModel[], quantPostsPerPage: number = 9): void {
     const pages = {};
 
@@ -60,55 +56,51 @@ export class BlogComponent implements OnInit {
     this.currentPage = 1;
   }
 
-  // GET ALL DATA
   getAllData(): void {
-    this.store.pipe(select((state: AppState) => state)).subscribe(
-      (state) => {
-        const categories: CategoryModel[] = values(state.categories);
-        const posts: PostModel[] = values(state.posts);
+    this.store.pipe(select((state: AppState) => state)).subscribe(state => {
+      const categories: CategoryModel[] = values(state.categories);
+      const posts: PostModel[] = values(state.posts);
 
-        if (categories.length) {
-          this.categories = categories;
-        } else {
-          this.isLoading = true;
+      if (categories.length) {
+        this.categories = categories;
+      } else {
+        this.isLoading = true;
 
-          this.newsService.getCategories().subscribe(
-            data => {
-              this.categories = data;
-              this.store.dispatch(new SetCategories(data));
-              this.isLoading = false;
-            },
-            error => {
-              console.error(error);
-              this.isLoading = false;
-            }
-          );
-        }
-
-        if (posts.length) {
-          this.posts = posts;
-          this.setPaginationSettings(posts);
-        } else {
-          this.isLoading = true;
-
-          this.newsService.getPosts().subscribe(
-            data => {
-              this.posts = data;
-              this.setPaginationSettings(data);
-              this.store.dispatch(new SetPosts(data));
-              this.isLoading = false;
-            },
-            error => {
-              console.error(error);
-              this.isLoading = false;
-            }
-          );
-        }
+        this.newsService.getCategories().subscribe(
+          data => {
+            this.categories = data;
+            this.store.dispatch(new SetCategories(data));
+            this.isLoading = false;
+          },
+          error => {
+            console.error(error);
+            this.isLoading = false;
+          },
+        );
       }
-    );
+
+      if (posts.length) {
+        this.posts = posts;
+        this.setPaginationSettings(posts);
+      } else {
+        this.isLoading = true;
+
+        this.newsService.getPosts().subscribe(
+          data => {
+            this.posts = data;
+            this.setPaginationSettings(data);
+            this.store.dispatch(new SetPosts(data));
+            this.isLoading = false;
+          },
+          error => {
+            console.error(error);
+            this.isLoading = false;
+          },
+        );
+      }
+    });
   }
 
-  // ON SELECT CATEGORY
   onSelectCategory(/* category */): void {
     this.isLoading = true;
 
@@ -121,13 +113,12 @@ export class BlogComponent implements OnInit {
       error => {
         console.error(error);
         this.isLoading = false;
-      }
+      },
     );
   }
 
-  // ON PAGINATE
   onPaginate(target: any): void {
-    switch(target) {
+    switch (target) {
       case 'previous':
         this.firstPaginationItem = --this.firstPaginationItem;
         break;
@@ -140,5 +131,4 @@ export class BlogComponent implements OnInit {
         this.currentPage = Number(target);
     }
   }
-
 }

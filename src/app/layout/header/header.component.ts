@@ -8,10 +8,9 @@ import { AuthService } from 'app/pages/auth/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
   projectTitle = PROJECT_TITLE;
   faHome = faHome;
   faNewspaper = faNewspaper;
@@ -19,19 +18,15 @@ export class HeaderComponent implements OnInit {
   faUser = faUser;
   @Input() userFullName: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-
-	//==============================
-  // GENERAL METHODS
+  //==============================
+  // METHODS
   //==============================
 
-  // ON LOG OUT
   onLogOut(): void {
     this.authService.logOut();
   }
-
 }

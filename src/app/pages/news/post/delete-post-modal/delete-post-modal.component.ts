@@ -6,27 +6,26 @@ import { NewsService } from 'app/pages/news/news.service';
 @Component({
   selector: 'app-delete-post-modal',
   templateUrl: './delete-post-modal.component.html',
-  styleUrls: []
+  styleUrls: [],
 })
 export class DeletePostModalComponent implements OnInit {
-
   isLoading: boolean = false;
   closeResult = '';
   @Input() open: boolean;
   @Output() closeModal = new EventEmitter();
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private router: Router,
-              private newsService: NewsService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private newsService: NewsService,
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   //==============================
-  // GENERAL METHODS
+  // METHODS
   //==============================
 
-  // DELETE CURRENT POST
   deleteCurrentPost(id: string): void {
     this.newsService.deleteCurrentPost(id).subscribe(
       () => {
@@ -37,35 +36,28 @@ export class DeletePostModalComponent implements OnInit {
       error => {
         console.error(error);
         this.isLoading = false;
-      }
+      },
     );
   }
 
-  // PARAMETER LISTENER
   parameterListener(): void {
-    this.activatedRoute.params.subscribe(
-      (params: Params) => {
-        this.deleteCurrentPost(params['id']);
-      }
-    );
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.deleteCurrentPost(params['id']);
+    });
   }
 
-  // ON DELETE POST
   onDeletePost(): void {
-    this.isLoading = true
+    this.isLoading = true;
     this.parameterListener();
   }
 
-  // ON CLICK OUT MODAL
   onClickOutModal(event: any): void {
     if (event.target.id === 'deletePost') {
       this.closeModal.emit();
     }
   }
 
-  // ON CLOSE MODAL
   onCloseModal(): void {
     this.closeModal.emit();
   }
-
 }

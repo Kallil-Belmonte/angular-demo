@@ -53,22 +53,27 @@ export const groupArrayItemsInArrays = (
 // GET FIELD CLASS
 export const getFieldClass = (
   form: FormGroup,
-  inputName: string,
+  formControlName: string,
   customClassNames: string[] = [],
 ): string[] => {
-  const isInvalid: boolean = form.get(inputName).touched && form.get(inputName).invalid;
+  const isInvalid: boolean = form.get(formControlName).touched && form.get(formControlName).invalid;
   return ['form-control', isInvalid ? 'is-invalid' : '', ...customClassNames];
 };
 
-// GET ERROR CLASS
-export const getErrorClass = (condition: boolean): string[] => [
-  'invalid-feedback',
-  condition ? 'd-block' : '',
-];
+// HAS ERROR MESSAGES
+export const hasErrorMessages = (form: FormGroup, formControlName: string): boolean =>
+  !!form.get(formControlName).touched && !!form.get(formControlName).errors;
 
-// GET FIELD ERROR MESSAGES
-export const getFieldErrorMessages = (form: FormGroup, inputName: string): boolean =>
-  !!form.get(inputName).touched && !!form.get(inputName).errors;
+// GET ERROR MESSAGE CLASS
+export const getErrorMessageClass = (
+  form: FormGroup,
+  formControlName: string,
+  validations: string[],
+): string[] => {
+  const { errors } = form.get(formControlName);
+  const show: boolean = validations.every(key => errors[key]);
+  return ['invalid-feedback', show ? 'd-block' : ''];
+};
 
 // CLEAR FORM MESSAGE
 export const clearFormMessage = (field: string[], index: number): void => {

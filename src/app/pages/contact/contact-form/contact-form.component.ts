@@ -5,7 +5,7 @@ import * as Helpers from 'app/shared/helpers';
 import { ContactService } from 'app/pages/contact/contact.service';
 
 const { required, minLength, email } = Validators;
-const { getFieldClass, getFieldErrorMessages, getErrorClass, clearFormMessage } = Helpers;
+const { getFieldClass, hasErrorMessages, getErrorMessageClass, clearFormMessage } = Helpers;
 
 type contactFormMessages = {
   success: string[];
@@ -24,6 +24,12 @@ export class ContactFormComponent implements OnInit {
     success: [],
   };
   clearFormMessage = clearFormMessage;
+  getFieldClass = (formControlName: string, classNames?: string[]) =>
+    getFieldClass(this.contactForm, formControlName, classNames);
+  hasErrorMessages = (formControlName: string) =>
+    hasErrorMessages(this.contactForm, formControlName);
+  getErrorMessageClass = (formControlName: string, validations: string[]) =>
+    getErrorMessageClass(this.contactForm, formControlName, validations);
 
   constructor(private formBuilder: FormBuilder, private contactService: ContactService) {}
 
@@ -33,10 +39,9 @@ export class ContactFormComponent implements OnInit {
   }
 
   //==============================
-  // GENERAL METHODS
+  // METHODS
   //==============================
 
-  // BUILD CONTACT FORM
   buildContactForm(): void {
     this.contactForm = this.formBuilder.group({
       firstName: ['', [required, minLength(3)]],
@@ -50,7 +55,6 @@ export class ContactFormComponent implements OnInit {
     });
   }
 
-  // GET FAVORITE COLORS
   getFavoriteColors(): void {
     this.contactService.getFavoriteColors().subscribe(
       data => {
@@ -62,20 +66,6 @@ export class ContactFormComponent implements OnInit {
         this.isLoading = false;
       },
     );
-  }
-
-  // CONTACT FORM
-  getInputClass(formControlName: string, classNames?: string[]): string[] {
-    return getFieldClass(this.contactForm, formControlName, classNames);
-  }
-
-  hasErrorMessages(formControlName: string): boolean {
-    return getFieldErrorMessages(this.contactForm, formControlName);
-  }
-
-  getErrorMessageClass(formControlName: string, validations: string[]): string[] {
-    const { errors } = this.contactForm.get(formControlName);
-    return getErrorClass(validations.every(key => errors[key]));
   }
 
   onSubmit(): void {

@@ -12,7 +12,7 @@ import { AuthService } from 'app/pages/auth/auth.service';
 
 const { required, email, minLength } = Validators;
 const { SetUserData } = AccountActions;
-const { getFieldClass, getFieldErrorMessages, getErrorClass, clearFormMessage } = Helpers;
+const { getFieldClass, hasErrorMessages, getErrorMessageClass, clearFormMessage } = Helpers;
 
 type loginFormErrors = {
   email: string[];
@@ -33,6 +33,11 @@ export class LoginFormComponent implements OnInit {
     password: [],
   };
   clearFormMessage = clearFormMessage;
+  getFieldClass = (formControlName: string, classNames?: string[]) =>
+    getFieldClass(this.loginForm, formControlName, classNames);
+  hasErrorMessages = (formControlName: string) => hasErrorMessages(this.loginForm, formControlName);
+  getErrorMessageClass = (formControlName: string, validations: string[]) =>
+    getErrorMessageClass(this.loginForm, formControlName, validations);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,30 +51,15 @@ export class LoginFormComponent implements OnInit {
   }
 
   //==============================
-  // GENERAL METHODS
+  // METHODS
   //==============================
 
-  // BUILD LOGIN FORM
   buildLoginForm(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', [required, email]],
       password: ['', [required, minLength(3)]],
       keepLogged: [false],
     });
-  }
-
-  // LOGIN FORM
-  getInputClass(formControlName: string, classNames?: string[]): string[] {
-    return getFieldClass(this.loginForm, formControlName, classNames);
-  }
-
-  hasErrorMessages(formControlName: string): boolean {
-    return getFieldErrorMessages(this.loginForm, formControlName);
-  }
-
-  getErrorMessageClass(formControlName: string, validations: string[]): string[] {
-    const { errors } = this.loginForm.get(formControlName);
-    return getErrorClass(validations.every(key => errors[key]));
   }
 
   onSubmit(): void {
@@ -112,9 +102,4 @@ export class LoginFormComponent implements OnInit {
       },
     );
   }
-
-  // ON CLEAR FORM MESSAGE
-  // onClearFormMessage(field: string, index: number): void {
-  //   this.loginFormErrors[field] = removeItemsFromArray(true, this.loginFormErrors[field], [index]);
-  // }
 }

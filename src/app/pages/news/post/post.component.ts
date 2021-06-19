@@ -14,61 +14,52 @@ const { SetCurrentPost } = PostActions;
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: []
+  styleUrls: [],
 })
 export class PostComponent implements OnInit {
-
   isLoading: boolean = true;
   isModalOpen: boolean = false;
   currentPost: PostModel;
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private store: Store<AppState>,
-              private newsService: NewsService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private store: Store<AppState>,
+    private newsService: NewsService,
+  ) {}
 
   ngOnInit() {
     this.parameterListener();
   }
 
-
-	//==============================
-  // GENERAL METHODS
+  //==============================
+  // METHODS
   //==============================
 
-  // GET CURRENT POST
   getCurrentPost(id: string): void {
     this.newsService.getCurrentPost(id).subscribe(
       data => {
         this.store.dispatch(new SetCurrentPost(data));
 
-        this.store.pipe(select((state: AppState) => state)).subscribe(
-          ({ currentPost }) => {
-            this.currentPost = currentPost;
-          }
-        );
+        this.store.pipe(select((state: AppState) => state)).subscribe(({ currentPost }) => {
+          this.currentPost = currentPost;
+        });
 
         this.isLoading = false;
       },
       error => {
         console.error(error);
         this.isLoading = false;
-      }
+      },
     );
   }
 
-
-  // PARAMETER LISTENER
   parameterListener(): void {
-    this.activatedRoute.params.subscribe(
-      (params: Params) => {
-        // Get Current Post
-        this.getCurrentPost(params['id']);
-      }
-    );
+    this.activatedRoute.params.subscribe((params: Params) => {
+      // Get Current Post
+      this.getCurrentPost(params['id']);
+    });
   }
 
-
-  // ON HANDLE MODAL
   onToggleModal(): void {
     // Toggle styles
     ThemeFunctions.toggleModalStyles(this.isModalOpen);
@@ -76,5 +67,4 @@ export class PostComponent implements OnInit {
     // Toggle modal
     this.isModalOpen = !this.isModalOpen;
   }
-
 }

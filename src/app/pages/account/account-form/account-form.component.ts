@@ -11,7 +11,7 @@ import { UserModel } from 'app/pages/account/_models/user.model';
 
 const { required, minLength, email } = Validators;
 const { EditUserData } = AccountActions;
-const { getFieldClass, getErrorClass, getFieldErrorMessages, clearFormMessage } = Helpers;
+const { getFieldClass, hasErrorMessages, getErrorMessageClass, clearFormMessage } = Helpers;
 
 type accountFormMessages = {
   success: string[];
@@ -39,6 +39,12 @@ export class AccountFormComponent implements OnInit {
     email: [],
   };
   clearFormMessage = clearFormMessage;
+  getFieldClass = (formControlName: string, classNames?: string[]) =>
+    getFieldClass(this.accountForm, formControlName, classNames);
+  hasErrorMessages = (formControlName: string) =>
+    hasErrorMessages(this.accountForm, formControlName);
+  getErrorMessageClass = (formControlName: string, validations: string[]) =>
+    getErrorMessageClass(this.accountForm, formControlName, validations);
 
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>) {}
 
@@ -48,10 +54,9 @@ export class AccountFormComponent implements OnInit {
   }
 
   //==============================
-  // GENERAL METHODS
+  // METHODS
   //==============================
 
-  // BUILD ACCOUNT FORM
   buildAccountForm(): void {
     this.accountForm = this.formBuilder.group({
       firstName: ['', [required, minLength(3)]],
@@ -60,25 +65,10 @@ export class AccountFormComponent implements OnInit {
     });
   }
 
-  // GET USER DATA
   getUserData(): void {
     this.store.pipe(select((state: AppState) => state)).subscribe(({ userData }) => {
       this.accountForm.setValue(userData);
     });
-  }
-
-  // ACCOUNT FORM
-  getInputClass(formControlName: string, classNames?: string[]): string[] {
-    return getFieldClass(this.accountForm, formControlName, classNames);
-  }
-
-  hasErrorMessages(formControlName: string): boolean {
-    return getFieldErrorMessages(this.accountForm, formControlName);
-  }
-
-  getErrorMessageClass(formControlName: string, validations: string[]): string[] {
-    const { errors } = this.accountForm.get(formControlName);
-    return getErrorClass(validations.every(key => errors[key]));
   }
 
   onSubmit(): void {
@@ -96,10 +86,5 @@ export class AccountFormComponent implements OnInit {
       this.store.dispatch(new EditUserData(this.userData));
       this.accountFormMessages.success.push('Account saved successfully.');
     }
-  }
-
-  // ON CLEAR FORM MESSAGE
-  onClearFormMessage(field: string[], index: number): void {
-    field.splice(index, 1);
   }
 }

@@ -16,10 +16,9 @@ export class LoginComponent implements OnInit {
   }
 
   //==============================
-  // GENERAL METHODS
+  // METHODS
   //==============================
 
-  // REDIRECT USER
   redirectUser(): void {
     const authToken =
       sessionStorage.getItem('authTokenAngularDemo') ||

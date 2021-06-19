@@ -12,7 +12,7 @@ import { AuthService } from 'app/pages/auth/auth.service';
 
 const { required, email, minLength } = Validators;
 const { SetUserData } = AccountActions;
-const { getFieldClass, getFieldErrorMessages, getErrorClass, clearFormMessage } = Helpers;
+const { getFieldClass, hasErrorMessages, getErrorMessageClass, clearFormMessage } = Helpers;
 
 type registerFormErrors = {
   email: string[];
@@ -33,6 +33,12 @@ export class RegisterFormComponent implements OnInit {
     password: [],
   };
   clearFormMessage = clearFormMessage;
+  getFieldClass = (formControlName: string, classNames?: string[]) =>
+    getFieldClass(this.registerForm, formControlName, classNames);
+  hasErrorMessages = (formControlName: string) =>
+    hasErrorMessages(this.registerForm, formControlName);
+  getErrorMessageClass = (formControlName: string, validations: string[]) =>
+    getErrorMessageClass(this.registerForm, formControlName, validations);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,10 +52,9 @@ export class RegisterFormComponent implements OnInit {
   }
 
   //==============================
-  // GENERAL METHODS
+  // METHODS
   //==============================
 
-  // BUILD REGISTER FORM
   buildRegisterForm(): void {
     this.registerForm = this.formBuilder.group({
       firstName: ['', [required]],
@@ -57,20 +62,6 @@ export class RegisterFormComponent implements OnInit {
       email: ['', [required, email]],
       password: ['', [required, minLength(3)]],
     });
-  }
-
-  // REGISTER FORM
-  getInputClass(formControlName: string, classNames?: string[]): string[] {
-    return getFieldClass(this.registerForm, formControlName, classNames);
-  }
-
-  hasErrorMessages(formControlName: string): boolean {
-    return getFieldErrorMessages(this.registerForm, formControlName);
-  }
-
-  getErrorMessageClass(formControlName: string, validations: string[]): string[] {
-    const { errors } = this.registerForm.get(formControlName);
-    return getErrorClass(validations.every(key => errors[key]));
   }
 
   onSubmit(): void {

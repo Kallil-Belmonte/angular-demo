@@ -12,7 +12,7 @@ import { NewsService } from 'app/pages/news/news.service';
 
 const { required } = Validators;
 const { SetCurrentPost } = PostActions;
-const { getFieldClass, getFieldErrorMessages, getErrorClass } = Helpers;
+const { getFieldClass, hasErrorMessages, getErrorMessageClass, clearFormMessage } = Helpers;
 
 @Component({
   selector: 'app-edit-post-form',
@@ -23,6 +23,12 @@ export class EditPostFormComponent implements OnInit {
   isLoading: boolean = true;
   editPostForm: FormGroup;
   currentPost: PostModel;
+  getFieldClass = (formControlName: string, classNames?: string[]) =>
+    getFieldClass(this.editPostForm, formControlName, classNames);
+  hasErrorMessages = (formControlName: string) =>
+    hasErrorMessages(this.editPostForm, formControlName);
+  getErrorMessageClass = (formControlName: string, validations: string[]) =>
+    getErrorMessageClass(this.editPostForm, formControlName, validations);
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,10 +44,9 @@ export class EditPostFormComponent implements OnInit {
   }
 
   //==============================
-  // GENERAL METHODS
+  // METHODS
   //==============================
 
-  // BUILD EDIT POST FORM
   buildEditPostForm(): void {
     this.editPostForm = this.formBuilder.group({
       title: ['', [required]],
@@ -49,7 +54,6 @@ export class EditPostFormComponent implements OnInit {
     });
   }
 
-  // SET FORM DATA
   setFormData(): void {
     this.store.pipe(select((state: AppState) => state)).subscribe(({ currentPost }) => {
       const { title, body } = currentPost;
@@ -58,7 +62,6 @@ export class EditPostFormComponent implements OnInit {
     });
   }
 
-  // GET CURRENT POST
   getCurrentPost(id: string): void {
     this.newsService.getCurrentPost(id).subscribe(
       data => {
@@ -73,21 +76,10 @@ export class EditPostFormComponent implements OnInit {
     );
   }
 
-  // PARAMETER LISTENER
   parameterListener(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.getCurrentPost(params['id']);
     });
-  }
-
-  // EDIT POST FORM
-  getInputClass(formControlName: string, classNames?: string[]): string[] {
-    return getFieldClass(this.editPostForm, formControlName, classNames);
-  }
-
-  getErrorMessageClass(formControlName: string, validations: string[]): string[] {
-    const { errors } = this.editPostForm.get(formControlName);
-    return getErrorClass(validations.every(key => errors[key]));
   }
 
   onSubmit(): void {

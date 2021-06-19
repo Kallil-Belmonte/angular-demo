@@ -10,27 +10,22 @@ const { capitalizeFirstLetter } = Helpers;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: []
+  styleUrls: [],
 })
 export class AppComponent implements OnInit {
-
-  public constructor(private router: Router,
-                     private title: Title) { }
+  public constructor(private router: Router, private title: Title) {}
 
   ngOnInit() {
     this.setPageTitle();
   }
 
-
-	//==============================
-  // GENERAL METHODS
+  //==============================
+  // METHODS
   //==============================
 
-  // SET PAGE TITLE
   setPageTitle(): void {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
-
         if (event.url === '/') {
           this.title.setTitle(`${PROJECT_TITLE} | Home`);
         } else {
@@ -39,9 +34,7 @@ export class AppComponent implements OnInit {
 
           this.title.setTitle(`${PROJECT_TITLE} | ${urlName}`);
         }
-
       }
     });
   }
-
 }

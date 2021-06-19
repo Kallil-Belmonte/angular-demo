@@ -12,51 +12,45 @@ const { SetPosts } = BlogActions;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: []
+  styleUrls: [],
 })
 export class HomeComponent implements OnInit {
-
   isLoading: boolean = false;
   featuredPosts: PostModel[];
 
-  constructor(private store: Store<AppState>,
-              private homeService: HomeService) { }
+  constructor(private store: Store<AppState>, private homeService: HomeService) {}
 
   ngOnInit() {
     this.getFeaturedPosts();
   }
 
-	//==============================
-  // GENERAL METHODS
+  //==============================
+  // METHODS
   //==============================
 
-  // GET FEATURED POSTS
   getFeaturedPosts(): void {
-    this.store.pipe(select((state: AppState) => state)).subscribe(
-      (state) => {
-        const posts: PostModel[] = values(state.posts);
+    this.store.pipe(select((state: AppState) => state)).subscribe(state => {
+      const posts: PostModel[] = values(state.posts);
 
-        if (posts.length) {
-          const [firstPost, secondPost, thirdPost] = posts;
-          this.featuredPosts = [firstPost, secondPost, thirdPost];
-        } else {
-          this.isLoading = true;
+      if (posts.length) {
+        const [firstPost, secondPost, thirdPost] = posts;
+        this.featuredPosts = [firstPost, secondPost, thirdPost];
+      } else {
+        this.isLoading = true;
 
-          this.homeService.getFeaturedPosts().subscribe(
-            data => {
-              const [firstPost, secondPost, thirdPost] = data;
-              this.featuredPosts = [firstPost, secondPost, thirdPost];
-              this.store.dispatch(new SetPosts(data));
-              this.isLoading = false;
-            },
-            error => {
-              console.error(error);
-              this.isLoading = false;
-            }
-          );
-        }
+        this.homeService.getFeaturedPosts().subscribe(
+          data => {
+            const [firstPost, secondPost, thirdPost] = data;
+            this.featuredPosts = [firstPost, secondPost, thirdPost];
+            this.store.dispatch(new SetPosts(data));
+            this.isLoading = false;
+          },
+          error => {
+            console.error(error);
+            this.isLoading = false;
+          },
+        );
       }
-    );
+    });
   }
-
 }

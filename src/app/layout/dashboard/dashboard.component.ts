@@ -7,30 +7,26 @@ import { AppState } from 'app/core/ngrx/reducers/store';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: []
+  styleUrls: [],
 })
 export class DashboardComponent implements OnInit {
-
   fullName: string;
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
     this.getUserData();
   }
 
-
-	//==============================
-  // GENERAL METHODS
+  //==============================
+  // METHODS
   //==============================
 
-  // GET USER DATA
   getUserData(): void {
-    this.store.pipe(select((state: AppState) => state)).subscribe(
-      ({ userData: { firstName, lastName } }) => {
+    this.store
+      .pipe(select((state: AppState) => state))
+      .subscribe(({ userData: { firstName, lastName } }) => {
         this.fullName = `${firstName} ${lastName}`;
-      }
-    );
+      });
   }
-
 }

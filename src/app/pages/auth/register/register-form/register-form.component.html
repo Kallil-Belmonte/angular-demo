@@ -7,7 +7,7 @@
     <label for="first-name">First name</label>
     <input
       id="first-name"
-      [ngClass]="getInputClass('firstName')"
+      [ngClass]="getFieldClass('firstName')"
       type="text"
       formControlName="firstName"
     />
@@ -19,7 +19,7 @@
     <label for="last-name">Last name</label>
     <input
       id="last-name"
-      [ngClass]="getInputClass('lastName')"
+      [ngClass]="getFieldClass('lastName')"
       type="text"
       formControlName="lastName"
     />
@@ -29,7 +29,7 @@
 
   <div class="form-group">
     <label for="email">E-mail</label>
-    <input id="email" [ngClass]="getInputClass('email')" type="text" formControlName="email" />
+    <input id="email" [ngClass]="getFieldClass('email')" type="text" formControlName="email" />
 
     <ng-template [ngIf]="hasErrorMessages('email')">
       <div [ngClass]="getErrorMessageClass('email', ['required'])">E-mail is required</div>
