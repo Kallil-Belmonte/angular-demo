@@ -12,24 +12,25 @@ import { NewsService } from 'app/pages/news/news.service';
 
 const { required } = Validators;
 const { SetCurrentPost } = PostActions;
-const { setFieldClassName, getFieldErrorMessages, setErrorClassName } = Helpers;
+const { getFieldClass, getFieldErrorMessages, getErrorClass } = Helpers;
 
 @Component({
   selector: 'app-edit-post-form',
   templateUrl: './edit-post-form.component.html',
-  styleUrls: ['./edit-post-form.component.scss']
+  styleUrls: ['./edit-post-form.component.scss'],
 })
 export class EditPostFormComponent implements OnInit {
-
   isLoading: boolean = true;
   editPostForm: FormGroup;
   currentPost: PostModel;
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private formBuilder: FormBuilder,
-              private store: Store<AppState>,
-              private newsService: NewsService,
-              private router: Router) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private store: Store<AppState>,
+    private newsService: NewsService,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.buildEditPostForm();
@@ -44,19 +45,17 @@ export class EditPostFormComponent implements OnInit {
   buildEditPostForm(): void {
     this.editPostForm = this.formBuilder.group({
       title: ['', [required]],
-      body:  ['', [required]]
+      body: ['', [required]],
     });
   }
 
   // SET FORM DATA
   setFormData(): void {
-    this.store.pipe(select((state: AppState) => state)).subscribe(
-      ({ currentPost }) => {
-        const { title, body } = currentPost;
-        this.currentPost = currentPost;
-        this.editPostForm.setValue({ title, body });
-      }
-    );
+    this.store.pipe(select((state: AppState) => state)).subscribe(({ currentPost }) => {
+      const { title, body } = currentPost;
+      this.currentPost = currentPost;
+      this.editPostForm.setValue({ title, body });
+    });
   }
 
   // GET CURRENT POST
@@ -70,42 +69,27 @@ export class EditPostFormComponent implements OnInit {
       error => {
         console.error(error);
         this.isLoading = false;
-      }
+      },
     );
   }
 
   // PARAMETER LISTENER
   parameterListener(): void {
-    this.activatedRoute.params.subscribe(
-      (params: Params) => {
-        this.getCurrentPost(params['id']);
-      }
-    );
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.getCurrentPost(params['id']);
+    });
   }
 
   // EDIT POST FORM
-
-  // On Set Input Class
-  onSetInputClass(formControlName: string, classNames?: string[]): string[] {
-    return setFieldClassName(this.editPostForm, formControlName, classNames);
+  getInputClass(formControlName: string, classNames?: string[]): string[] {
+    return getFieldClass(this.editPostForm, formControlName, classNames);
   }
 
-  // On Show Field Errors
-  onGetFieldErrorMessages(formControlName: string): boolean {
-    return getFieldErrorMessages(this.editPostForm, formControlName);
+  getErrorMessageClass(formControlName: string, validations: string[]): string[] {
+    const { errors } = this.editPostForm.get(formControlName);
+    return getErrorClass(validations.every(key => errors[key]));
   }
 
-  // On Set Title Error Class
-  onSetTitleErrorClass(): string[] {
-    return setErrorClassName(this.editPostForm.get('title').errors.required);
-  }
-
-  // On Set Body Error Class
-  onSetBodyErrorClass(): string[] {
-    return setErrorClassName(this.editPostForm.get('body').errors.required);
-  }
-
-  // On Submit
   onSubmit(): void {
     this.isLoading = true;
 
@@ -122,8 +106,7 @@ export class EditPostFormComponent implements OnInit {
       error => {
         console.error(error);
         this.isLoading = false;
-      }
+      },
     );
   }
-
 }

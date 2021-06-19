@@ -1,7 +1,12 @@
 <app-loader *ngIf="isLoading"></app-loader>
 
 <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-  <app-alert-dismissible status="success" [dismissible]="true" (dismissAlert)="clearFormMessage(contactFormMessages.success, i)" *ngFor="let successMessage of contactFormMessages.success; let i = index">
+  <app-alert-dismissible
+    status="success"
+    [dismissible]="true"
+    (dismissAlert)="clearFormMessage(contactFormMessages.success, i)"
+    *ngFor="let successMessage of contactFormMessages.success; let i = index"
+  >
     {{ successMessage }}
   </app-alert-dismissible>
 
@@ -9,11 +14,20 @@
     <div class="col">
       <div class="form-group">
         <label for="first-name">First name</label>
-        <input id="first-name" [ngClass]="onSetInputClass('firstName')" type="text" formControlName="firstName" />
+        <input
+          id="first-name"
+          [ngClass]="getInputClass('firstName')"
+          type="text"
+          formControlName="firstName"
+        />
 
-        <ng-template [ngIf]="onGetFieldErrorMessages('firstName')">
-          <div [ngClass]="onSetFirstNameFirstErrorClass()">First name is required</div>
-          <div [ngClass]="onSetFirstNameSecondErrorClass()">Minimum 3 characters required</div>
+        <ng-template [ngIf]="hasErrorMessages('firstName')">
+          <div [ngClass]="getErrorMessageClass('firstName', ['required'])">
+            First name is required
+          </div>
+          <div [ngClass]="getErrorMessageClass('firstName', ['minLength'])">
+            Minimum 3 characters required
+          </div>
         </ng-template>
       </div>
     </div>
@@ -21,9 +35,18 @@
     <div class="col">
       <div class="form-group">
         <label for="last-name">Last name</label>
-        <input id="last-name" [ngClass]="onSetInputClass('lastName')" type="text" formControlName="lastName" />
+        <input
+          id="last-name"
+          [ngClass]="getInputClass('lastName')"
+          type="text"
+          formControlName="lastName"
+        />
 
-        <div [ngClass]="onSetLastNameErrorClass()">Last name is required</div>
+        <ng-template [ngIf]="hasErrorMessages('lastName')">
+          <div [ngClass]="getErrorMessageClass('lastName', ['required'])">
+            Last name is required
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>
@@ -32,11 +55,11 @@
     <div class="col">
       <div class="form-group">
         <label for="email">E-mail</label>
-        <input id="email" [ngClass]="onSetInputClass('email')" type="email" formControlName="email" />
+        <input id="email" [ngClass]="getInputClass('email')" type="email" formControlName="email" />
 
-        <ng-template [ngIf]="onGetFieldErrorMessages('email')">
-          <div [ngClass]="onSetEmailFirstErrorClass()">E-mail is required</div>
-          <div [ngClass]="onSetEmailSecondErrorClass()">Invalid e-mail</div>
+        <ng-template [ngIf]="hasErrorMessages('email')">
+          <div [ngClass]="getErrorMessageClass('email', ['required'])">E-mail is required</div>
+          <div [ngClass]="getErrorMessageClass('email', ['email'])">Invalid e-mail</div>
         </ng-template>
       </div>
     </div>
@@ -44,9 +67,20 @@
     <div class="col">
       <div class="form-group">
         <label for="telephone">Telephone</label>
-        <input id="telephone" [ngClass]="onSetInputClass('telephone', ['telephone-mask'])" type="tel" formControlName="telephone" placeholder="(00) 0000 0000" mask="(00) 0000 00000" />
+        <input
+          id="telephone"
+          [ngClass]="getInputClass('telephone', ['telephone-mask'])"
+          type="tel"
+          formControlName="telephone"
+          placeholder="(00) 0000 0000"
+          mask="(00) 0000 00000"
+        />
 
-        <div [ngClass]="onSetTelephoneErrorClass()">Telephone is required</div>
+        <ng-template [ngIf]="hasErrorMessages('telephone')">
+          <div [ngClass]="getErrorMessageClass('telephone', ['required'])">
+            Telephone is required
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>
@@ -73,10 +107,16 @@
         <label for="favorite-color">Favorite color</label>
         <select id="favorite-color" class="form-control" formControlName="favoriteColor">
           <option value="select" disabled>Select</option>
-          <option value="{{ favoriteColor }}" *ngFor="let color of favoriteColors">{{ color }}</option>
+          <option value="{{ favoriteColor }}" *ngFor="let color of favoriteColors">
+            {{ color }}
+          </option>
         </select>
 
-        <div [ngClass]="onSetFavoriteColorErrorClass()">Favorite color is required</div>
+        <ng-template [ngIf]="hasErrorMessages('favoriteColor')">
+          <div [ngClass]="getErrorMessageClass('favoriteColor', ['required'])">
+            Favorite color is required
+          </div>
+        </ng-template>
       </div>
     </div>
 
@@ -85,7 +125,10 @@
         <input type="checkbox" formControlName="employed" />
         <div class="state p-primary">
           <svg class="svg svg-icon" viewBox="0 0 20 20">
-            <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: #FFF; fill: #FFF;"></path>
+            <path
+              d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+              style="stroke: #fff; fill: #fff"
+            ></path>
           </svg>
           <label>Employed</label>
         </div>
@@ -95,11 +138,35 @@
 
   <div class="form-group">
     <label for="message">Message</label>
-    <textarea id="message" [ngClass]="onSetInputClass('message')" rows="3" formControlName="message"></textarea>
+    <textarea
+      id="message"
+      [ngClass]="getInputClass('message')"
+      rows="3"
+      formControlName="message"
+    ></textarea>
 
-    <div [ngClass]="onSetMessageErrorClass()">Message is required</div>
+    <ng-template [ngIf]="hasErrorMessages('favoriteColor')">
+      <div [ngClass]="getErrorMessageClass('message', ['required'])">Message is required</div>
+    </ng-template>
   </div>
 
-  <button class="btn btn-primary mr-2" type="submit" [disabled]="!contactForm.valid || contactForm.pristine || contactForm.get('favoriteColor').value === 'select'">Send</button>
-  <button class="btn btn-light" type="button" [disabled]="contactForm.pristine" (click)="contactForm.reset()">Reset form</button>
+  <button
+    class="btn btn-primary mr-2"
+    type="submit"
+    [disabled]="
+      !contactForm.valid ||
+      contactForm.pristine ||
+      contactForm.get('favoriteColor').value === 'select'
+    "
+  >
+    Send
+  </button>
+  <button
+    class="btn btn-light"
+    type="button"
+    [disabled]="contactForm.pristine"
+    (click)="contactForm.reset()"
+  >
+    Reset form
+  </button>
 </form>

@@ -3,22 +3,36 @@
 <form class="edit-post-form" [formGroup]="editPostForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="title">Title</label>
-    <input id="title" [ngClass]="onSetInputClass('title')" type="text" formControlName="title" />
+    <input id="title" [ngClass]="getInputClass('title')" type="text" formControlName="title" />
 
-    <ng-template [ngIf]="onGetFieldErrorMessages('title')">
-      <div [ngClass]="onSetTitleErrorClass()">Title is required</div>
-    </ng-template>
+    <div [ngClass]="getErrorMessageClass('title', ['required'])">Title is required</div>
   </div>
 
   <div class="form-group">
     <label for="body">Body</label>
-    <textarea id="body" [ngClass]="onSetInputClass('body')" formControlName="body" rows="6"></textarea>
+    <textarea
+      id="body"
+      [ngClass]="getInputClass('body')"
+      formControlName="body"
+      rows="6"
+    ></textarea>
 
-    <ng-template [ngIf]="onGetFieldErrorMessages('body')">
-      <div [ngClass]="onSetBodyErrorClass()">Title is required</div>
-    </ng-template>
+    <div [ngClass]="getErrorMessageClass('body', ['required'])">Title is required</div>
   </div>
 
-  <button class="btn btn-primary mr-2" type="submit" [disabled]="!editPostForm.valid || editPostForm.pristine">Edit</button>
-  <button class="btn btn-light" type="button" [disabled]="editPostForm.pristine" (click)="editPostForm.reset()">Reset form</button>
+  <button
+    class="btn btn-primary mr-2"
+    type="submit"
+    [disabled]="!editPostForm.valid || editPostForm.pristine"
+  >
+    Edit
+  </button>
+  <button
+    class="btn btn-light"
+    type="button"
+    [disabled]="editPostForm.pristine"
+    (click)="editPostForm.reset()"
+  >
+    Reset form
+  </button>
 </form>

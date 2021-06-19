@@ -1,7 +1,11 @@
 import { FormGroup } from '@angular/forms';
 
 // GROUP ARRAY ITEMS IN ARRAYS
-export const groupArrayItemsInArrays = (array: any[], itemsQuantity: number, repeatLastItem?: boolean): any[] => {
+export const groupArrayItemsInArrays = (
+  array: any[],
+  itemsQuantity: number,
+  repeatLastItem?: boolean,
+): any[] => {
   const matrix = [[]];
 
   if (repeatLastItem && itemsQuantity > 1) {
@@ -46,34 +50,25 @@ export const groupArrayItemsInArrays = (array: any[], itemsQuantity: number, rep
   return matrix;
 };
 
-
-// SET FIELD CLASS NAME
-export const setFieldClassName = (form: FormGroup, inputName: string, customClassNames: string[] = []): string[] => {
-  const classList: string[] = ['form-control', ...customClassNames];
-
-  if (form.get(inputName).touched && form.get(inputName).invalid) classList.push('is-invalid');
-
-  return classList;
+// GET FIELD CLASS
+export const getFieldClass = (
+  form: FormGroup,
+  inputName: string,
+  customClassNames: string[] = [],
+): string[] => {
+  const isInvalid: boolean = form.get(inputName).touched && form.get(inputName).invalid;
+  return ['form-control', isInvalid ? 'is-invalid' : '', ...customClassNames];
 };
 
-
-// SET ERROR CLASS NAME
-export const setErrorClassName = (condition: boolean): string[] => {
-  const classList: string[] = ['invalid-feedback'];
-
-  if (condition) classList.push('d-block');
-
-  return classList;
-};
-
+// GET ERROR CLASS
+export const getErrorClass = (condition: boolean): string[] => [
+  'invalid-feedback',
+  condition ? 'd-block' : '',
+];
 
 // GET FIELD ERROR MESSAGES
-export const getFieldErrorMessages = (form: FormGroup, inputName: string): boolean => {
-  if (form.get(inputName).touched && form.get(inputName).errors) return true;
-
-  return false;
-};
-
+export const getFieldErrorMessages = (form: FormGroup, inputName: string): boolean =>
+  !!form.get(inputName).touched && !!form.get(inputName).errors;
 
 // CLEAR FORM MESSAGE
 export const clearFormMessage = (field: string[], index: number): void => {

@@ -1,48 +1,93 @@
 <div class="row">
   <div class="offset-md-3 col-md-6">
-    <app-alert-dismissible status="success" [dismissible]="true" (dismissAlert)="clearFormMessage(accountFormMessages.success, i)" *ngFor="let successMessage of accountFormMessages.success; let i = index">
+    <app-alert-dismissible
+      status="success"
+      [dismissible]="true"
+      (dismissAlert)="clearFormMessage(accountFormMessages.success, i)"
+      *ngFor="let successMessage of accountFormMessages.success; let i = index"
+    >
       {{ successMessage }}
     </app-alert-dismissible>
 
-
-    <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="clearFormMessage(accountFormMessages.error, i)" *ngFor="let errorMessage of accountFormMessages.error; let i = index">
+    <app-alert-dismissible
+      status="danger"
+      [dismissible]="true"
+      (dismissAlert)="clearFormMessage(accountFormMessages.error, i)"
+      *ngFor="let errorMessage of accountFormMessages.error; let i = index"
+    >
       {{ errorMessage }}
     </app-alert-dismissible>
 
     <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="first-name">First name</label>
-        <input id="first-name" [ngClass]="onSetInputClass('firstName')" type="text" formControlName="firstName" />
+        <input
+          id="first-name"
+          [ngClass]="getInputClass('firstName')"
+          type="text"
+          formControlName="firstName"
+        />
 
-        <ng-template [ngIf]="onGetFieldErrorMessages('firstName')">
-          <div [ngClass]="onSetFirstNameFirstErrorClass()">First name is required</div>
-          <div [ngClass]="onSetFirstNameSecondErrorClass()">Minimum 3 characters required</div>
+        <ng-template [ngIf]="hasErrorMessages('firstName')">
+          <div [ngClass]="getErrorMessageClass('firstName', ['required'])">
+            First name is required
+          </div>
+          <div [ngClass]="getErrorMessageClass('firstName', ['minlength'])">
+            Minimum 3 characters required
+          </div>
         </ng-template>
       </div>
 
       <div class="form-group">
         <label for="last-name">Last name</label>
-        <input id="last-name" [ngClass]="onSetInputClass('lastName')" type="text" formControlName="lastName" />
+        <input
+          id="last-name"
+          [ngClass]="getInputClass('lastName')"
+          type="text"
+          formControlName="lastName"
+        />
 
-        <div [ngClass]="onSetLastNameErrorClass()">Last name is required</div>
+        <ng-template [ngIf]="hasErrorMessages('lastName')">
+          <div [ngClass]="getErrorMessageClass('lastName', ['touched', 'invalid'])">
+            Last name is required
+          </div>
+        </ng-template>
       </div>
 
       <div class="form-group">
         <label for="email">E-mail</label>
-        <input id="email" [ngClass]="onSetInputClass('email')" type="email" formControlName="email" />
+        <input id="email" [ngClass]="getInputClass('email')" type="email" formControlName="email" />
 
-        <ng-template [ngIf]="onGetFieldErrorMessages('email')">
-          <div [ngClass]="onSetEmailFirstErrorClass()">E-mail is required</div>
-          <div [ngClass]="onSetEmailSecondErrorClass()">Invalid e-mail</div>
+        <ng-template [ngIf]="hasErrorMessages('email')">
+          <div [ngClass]="getErrorMessageClass('email', ['required'])">E-mail is required</div>
+          <div [ngClass]="getErrorMessageClass('email', ['email'])">Invalid e-mail</div>
         </ng-template>
 
-        <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="clearFormMessage(accountFormErrors.email, i)" *ngFor="let errorMessage of accountFormErrors.email; let i = index">
+        <app-alert-dismissible
+          status="danger"
+          [dismissible]="true"
+          (dismissAlert)="clearFormMessage(accountFormErrors.email, i)"
+          *ngFor="let errorMessage of accountFormErrors.email; let i = index"
+        >
           {{ errorMessage }}
         </app-alert-dismissible>
       </div>
 
-      <button class="btn btn-primary mr-2" type="submit" [disabled]="!accountForm.valid || accountForm.pristine">Save</button>
-      <button class="btn btn-light" type="button" [disabled]="accountForm.pristine" (click)="accountForm.reset()">Reset form</button>
+      <button
+        class="btn btn-primary mr-2"
+        type="submit"
+        [disabled]="!accountForm.valid || accountForm.pristine"
+      >
+        Save
+      </button>
+      <button
+        class="btn btn-light"
+        type="button"
+        [disabled]="accountForm.pristine"
+        (click)="accountForm.reset()"
+      >
+        Reset form
+      </button>
     </form>
   </div>
 </div>

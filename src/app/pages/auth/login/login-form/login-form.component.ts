@@ -12,85 +12,66 @@ import { AuthService } from 'app/pages/auth/auth.service';
 
 const { required, email, minLength } = Validators;
 const { SetUserData } = AccountActions;
-const { setFieldClassName, getFieldErrorMessages, setErrorClassName, clearFormMessage } = Helpers;
+const { getFieldClass, getFieldErrorMessages, getErrorClass, clearFormMessage } = Helpers;
 
 type loginFormErrors = {
-  email: string[],
-  password: string[],
+  email: string[];
+  password: string[];
 };
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss']
+  styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent implements OnInit {
-
   isLoading: boolean = false;
   userData: UserModel;
   loginForm: FormGroup;
   loginFormErrors: loginFormErrors = {
-    email:    [],
+    email: [],
     password: [],
   };
   clearFormMessage = clearFormMessage;
 
-  constructor(private formBuilder: FormBuilder,
-              private router: Router,
-              private store: Store<AppState>,
-              private authService: AuthService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private store: Store<AppState>,
+    private authService: AuthService,
+  ) {}
 
   ngOnInit() {
-    console.log('Utilize o e-mail: demo@demo.com para ver os alertas de erro.');
     this.buildLoginForm();
   }
 
-	//==============================
+  //==============================
   // GENERAL METHODS
   //==============================
 
   // BUILD LOGIN FORM
   buildLoginForm(): void {
     this.loginForm = this.formBuilder.group({
-      email:      ['', [required, email]],
-      password:   ['', [required, minLength(3)]],
+      email: ['', [required, email]],
+      password: ['', [required, minLength(3)]],
       keepLogged: [false],
     });
   }
 
   // LOGIN FORM
-
-  // On Set Input Class
-  onSetInputClass(formControlName: string, classNames?: string[]): string[] {
-    return setFieldClassName(this.loginForm, formControlName, classNames);
+  getInputClass(formControlName: string, classNames?: string[]): string[] {
+    return getFieldClass(this.loginForm, formControlName, classNames);
   }
 
-  // On Show Field Errors
-  onGetFieldErrorMessages(formControlName: string): boolean {
+  hasErrorMessages(formControlName: string): boolean {
     return getFieldErrorMessages(this.loginForm, formControlName);
   }
 
-  // On Set Email First Error Class
-  onSetEmailFirstErrorClass(): string[] {
-    return setErrorClassName(this.loginForm.get('email').errors.required);
+  getErrorMessageClass(formControlName: string, validations: string[]): string[] {
+    const { errors } = this.loginForm.get(formControlName);
+    return getErrorClass(validations.every(key => errors[key]));
   }
 
-  // On Set Email Second Error Class
-  onSetEmailSecondErrorClass(): string[] {
-    return setErrorClassName(this.loginForm.get('email').errors.email);
-  }
-
-  // On Set Password First Error Class
-  onSetPasswordFirstErrorClass(): string[] {
-    return setErrorClassName(this.loginForm.get('password').errors.required);
-  }
-
-  // On Set Password Second Error Class
-  onSetPasswordSecondErrorClass(): string[] {
-    return setErrorClassName(this.loginForm.get('password').errors.email);
-  }
-
-  // On Submit
   onSubmit(): void {
     this.isLoading = true;
     this.loginFormErrors.email = [];
@@ -99,18 +80,18 @@ export class LoginFormComponent implements OnInit {
     this.authService.logIn(this.loginForm.value).subscribe(
       data => {
         if (this.loginForm.get('email').value === 'demo@demo.com') {
-
           // Error simulation
           this.loginFormErrors.email.push('This e-mail does not exists.');
           this.loginFormErrors.password.push('The password is incorrect.');
 
           this.isLoading = false;
-
         } else {
-
           if (this.loginForm.get('keepLogged').value) {
             localStorage.setItem('authTokenAngularDemo', data.idToken);
-            localStorage.setItem('expirationDateAngularDemo', new Date(new Date().getTime() + parseInt(data.expiresIn) * 1000).toISOString());
+            localStorage.setItem(
+              'expirationDateAngularDemo',
+              new Date(new Date().getTime() + parseInt(data.expiresIn) * 1000).toISOString(),
+            );
           } else {
             sessionStorage.setItem('authTokenAngularDemo', data.idToken);
           }
@@ -123,13 +104,12 @@ export class LoginFormComponent implements OnInit {
           this.store.dispatch(new SetUserData(this.userData));
           this.isLoading = false;
           this.router.navigate(['/']);
-
         }
       },
       error => {
         console.error(error);
         this.isLoading = false;
-      }
+      },
     );
   }
 
@@ -137,5 +117,4 @@ export class LoginFormComponent implements OnInit {
   // onClearFormMessage(field: string, index: number): void {
   //   this.loginFormErrors[field] = removeItemsFromArray(true, this.loginFormErrors[field], [index]);
   // }
-
 }

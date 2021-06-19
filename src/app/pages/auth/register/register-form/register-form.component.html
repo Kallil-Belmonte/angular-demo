@@ -5,51 +5,81 @@
 
   <div class="form-group">
     <label for="first-name">First name</label>
-    <input id="first-name" [ngClass]="onSetInputClass('firstName')" type="text" formControlName="firstName" />
+    <input
+      id="first-name"
+      [ngClass]="getInputClass('firstName')"
+      type="text"
+      formControlName="firstName"
+    />
 
-    <ng-template [ngIf]="onGetFieldErrorMessages('firstName')">
-      <div [ngClass]="onSetFirstNameErrorClass()">First name is required</div>
-    </ng-template>
+    <div [ngClass]="getErrorMessageClass('firstName', ['required'])">First name is required</div>
   </div>
 
   <div class="form-group">
     <label for="last-name">Last name</label>
-    <input id="last-name" [ngClass]="onSetInputClass('lastName')" type="text" formControlName="lastName" />
+    <input
+      id="last-name"
+      [ngClass]="getInputClass('lastName')"
+      type="text"
+      formControlName="lastName"
+    />
 
-    <ng-template [ngIf]="onGetFieldErrorMessages('lastName')">
-      <div [ngClass]="onSetLastNameErrorClass()">Last name is required</div>
-    </ng-template>
+    <div [ngClass]="getErrorMessageClass('lastName', ['required'])">Last name is required</div>
   </div>
 
   <div class="form-group">
     <label for="email">E-mail</label>
-    <input id="email" [ngClass]="onSetInputClass('email')" type="text" formControlName="email" />
+    <input id="email" [ngClass]="getInputClass('email')" type="text" formControlName="email" />
 
-    <ng-template [ngIf]="onGetFieldErrorMessages('email')">
-      <div [ngClass]="onSetEmailFirstErrorClass()">E-mail is required</div>
-      <div [ngClass]="onSetEmailSecondErrorClass()">Invalid e-mail</div>
+    <ng-template [ngIf]="hasErrorMessages('email')">
+      <div [ngClass]="getErrorMessageClass('email', ['required'])">E-mail is required</div>
+      <div [ngClass]="getErrorMessageClass('email', ['email'])">Invalid e-mail</div>
     </ng-template>
 
-    <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="clearFormMessage(registerFormErrors.email, i)" *ngFor="let errorMessage of registerFormErrors.email; let i = index">
+    <app-alert-dismissible
+      status="danger"
+      [dismissible]="true"
+      (dismissAlert)="clearFormMessage(registerFormErrors.email, i)"
+      *ngFor="let errorMessage of registerFormErrors.email; let i = index"
+    >
       {{ errorMessage }}
     </app-alert-dismissible>
   </div>
 
   <div class="form-group">
     <label for="password">Password</label>
-    <input id="password" [ngClass]="{ 'form-control': true, 'is-invalid': registerForm.get('password').touched && registerForm.get('password').invalid }" type="password" formControlName="password" />
+    <input
+      id="password"
+      [ngClass]="{
+        'form-control': true,
+        'is-invalid': registerForm.get('password').touched && registerForm.get('password').invalid
+      }"
+      type="password"
+      formControlName="password"
+    />
 
-    <ng-template [ngIf]="onGetFieldErrorMessages('password')">
-      <div [ngClass]="onSetPasswordFirstErrorClass()">Password is required</div>
-      <div [ngClass]="onSetPasswordSecondErrorClass()">Minimum 3 characters required</div>
+    <ng-template [ngIf]="hasErrorMessages('password')">
+      <div [ngClass]="getErrorMessageClass('password', ['required'])">Password is required</div>
+      <div [ngClass]="getErrorMessageClass('password', ['minLength'])">
+        Minimum 3 characters required
+      </div>
     </ng-template>
 
-    <app-alert-dismissible status="danger" [dismissible]="true" (dismissAlert)="clearFormMessage(registerFormErrors.password, i)" *ngFor="let errorMessage of registerFormErrors.password; let i = index">
+    <app-alert-dismissible
+      status="danger"
+      [dismissible]="true"
+      (dismissAlert)="clearFormMessage(registerFormErrors.password, i)"
+      *ngFor="let errorMessage of registerFormErrors.password; let i = index"
+    >
       {{ errorMessage }}
     </app-alert-dismissible>
   </div>
 
-  <button class="btn btn-primary d-block mx-auto" type="submit" [disabled]="!registerForm.valid || registerForm.pristine">
+  <button
+    class="btn btn-primary d-block mx-auto"
+    type="submit"
+    [disabled]="!registerForm.valid || registerForm.pristine"
+  >
     Register
   </button>
 

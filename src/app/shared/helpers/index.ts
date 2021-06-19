@@ -1,23 +1,20 @@
 import {
   groupArrayItemsInArrays,
-  setFieldClassName,
-  setErrorClassName,
+  getFieldClass,
+  getErrorClass,
   getFieldErrorMessages,
   clearFormMessage,
 } from './general';
 
-import {
-  capitalizeFirstLetter,
-} from './formatters';
+import { capitalizeFirstLetter } from './formatters';
 
 export {
   // General
   groupArrayItemsInArrays,
-  setFieldClassName,
-  setErrorClassName,
+  getFieldClass,
+  getErrorClass,
   getFieldErrorMessages,
   clearFormMessage,
-
   // Formatters
   capitalizeFirstLetter,
 };

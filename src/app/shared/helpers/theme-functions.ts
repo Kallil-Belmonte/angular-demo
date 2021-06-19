@@ -1,7 +1,6 @@
 declare var $: any;
 
 export class ThemeFunctions {
-
   // TOGGLE MODAL STYLES
   static toggleModalStyles(isModalOpen: boolean) {
     if (isModalOpen) {
@@ -11,8 +10,7 @@ export class ThemeFunctions {
       const scrollbarWidth = window.innerWidth - document.body.clientWidth;
 
       $('body').addClass('modal-open');
-      $('body, .modal-open .modal').css({'padding-right': scrollbarWidth.toString() + 'px'});
+      $('body, .modal-open .modal').css({ 'padding-right': scrollbarWidth.toString() + 'px' });
     }
   }
-
-};
+}
