@@ -54,10 +54,10 @@ export const groupArrayItemsInArrays = (
 export const getFieldClass = (
   form: FormGroup,
   formControlName: string,
-  customClassNames: string[] = [],
+  customClass: string[] = [],
 ): string[] => {
   const isInvalid: boolean = form.get(formControlName).touched && form.get(formControlName).invalid;
-  return ['form-control', isInvalid ? 'is-invalid' : '', ...customClassNames];
+  return ['form-control', isInvalid ? 'is-invalid' : '', ...customClass];
 };
 
 // HAS ERROR MESSAGES
