@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { StoreModule, MetaReducer } from '@ngrx/store';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { Reducers, localStorageSyncReducer } from 'app/core/ngrx/reducers/store';
@@ -38,7 +37,6 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     CommonModule,
     HttpClientModule,
     StoreModule.forRoot(Reducers, { metaReducers }),
-    NgbModule,
     FontAwesomeModule,
     AppRoutingModule,
     AuthModule,
@@ -47,9 +45,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     ContactModule,
     AccountModule,
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
