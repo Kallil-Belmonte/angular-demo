@@ -1,57 +1,68 @@
-/* GENERAL
-==============================*/
-
-/* TEXT CONTINUED */
+// TEXT CONTINUED
 
 .text-continued {
   @extend %text-continued;
 }
 
+// FLEX CENTER
 
-/* CENTER ABSOLUTE */
-
-.center-absolute {
-  @extend %center-absolute;
+.flex-center {
+  @extend %flex-center;
 }
 
-/* Horizontal center */
+// Vertical center
 
-.center-absolute-x {
-  @extend %center-absolute-x;
+.flex-center-y {
+  @extend %flex-center-y;
 }
 
-/* Vertical center */
+// Horizontal center
 
-.center-absolute-y {
-  @extend %center-absolute-y;
+.flex-center-x {
+  @extend %flex-center-x;
 }
 
+// ABSOLUTE CENTER
 
-/* BACKGROUND IMAGE */
+.absolute-center {
+  @extend %absolute-center;
+}
 
-/* Contain */
+// Vertical center
+
+.absolute-center-y {
+  @extend %absolute-center-y;
+}
+
+// Horizontal center
+
+.absolute-center-x {
+  @extend %absolute-center-x;
+}
+
+// BACKGROUND IMAGE
+
+// Contain
 
 .bg-image-contain {
   @extend %background-image-contain;
 }
 
-/* Cover */
+// Cover
 
 .bg-image-cover {
   @extend %background-image-cover;
 }
 
-
-/* DISABLES CURSOR ACTIONS ON THE ELEMENT */
+// DISABLES CURSOR ACTIONS
 
 .disabled-cursor {
   pointer-events: none;
 }
 
+// FONTS
 
-/* FONTS */
-
-/* NOME DA FONTE */
+// NOME DA FONTE
 
 // @font-face {
 //   font-family: 'Nome da Fonte';
@@ -63,9 +74,9 @@
 //   url('../fonts/nome-da-fonte/webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
 // }
 
-/* NOME DA FONTE */
+// NOME DA FONTE
 
-/* Ultra Light */
+// Ultra Light
 
 // @font-face {
 //   font-family: 'San Francisco';
@@ -73,7 +84,7 @@
 //   src: url('../fonts/nome-da-fonte/nome-da-fonte-ultralight-webfont.woff');
 // }
 
-/* Thin */
+// Thin
 
 // @font-face {
 //   font-family: 'San Francisco';
@@ -81,7 +92,7 @@
 //   src: url('../fonts/nome-da-fonte/nome-da-fonte-thin-webfont.woff');
 // }
 
-/* Regular */
+// Regular
 
 // @font-face {
 //   font-family: 'San Francisco';
@@ -89,7 +100,7 @@
 //   src: url('../fonts/nome-da-fonte/nome-da-fonte-regular-webfont.woff');
 // }
 
-/* Medium */
+// Medium
 
 // @font-face {
 //   font-family: 'San Francisco';
@@ -97,7 +108,7 @@
 //   src: url('../fonts/nome-da-fonte/nome-da-fonte-medium-webfont.woff');
 // }
 
-/* Semi Bold */
+// Semi Bold
 
 // @font-face {
 //   font-family: 'San Francisco';
@@ -105,7 +116,7 @@
 //   src: url('../fonts/nome-da-fonte/nome-da-fonte-semibold-webfont.woff');
 // }
 
-/* Bold */
+// Bold
 
 // @font-face {
 //   font-family: 'San Francisco';
@@ -113,8 +124,7 @@
 //   src: url('../fonts/nome-da-fonte/nome-da-fonte-bold-webfont.woff');
 // }
 
-
-/* SCROLLBAR */
+// SCROLLBAR
 
 ::-webkit-scrollbar-track {
   border-radius: 10px;
@@ -127,11 +137,10 @@
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: #C1C8CC;
+  background-color: #c1c8cc;
 }
 
-
-/* LINKS */
+// LINKS
 
 a:hover {
   text-decoration: none;
