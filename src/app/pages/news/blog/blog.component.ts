@@ -20,7 +20,7 @@ const { SetCategories, SetPosts } = BlogActions;
   styleUrls: ['./blog.component.scss'],
 })
 export class BlogComponent implements OnInit {
-  isLoading: boolean = false;
+  loading: boolean = false;
   faNewspaper = faNewspaper;
   pages: object = {};
   categories: CategoryModel[] = [];
@@ -64,17 +64,17 @@ export class BlogComponent implements OnInit {
       if (categories.length) {
         this.categories = categories;
       } else {
-        this.isLoading = true;
+        this.loading = true;
 
         this.newsService.getCategories().subscribe(
           data => {
             this.categories = data;
             this.store.dispatch(new SetCategories(data));
-            this.isLoading = false;
+            this.loading = false;
           },
           error => {
             console.error(error);
-            this.isLoading = false;
+            this.loading = false;
           },
         );
       }
@@ -83,18 +83,18 @@ export class BlogComponent implements OnInit {
         this.posts = posts;
         this.setPaginationSettings(posts);
       } else {
-        this.isLoading = true;
+        this.loading = true;
 
         this.newsService.getPosts().subscribe(
           data => {
             this.posts = data;
             this.setPaginationSettings(data);
             this.store.dispatch(new SetPosts(data));
-            this.isLoading = false;
+            this.loading = false;
           },
           error => {
             console.error(error);
-            this.isLoading = false;
+            this.loading = false;
           },
         );
       }
@@ -102,17 +102,17 @@ export class BlogComponent implements OnInit {
   }
 
   onSelectCategory(/* category */): void {
-    this.isLoading = true;
+    this.loading = true;
 
     this.newsService.getPosts().subscribe(
       data => {
         this.setPaginationSettings(data);
         this.store.dispatch(new SetPosts(data));
-        this.isLoading = false;
+        this.loading = false;
       },
       error => {
         console.error(error);
-        this.isLoading = false;
+        this.loading = false;
       },
     );
   }

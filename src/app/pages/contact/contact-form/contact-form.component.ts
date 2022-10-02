@@ -17,7 +17,7 @@ type contactFormMessages = {
   styleUrls: [],
 })
 export class ContactFormComponent implements OnInit {
-  isLoading: boolean = true;
+  loading: boolean = true;
   contactForm: FormGroup;
   favoriteColors: string[];
   contactFormMessages: contactFormMessages = {
@@ -59,11 +59,11 @@ export class ContactFormComponent implements OnInit {
     this.contactService.getFavoriteColors().subscribe(
       data => {
         this.favoriteColors = data;
-        this.isLoading = false;
+        this.loading = false;
       },
       error => {
         console.error(error);
-        this.isLoading = false;
+        this.loading = false;
       },
     );
   }

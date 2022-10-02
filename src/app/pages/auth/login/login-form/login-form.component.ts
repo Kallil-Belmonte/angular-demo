@@ -25,7 +25,7 @@ type loginFormErrors = {
   styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent implements OnInit {
-  isLoading: boolean = false;
+  loading: boolean = false;
   userData: UserModel;
   loginForm: FormGroup;
   loginFormErrors: loginFormErrors = {
@@ -63,7 +63,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.isLoading = true;
+    this.loading = true;
     this.loginFormErrors.email = [];
     this.loginFormErrors.password = [];
 
@@ -74,7 +74,7 @@ export class LoginFormComponent implements OnInit {
           this.loginFormErrors.email.push('This e-mail does not exists.');
           this.loginFormErrors.password.push('The password is incorrect.');
 
-          this.isLoading = false;
+          this.loading = false;
         } else {
           if (this.loginForm.get('keepLogged').value) {
             localStorage.setItem('authTokenAngularDemo', data.idToken);
@@ -92,13 +92,13 @@ export class LoginFormComponent implements OnInit {
             email: data.email,
           };
           this.store.dispatch(new SetUserData(this.userData));
-          this.isLoading = false;
+          this.loading = false;
           this.router.navigate(['/']);
         }
       },
       error => {
         console.error(error);
-        this.isLoading = false;
+        this.loading = false;
       },
     );
   }

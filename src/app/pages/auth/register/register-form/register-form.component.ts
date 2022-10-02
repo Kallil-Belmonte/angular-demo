@@ -25,7 +25,7 @@ type registerFormErrors = {
   styleUrls: ['./register-form.component.scss'],
 })
 export class RegisterFormComponent implements OnInit {
-  isLoading: boolean = false;
+  loading: boolean = false;
   userData: UserModel;
   registerForm: FormGroup;
   registerFormErrors: registerFormErrors = {
@@ -65,7 +65,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.isLoading = true;
+    this.loading = true;
     this.registerFormErrors.email = [];
     this.registerFormErrors.password = [];
 
@@ -76,7 +76,7 @@ export class RegisterFormComponent implements OnInit {
           this.registerFormErrors.email.push('This e-mail already exists.');
           this.registerFormErrors.password.push('Your password is too weak.');
 
-          this.isLoading = false;
+          this.loading = false;
         } else {
           sessionStorage.setItem('authTokenAngularDemo', data.token);
 
@@ -86,13 +86,13 @@ export class RegisterFormComponent implements OnInit {
             email: data.email,
           };
           this.store.dispatch(new SetUserData(this.userData));
-          this.isLoading = false;
+          this.loading = false;
           this.router.navigate(['/']);
         }
       },
       error => {
         console.error(error);
-        this.isLoading = false;
+        this.loading = false;
       },
     );
   }

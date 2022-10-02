@@ -1,4 +1,4 @@
-<app-loader *ngIf="isLoading"></app-loader>
+<app-loader *ngIf="loading"></app-loader>
 
 <form class="edit-post-form" [formGroup]="editPostForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
@@ -12,31 +12,17 @@
 
   <div class="form-group">
     <label for="body">Body</label>
-    <textarea
-      id="body"
-      [ngClass]="getFieldClass('body')"
-      formControlName="body"
-      rows="6"
-    ></textarea>
+    <textarea id="body" [ngClass]="getFieldClass('body')" formControlName="body" rows="6"></textarea>
 
     <ng-template [ngIf]="hasErrorMessages('body')">
       <div [ngClass]="getErrorMessageClass('body', ['required'])">Title is required</div>
     </ng-template>
   </div>
 
-  <button
-    class="btn btn-primary mr-2"
-    type="submit"
-    [disabled]="!editPostForm.valid || editPostForm.pristine"
-  >
+  <button class="btn btn-primary mr-2" type="submit" [disabled]="!editPostForm.valid || editPostForm.pristine">
     Edit
   </button>
-  <button
-    class="btn btn-light"
-    type="button"
-    [disabled]="editPostForm.pristine"
-    (click)="editPostForm.reset()"
-  >
+  <button class="btn btn-light" type="button" [disabled]="editPostForm.pristine" (click)="editPostForm.reset()">
     Reset form
   </button>
 </form>

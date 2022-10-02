@@ -17,7 +17,7 @@ const { SetCurrentPost } = PostActions;
   styleUrls: [],
 })
 export class PostComponent implements OnInit {
-  isLoading: boolean = true;
+  loading: boolean = true;
   isModalOpen: boolean = false;
   currentPost: PostModel;
 
@@ -44,11 +44,11 @@ export class PostComponent implements OnInit {
           this.currentPost = currentPost;
         });
 
-        this.isLoading = false;
+        this.loading = false;
       },
       error => {
         console.error(error);
-        this.isLoading = false;
+        this.loading = false;
       },
     );
   }

@@ -9,7 +9,7 @@ import { NewsService } from 'app/pages/news/news.service';
   styleUrls: [],
 })
 export class DeletePostModalComponent implements OnInit {
-  isLoading: boolean = false;
+  loading: boolean = false;
   closeResult = '';
   @Input() open: boolean;
   @Output() closeModal = new EventEmitter();
@@ -30,12 +30,12 @@ export class DeletePostModalComponent implements OnInit {
     this.newsService.deleteCurrentPost(id).subscribe(
       () => {
         this.closeModal.emit();
-        this.isLoading = false;
+        this.loading = false;
         this.router.navigate(['/blog']);
       },
       error => {
         console.error(error);
-        this.isLoading = false;
+        this.loading = false;
       },
     );
   }
@@ -47,7 +47,7 @@ export class DeletePostModalComponent implements OnInit {
   }
 
   onDeletePost(): void {
-    this.isLoading = true;
+    this.loading = true;
     this.parameterListener();
   }
 

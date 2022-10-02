@@ -15,7 +15,7 @@ const { SetPosts } = BlogActions;
   styleUrls: [],
 })
 export class HomeComponent implements OnInit {
-  isLoading: boolean = false;
+  loading: boolean = false;
   featuredPosts: PostModel[];
 
   constructor(private store: Store<AppState>, private homeService: HomeService) {}
@@ -36,18 +36,18 @@ export class HomeComponent implements OnInit {
         const [firstPost, secondPost, thirdPost] = posts;
         this.featuredPosts = [firstPost, secondPost, thirdPost];
       } else {
-        this.isLoading = true;
+        this.loading = true;
 
         this.homeService.getFeaturedPosts().subscribe(
           data => {
             const [firstPost, secondPost, thirdPost] = data;
             this.featuredPosts = [firstPost, secondPost, thirdPost];
             this.store.dispatch(new SetPosts(data));
-            this.isLoading = false;
+            this.loading = false;
           },
           error => {
             console.error(error);
-            this.isLoading = false;
+            this.loading = false;
           },
         );
       }

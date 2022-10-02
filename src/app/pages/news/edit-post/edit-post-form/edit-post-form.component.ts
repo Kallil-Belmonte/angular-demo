@@ -20,7 +20,7 @@ const { getFieldClass, hasErrorMessages, getErrorMessageClass, clearFormMessage 
   styleUrls: ['./edit-post-form.component.scss'],
 })
 export class EditPostFormComponent implements OnInit {
-  isLoading: boolean = true;
+  loading: boolean = true;
   editPostForm: FormGroup;
   currentPost: PostModel;
   getFieldClass = (formControlName: string, classNames?: string[]) =>
@@ -67,11 +67,11 @@ export class EditPostFormComponent implements OnInit {
       data => {
         this.store.dispatch(new SetCurrentPost(data));
         this.setFormData();
-        this.isLoading = false;
+        this.loading = false;
       },
       error => {
         console.error(error);
-        this.isLoading = false;
+        this.loading = false;
       },
     );
   }
@@ -83,7 +83,7 @@ export class EditPostFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.isLoading = true;
+    this.loading = true;
 
     this.newsService.EditPost(this.currentPost.id, this.editPostForm.value).subscribe(
       () => {
@@ -92,12 +92,12 @@ export class EditPostFormComponent implements OnInit {
           ...this.editPostForm.value,
         };
         this.store.dispatch(new SetCurrentPost(this.currentPost));
-        this.isLoading = false;
+        this.loading = false;
         this.router.navigate([`/post/${this.currentPost.id}`]);
       },
       error => {
         console.error(error);
-        this.isLoading = false;
+        this.loading = false;
       },
     );
   }

@@ -1,21 +1,18 @@
 <main>
-  <app-loader *ngIf="isLoading"></app-loader>
+  <app-loader *ngIf="loading"></app-loader>
 
   <div class="container">
     <app-page-header [fontAwesomeIcon]="faNewspaper">Blog</app-page-header>
 
-    <app-posts-per-page [postsPerPage]="postsPerPage" (onChange)="setPaginationSettings(posts, $event)"></app-posts-per-page>
+    <app-posts-per-page [postsPerPage]="postsPerPage" (onChange)="setPaginationSettings(posts, $event)">
+    </app-posts-per-page>
 
     <div class="row">
       <div class="col-md-9">
         <app-posts [pages]="pages" [currentPage]="currentPage"></app-posts>
 
-        <app-blog-pagination
-          [pages]="pagesKeys"
-          [firstItem]="firstPaginationItem"
-          [maxItem]="maxPaginationItem"
-          [currentPage]="currentPage"
-          (onPaginate)="onPaginate($event)">
+        <app-blog-pagination [pages]="pagesKeys" [firstItem]="firstPaginationItem" [maxItem]="maxPaginationItem"
+          [currentPage]="currentPage" (onPaginate)="onPaginate($event)">
         </app-blog-pagination>
       </div>
       <div class="col-md-3">

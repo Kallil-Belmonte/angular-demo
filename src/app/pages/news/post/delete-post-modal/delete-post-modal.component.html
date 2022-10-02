@@ -1,6 +1,7 @@
-<app-loader *ngIf="isLoading"></app-loader>
+<app-loader *ngIf="loading"></app-loader>
 
-<div [ngClass]="{ 'modal fade': true, 'show d-block': open }" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="deletePostLabel" [attr.aria-hidden]="open ? false : true" (click)="onClickOutModal($event)">
+<div [ngClass]="{ 'modal fade': true, 'show d-block': open }" id="deletePost" tabindex="-1" role="dialog"
+  aria-labelledby="deletePostLabel" [attr.aria-hidden]="open ? false : true" (click)="onClickOutModal($event)">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

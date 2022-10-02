@@ -1,28 +1,18 @@
-<app-loader *ngIf="isLoading"></app-loader>
+<app-loader *ngIf="loading"></app-loader>
 
 <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <h1 class="page-title">Register</h1>
 
   <div class="form-group">
     <label for="first-name">First name</label>
-    <input
-      id="first-name"
-      [ngClass]="getFieldClass('firstName')"
-      type="text"
-      formControlName="firstName"
-    />
+    <input id="first-name" [ngClass]="getFieldClass('firstName')" type="text" formControlName="firstName" />
 
     <div [ngClass]="getErrorMessageClass('firstName', ['required'])">First name is required</div>
   </div>
 
   <div class="form-group">
     <label for="last-name">Last name</label>
-    <input
-      id="last-name"
-      [ngClass]="getFieldClass('lastName')"
-      type="text"
-      formControlName="lastName"
-    />
+    <input id="last-name" [ngClass]="getFieldClass('lastName')" type="text" formControlName="lastName" />
 
     <div [ngClass]="getErrorMessageClass('lastName', ['required'])">Last name is required</div>
   </div>
@@ -36,27 +26,19 @@
       <div [ngClass]="getErrorMessageClass('email', ['email'])">Invalid e-mail</div>
     </ng-template>
 
-    <app-alert-dismissible
-      status="danger"
-      [dismissible]="true"
+    <app-alert-dismissible status="danger" [dismissible]="true"
       (dismissAlert)="clearFormMessage(registerFormErrors.email, i)"
-      *ngFor="let errorMessage of registerFormErrors.email; let i = index"
-    >
+      *ngFor="let errorMessage of registerFormErrors.email; let i = index">
       {{ errorMessage }}
     </app-alert-dismissible>
   </div>
 
   <div class="form-group">
     <label for="password">Password</label>
-    <input
-      id="password"
-      [ngClass]="{
+    <input id="password" [ngClass]="{
         'form-control': true,
         'is-invalid': registerForm.get('password').touched && registerForm.get('password').invalid
-      }"
-      type="password"
-      formControlName="password"
-    />
+      }" type="password" formControlName="password" />
 
     <ng-template [ngIf]="hasErrorMessages('password')">
       <div [ngClass]="getErrorMessageClass('password', ['required'])">Password is required</div>
@@ -65,21 +47,15 @@
       </div>
     </ng-template>
 
-    <app-alert-dismissible
-      status="danger"
-      [dismissible]="true"
+    <app-alert-dismissible status="danger" [dismissible]="true"
       (dismissAlert)="clearFormMessage(registerFormErrors.password, i)"
-      *ngFor="let errorMessage of registerFormErrors.password; let i = index"
-    >
+      *ngFor="let errorMessage of registerFormErrors.password; let i = index">
       {{ errorMessage }}
     </app-alert-dismissible>
   </div>
 
-  <button
-    class="btn btn-primary d-block mx-auto"
-    type="submit"
-    [disabled]="!registerForm.valid || registerForm.pristine"
-  >
+  <button class="btn btn-primary d-block mx-auto" type="submit"
+    [disabled]="!registerForm.valid || registerForm.pristine">
     Register
   </button>
 
